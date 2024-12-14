@@ -23,7 +23,7 @@
 
 <script setup>
 import { computed } from "vue";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils.js";
 
 const props = defineProps({
   borderRadius: {
