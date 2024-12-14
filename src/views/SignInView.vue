@@ -11,10 +11,11 @@
             Anmelden mit Google</Button>
         </div>
 
-        <div class="inline-flex items-center justify-center w-full">
+        <!--<div class="inline-flex items-center justify-center w-full">
           <hr class="w-3/4 h-px bg-gray-200 border-0">
           <span class="absolute px-3 text-gray-900 -translate-x-1/2 bg-white left-1/2">or continue with</span>
-        </div>
+        </div> -->
+        <Separator label="or continue with" class="my-6" />
         <div class="flex flex-col mb-4 mt-2">
           <Label for="email" class="font-medium">Email</Label>
           <Input id="email" type="email" placeholder="user@email.com" class="py-2.5 px-3 mt-1 border rounded-lg w-full" />
@@ -47,10 +48,11 @@ import Button from "@/components/ui/button/Button.vue";
 import Input from "@/components/ui/input/Input.vue";
 import IconGoogle from "@/components/icons/IconGoogle.vue";
 import {Send} from "lucide-vue-next";
+import Separator from "@/components/ui/separator/Separator.vue";
 
 export default {
   name: "SignInView",
-  components: {IconGoogle, Input, Button, Send},
+  components: {Separator, IconGoogle, Input, Button, Send},
   methods: {
     onSubmit() {
 
