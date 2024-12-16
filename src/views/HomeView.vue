@@ -66,6 +66,11 @@
       <CTASection></CTASection>
     </div>
 
+    <div id="companies">
+      <CompanySection></CompanySection>
+    </div>
+
+
     <div id="stats" class="bg-indigo-200">
       <StatsSection></StatsSection>
     </div>
@@ -94,11 +99,13 @@ import TooltipTrigger from "@/components/ui/tooltip/TooltipTrigger.vue";
 import TooltipContent from "@/components/ui/tooltip/TooltipContent.vue";
 import CTASection from "@/components/home/CTASection.vue";
 import StatsSection from "@/components/home/StatsSection.vue";
+import CompanySection from "@/components/home/CompanySection.vue";
 
 export default {
   name: "CalculatorView",
   methods: {toast},
   components: {
+    CompanySection,
     StatsSection,
     CTASection,
     TooltipContent,
