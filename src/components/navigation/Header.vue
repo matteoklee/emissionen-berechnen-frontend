@@ -23,7 +23,7 @@
                     <NavigationMenuLink as-child>
                       <a
                           class="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                          href="/"
+                          href="#cta"
                       >
                         <img src="https://www.radix-vue.com/logo.svg" class="h-6 w-6">
                         <div class="mb-2 mt-4 text-lg font-medium">
@@ -40,7 +40,7 @@
                   <li>
                     <NavigationMenuLink as-child>
                       <a
-                          href="/docs/introduction"
+                          href="#pricing"
                           class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                       >
                         <div class="text-sm font-medium leading-none">Introduction</div>
@@ -53,7 +53,7 @@
                   <li>
                     <NavigationMenuLink as-child>
                       <a
-                          href="/docs/installation"
+                          href="#stats"
                           class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                       >
                         <div class="text-sm font-medium leading-none">Installation</div>
@@ -66,7 +66,7 @@
                   <li>
                     <NavigationMenuLink as-child>
                       <a
-                          href="/docs/typography"
+                          href="#stats"
                           class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                       >
                         <div class="text-sm font-medium leading-none">Typography</div>

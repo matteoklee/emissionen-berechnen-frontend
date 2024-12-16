@@ -1,8 +1,7 @@
 <template>
-  <div class="mt-16">
+  <div id="cta" class="mt-16">
     <div class="text-center mt-2">
       <h1 class="text-center mb-2">This is the home page</h1>
-
 
       <TooltipProvider>
         <Tooltip>
@@ -63,7 +62,15 @@
       </Sheet>
     </div>
 
-    <div>
+    <div id="hero">
+      <CTASection></CTASection>
+    </div>
+
+    <div id="stats" class="bg-indigo-200">
+      <StatsSection></StatsSection>
+    </div>
+
+    <div id="pricing">
       <PricingSection></PricingSection>
     </div>
   </div>
@@ -85,11 +92,15 @@ import TooltipProvider from "@/components/ui/tooltip/TooltipProvider.vue";
 import Tooltip from "@/components/ui/tooltip/Tooltip.vue";
 import TooltipTrigger from "@/components/ui/tooltip/TooltipTrigger.vue";
 import TooltipContent from "@/components/ui/tooltip/TooltipContent.vue";
+import CTASection from "@/components/home/CTASection.vue";
+import StatsSection from "@/components/home/StatsSection.vue";
 
 export default {
   name: "CalculatorView",
   methods: {toast},
   components: {
+    StatsSection,
+    CTASection,
     TooltipContent,
     TooltipTrigger,
     Tooltip,
