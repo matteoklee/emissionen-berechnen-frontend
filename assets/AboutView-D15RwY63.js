@@ -1,0 +1,1 @@
+import{_ as s,c as t,a as o,o as a}from"./index-DNIkLp4P.js";const c={},n={class:"h-screen"};function r(_,e){return a(),t("div",n,e[0]||(e[0]=[o("h1",{class:"text-center my-6"},"This is an about page",-1)]))}const d=s(c,[["render",r]]);export{d as default};
