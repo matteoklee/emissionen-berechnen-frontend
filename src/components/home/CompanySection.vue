@@ -10,28 +10,34 @@
 
 <script>
 import AnimatedLogoCloud from '@/components/ui/logo-cloud/AnimatedLogoCloud.vue'
-
 export default {
   name: 'CompanySection',
   components: { AnimatedLogoCloud },
+  setup() {
+    const baseUrl = import.meta.env.BASE_URL;
+
+    return {
+      baseUrl
+    };
+  },
   data() {
     return {
       logos: [
         {
           name: 'Hochschule Harz',
-          path: '/images/hs_harz.svg'
+          path: `${this.baseUrl}images/hs_harz.svg`
         },
         {
           name: 'GreenSign',
-          path: '/images/greensign.svg'
+          path: `${this.baseUrl}images/greensign.svg`
         },
         {
           name: 'Harzer Tourismusverband',
-          path: '/images/htv.svg'
+          path: `${this.baseUrl}images/htv.svg`
         },
         {
           name: 'Wernigerode Tourimus GmbH',
-          path: '/images/wtg.svg'
+          path: `${this.baseUrl}images/wtg.svg`
         }
         /*{
           name: "Airbnb",

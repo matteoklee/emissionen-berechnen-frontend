@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/emissionen-berechnen-frontend/', // GitHub Repository Name
   logLevel: 'silent',
   plugins: [vue()],
   resolve: {
