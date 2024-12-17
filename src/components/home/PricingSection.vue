@@ -128,9 +128,10 @@ import Badge from "@/components/ui/badge/Badge.vue";
 import Switch from "@/components/ui/switch/Switch.vue";
 import {Check} from "lucide-vue-next";
 import Button from "@/components/ui/button/Button.vue";
+import {Label} from "radix-vue";
 export default {
   name: "PricingSection",
-  components: {Button, Switch, Badge, Check}
+  components: {Label, Button, Switch, Badge, Check}
 }
 </script>
 

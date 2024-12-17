@@ -112,7 +112,7 @@
       <div v-else>
         <div class="inline-flex flex-row space-x-3">
           <router-link to="/login"><Button variant="outlined" class="border">Anmelden</Button></router-link>
-          <router-link to="/register"><Button variant="" class="">Jetzt Starten</Button></router-link>
+          <router-link to="/calculator"><Button variant="" class="">Jetzt Starten</Button></router-link>
         </div>
       </div>
 

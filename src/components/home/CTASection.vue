@@ -28,10 +28,12 @@
             />
           </p>
           <div v-motion-slide-bottom :duration="300" :delay="1400" class="flex flex-col justify-center items-center ">
-            <Button class="bg-primary p-5 mt-6 mb-4 duration-300" variant="">
-              <LeafIcon :size="24" class="mr-2"></LeafIcon>
-              Demo ansehen
-            </Button>
+            <router-link to="/calculator">
+              <Button class="bg-primary p-5 mt-6 mb-4 duration-300" variant="">
+                <LeafIcon :size="24" class="mr-2"></LeafIcon>
+                Demo ansehen
+              </Button>
+            </router-link>
             <RadianText
                 class="inline-flex items-center justify-center px-4 py-1 transition text-gray-900 ease-out hover:text-neutral-900 hover:duration-300"
                 :duration="5"

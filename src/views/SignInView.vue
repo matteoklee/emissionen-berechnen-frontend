@@ -49,10 +49,11 @@ import Input from "@/components/ui/input/Input.vue";
 import IconGoogle from "@/components/icons/IconGoogle.vue";
 import {Send} from "lucide-vue-next";
 import Separator from "@/components/ui/separator/Separator.vue";
+import Label from "@/components/ui/label/Label.vue";
 
 export default {
   name: "SignInView",
-  components: {Separator, IconGoogle, Input, Button, Send},
+  components: {Label, Separator, IconGoogle, Input, Button, Send},
   methods: {
     onSubmit() {
 

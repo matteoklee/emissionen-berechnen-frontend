@@ -139,11 +139,17 @@ import StatsSection from "@/components/home/StatsSection.vue";
 import CompanySection from "@/components/home/CompanySection.vue";
 import MultiStepLoader from "@/components/ui/multi-step-loader/MultiStepLoader.vue";
 import FeatureSection from "@/components/home/FeatureSection.vue";
+import SheetFooter from "@/components/ui/sheet/SheetFooter.vue";
+import SheetClose from "@/components/ui/sheet/SheetClose.vue";
+import Label from "@/components/ui/label/Label.vue";
 
 export default {
   name: "CalculatorView",
   //methods: {toast},
   components: {
+    Label,
+    SheetClose,
+    SheetFooter,
     FeatureSection,
     MultiStepLoader,
     CompanySection,
