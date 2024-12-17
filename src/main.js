@@ -6,7 +6,7 @@ import router from './router'
 
 import './assets/main.scss'
 
-import {MotionPlugin} from "@vueuse/motion";
+import { MotionPlugin } from '@vueuse/motion'
 
 const app = createApp(App)
 

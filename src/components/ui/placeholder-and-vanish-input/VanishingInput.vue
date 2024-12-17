@@ -1,13 +1,9 @@
-<template>
-
-</template>
+<template></template>
 
 <script>
 export default {
-  name: "VanishingInput"
+  name: 'VanishingInput'
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

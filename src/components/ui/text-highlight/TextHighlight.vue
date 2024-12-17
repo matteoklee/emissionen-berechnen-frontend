@@ -5,41 +5,41 @@
 </template>
 
 <script>
-import { computed } from "vue";
-import { cn } from "@/lib/utils";
+import { computed } from 'vue'
+import { cn } from '@/lib/utils'
 
 export default {
-  name: "TextHighlight",
-  methods: {cn},
+  name: 'TextHighlight',
+  methods: { cn },
   props: {
     delay: {
       type: Number,
-      default: 0,
+      default: 0
     },
     duration: {
       type: Number,
-      default: 2000,
+      default: 2000
     },
     class: {
       type: [String, Array, Object],
-      default: "",
+      default: ''
     },
     textEndColor: {
       type: String,
-      default: "inherit",
-    },
+      default: 'inherit'
+    }
   },
   setup(props) {
-    const delayMs = computed(() => `${props.delay}ms`);
-    const durationMs = computed(() => `${props.duration}ms`);
+    const delayMs = computed(() => `${props.delay}ms`)
+    const durationMs = computed(() => `${props.duration}ms`)
 
     return {
       delayMs,
       durationMs,
-      classProp: props.class,
-    };
-  },
-};
+      classProp: props.class
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -66,7 +66,7 @@ span {
   background-repeat: no-repeat;
   background-position: left center;
   animation:
-      background-expand v-bind(durationMs) ease-in-out v-bind(delayMs) forwards,
-      text-color-change v-bind(durationMs) ease-in-out v-bind(delayMs) forwards;
+    background-expand v-bind(durationMs) ease-in-out v-bind(delayMs) forwards,
+    text-color-change v-bind(durationMs) ease-in-out v-bind(delayMs) forwards;
 }
 </style>

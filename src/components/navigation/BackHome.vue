@@ -5,17 +5,14 @@
       Zurück zur Startseite
     </router-link>
   </div>
-
 </template>
 
 <script>
-import {ArrowLeft} from "lucide-vue-next";
+import { ArrowLeft } from 'lucide-vue-next'
 export default {
-  name: "BackHome",
-  components: {ArrowLeft}
+  name: 'BackHome',
+  components: { ArrowLeft }
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,24 +1,24 @@
 <script setup>
-import { cn } from '@/lib/utils';
-import { StepperSeparator, useForwardProps } from 'radix-vue';
+import { cn } from '@/lib/utils'
+import { StepperSeparator, useForwardProps } from 'radix-vue'
 
-import { computed } from 'vue';
+import { computed } from 'vue'
 
 const props = defineProps({
   orientation: { type: String, required: false },
   decorative: { type: Boolean, required: false },
   asChild: { type: Boolean, required: false },
   as: { type: null, required: false },
-  class: { type: null, required: false },
-});
+  class: { type: null, required: false }
+})
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
+  const { class: _, ...delegated } = props
 
-  return delegated;
-});
+  return delegated
+})
 
-const forwarded = useForwardProps(delegatedProps);
+const forwarded = useForwardProps(delegatedProps)
 </script>
 
 <template>
@@ -31,7 +31,7 @@ const forwarded = useForwardProps(delegatedProps);
         'group-data-[disabled]:bg-muted group-data-[disabled]:opacity-50',
         // Completed
         'group-data-[state=completed]:bg-accent-foreground',
-        props.class,
+        props.class
       )
     "
   />

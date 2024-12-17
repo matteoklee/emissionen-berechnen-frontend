@@ -1,15 +1,10 @@
 <script setup>
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 defineProps({
   title: { type: String, required: false },
-  data: { type: Array, required: true },
-});
+  data: { type: Array, required: true }
+})
 </script>
 
 <template>

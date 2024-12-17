@@ -1,7 +1,7 @@
 <template>
   <p
-      :style="styleVar"
-      :class="
+    :style="styleVar"
+    :class="
       cn(
         'mx-auto max-w-md text-neutral-600/70 dark:text-neutral-400/70',
         // Radiant effect
@@ -17,40 +17,40 @@
 </template>
 
 <script>
-import { computed } from "vue";
-import { cn } from "@/lib/utils";
+import { computed } from 'vue'
+import { cn } from '@/lib/utils'
 
 export default {
-  name: "RadianText",
-  methods: {cn},
+  name: 'RadianText',
+  methods: { cn },
   props: {
     duration: {
       type: Number,
-      default: 10,
+      default: 10
     },
     radiantWidth: {
       type: Number,
-      default: 100,
+      default: 100
     },
     class: {
       type: String,
-      default: "",
-    },
+      default: ''
+    }
   },
   setup(props) {
     const styleVar = computed(() => {
       return {
-        "--radiant-anim-duration": `${props.duration}s`,
-        "--radiant-width": `${props.radiantWidth}px`,
-      };
-    });
+        '--radiant-anim-duration': `${props.duration}s`,
+        '--radiant-width': `${props.radiantWidth}px`
+      }
+    })
 
     return {
       styleVar,
-      classProp: props.class,
-    };
-  },
-};
+      classProp: props.class
+    }
+  }
+}
 </script>
 
 <style scoped>

@@ -19,16 +19,14 @@
 </template>
 
 <script>
-import CalculationEvaluation from "@/components/calculation/CalculationEvaluation.vue";
-import CalculationForm from "@/components/calculation/CalculationForm.vue";
-import BackHome from "@/components/navigation/BackHome.vue";
+import CalculationEvaluation from '@/components/calculation/CalculationEvaluation.vue'
+import CalculationForm from '@/components/calculation/CalculationForm.vue'
+import BackHome from '@/components/navigation/BackHome.vue'
 
 export default {
-  name: "CalculatorView",
-  components: {BackHome, CalculationForm, CalculationEvaluation}
+  name: 'CalculatorView',
+  components: { BackHome, CalculationForm, CalculationEvaluation }
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

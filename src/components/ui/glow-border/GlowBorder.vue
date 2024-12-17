@@ -1,19 +1,19 @@
 <template>
   <div
-      :style="parentStyles"
-      :class="
+    :style="parentStyles"
+    :class="
       cn(
         'relative grid min-h-[60px] w-fit min-w-[300px] place-items-center rounded-[--border-radius] bg-white p-3 text-black dark:bg-black dark:text-white glow-border',
-        props.class,
+        props.class
       )
     "
   >
     <div
-        :style="childStyles"
-        :class="
+      :style="childStyles"
+      :class="
         cn(
           `glow-border before:absolute before:inset-0 before:aspect-square before:size-full before:rounded-[--border-radius] before:bg-[length:300%_300%] before:p-[--border-width] before:opacity-50 before:will-change-[background-position] before:content-['']`,
-          'before:![-webkit-mask-composite:xor] before:![mask-composite:exclude] before:[mask:--mask-linear-gradient]',
+          'before:![-webkit-mask-composite:xor] before:![mask-composite:exclude] before:[mask:--mask-linear-gradient]'
         )
       "
     ></div>
@@ -22,45 +22,45 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { cn } from "@/lib/utils.js";
+import { computed } from 'vue'
+import { cn } from '@/lib/utils.js'
 
 const props = defineProps({
   borderRadius: {
     type: Number,
-    default: 10,
+    default: 10
   },
   color: {
     type: [String, Array],
-    default: "#FFF",
+    default: '#FFF'
   },
   borderWidth: {
     type: Number,
-    default: 2,
+    default: 2
   },
   duration: {
     type: Number,
-    default: 10,
+    default: 10
   },
   class: {
     type: String,
-    default: "",
-  },
-});
+    default: ''
+  }
+})
 
 const parentStyles = computed(() => {
-  return { "--border-radius": `${props.borderRadius}px` };
-});
+  return { '--border-radius': `${props.borderRadius}px` }
+})
 
 const childStyles = computed(() => ({
-  "--border-width": `${props.borderWidth}px`,
-  "--border-radius": `${props.borderRadius}px`,
-  "--glow-pulse-duration": `${props.duration}s`,
-  "--mask-linear-gradient": `linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)`,
-  "--background-radial-gradient": `radial-gradient(circle, transparent, ${
-      Array.isArray(props.color) ? props.color.join(",") : props.color
-  }, transparent)`,
-}));
+  '--border-width': `${props.borderWidth}px`,
+  '--border-radius': `${props.borderRadius}px`,
+  '--glow-pulse-duration': `${props.duration}s`,
+  '--mask-linear-gradient': `linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)`,
+  '--background-radial-gradient': `radial-gradient(circle, transparent, ${
+    Array.isArray(props.color) ? props.color.join(',') : props.color
+  }, transparent)`
+}))
 </script>
 
 <style scoped>

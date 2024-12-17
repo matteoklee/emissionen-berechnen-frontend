@@ -1,8 +1,8 @@
 <script setup>
-import { cn } from '@/lib/utils';
-import { StepperItem, useForwardProps } from 'radix-vue';
+import { cn } from '@/lib/utils'
+import { StepperItem, useForwardProps } from 'radix-vue'
 
-import { computed } from 'vue';
+import { computed } from 'vue'
 
 const props = defineProps({
   step: { type: Number, required: true },
@@ -10,28 +10,23 @@ const props = defineProps({
   completed: { type: Boolean, required: false },
   asChild: { type: Boolean, required: false },
   as: { type: null, required: false },
-  class: { type: null, required: false },
-});
+  class: { type: null, required: false }
+})
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props;
+  const { class: _, ...delegated } = props
 
-  return delegated;
-});
+  return delegated
+})
 
-const forwarded = useForwardProps(delegatedProps);
+const forwarded = useForwardProps(delegatedProps)
 </script>
 
 <template>
   <StepperItem
     v-slot="slotProps"
     v-bind="forwarded"
-    :class="
-      cn(
-        'flex items-center gap-2 group data-[disabled]:pointer-events-none',
-        props.class,
-      )
-    "
+    :class="cn('flex items-center gap-2 group data-[disabled]:pointer-events-none', props.class)"
   >
     <slot v-bind="slotProps" />
   </StepperItem>

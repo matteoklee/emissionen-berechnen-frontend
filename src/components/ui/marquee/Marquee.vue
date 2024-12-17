@@ -1,25 +1,25 @@
 <template>
   <div
-      :class="
+    :class="
       cn(
         'group flex overflow-hidden p-2 [--duration:40s] [--gap:1rem] [gap:var(--gap)]',
         vertical ? 'flex-col' : 'flex-row',
-        props.class,
+        props.class
       )
     "
   >
     <div
-        v-for="index in repeat"
-        :key="index"
-        :class="
+      v-for="index in repeat"
+      :key="index"
+      :class="
         cn(
           'flex shrink-0 justify-around [gap:var(--gap)]',
           vertical ? 'animate-marquee-vertical flex-col' : 'animate-marquee flex-row',
-          pauseOnHover ? 'group-hover:[animation-play-state:paused]' : '',
+          pauseOnHover ? 'group-hover:[animation-play-state:paused]' : ''
         )
       "
-        :style="{
-        animationDirection: reverse ? 'reverse' : 'normal',
+      :style="{
+        animationDirection: reverse ? 'reverse' : 'normal'
       }"
     >
       <slot />
@@ -28,24 +28,24 @@
 </template>
 
 <script setup>
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils'
 
 const props = defineProps({
   class: String,
   reverse: Boolean,
   pauseOnHover: {
     type: Boolean,
-    default: false,
+    default: false
   },
   vertical: {
     type: Boolean,
-    default: false,
+    default: false
   },
   repeat: {
     type: Number,
-    default: 4,
-  },
-});
+    default: 4
+  }
+})
 </script>
 
 <style scoped>

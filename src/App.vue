@@ -1,8 +1,5 @@
-
-
 <template>
   <div class="flex flex-col min-h-screen">
-
     <div v-if="isSignedIn">
       <p class="text-right hidden">LOGGED IN</p>
     </div>
@@ -18,22 +15,19 @@
 </template>
 
 <script>
-
-import {Toaster} from "vue-sonner";
-import Footer from "@/components/navigation/Footer.vue";
-import Header from "@/components/navigation/Header.vue";
+import { Toaster } from 'vue-sonner'
+import Footer from '@/components/navigation/Footer.vue'
+import Header from '@/components/navigation/Header.vue'
 
 export default {
-  name: "App",
-  components: {Header, Footer, Toaster},
+  name: 'App',
+  components: { Header, Footer, Toaster },
   data() {
     return {
-      isSigneIn: false,
+      isSigneIn: false
     }
-  },
+  }
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

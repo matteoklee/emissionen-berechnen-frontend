@@ -8,7 +8,8 @@
         <div class="flex flex-col mb-2">
           <Button type="submit" variant="outlined" class="text-md py-6 border">
             <IconGoogle class="w-4 h-4 mr-2" />
-            Anmelden mit Google</Button>
+            Anmelden mit Google</Button
+          >
         </div>
 
         <!--<div class="inline-flex items-center justify-center w-full">
@@ -18,50 +19,60 @@
         <Separator label="or continue with" class="my-6" />
         <div class="flex flex-col mb-4 mt-2">
           <Label for="email" class="font-medium">Email</Label>
-          <Input id="email" type="email" placeholder="user@email.com" class="py-2.5 px-3 mt-1 border rounded-lg w-full" />
+          <Input
+            id="email"
+            type="email"
+            placeholder="user@email.com"
+            class="py-2.5 px-3 mt-1 border rounded-lg w-full"
+          />
         </div>
         <div class="flex flex-col mb-4">
           <div class="inline-flex flex-row justify-between items-center">
             <Label for="password" class="font-medium">Passwort</Label>
-            <router-link to="/register"><p class="font-medium underline">Passwort vergessen?</p></router-link>
+            <router-link to="/register"
+              ><p class="font-medium underline">Passwort vergessen?</p></router-link
+            >
           </div>
 
-          <Input id="password" type="password" placeholder="" class="py-2.5 px-3 mt-1 border rounded-lg w-full" />
+          <Input
+            id="password"
+            type="password"
+            placeholder=""
+            class="py-2.5 px-3 mt-1 border rounded-lg w-full"
+          />
         </div>
         <div class="flex flex-col mb-4">
           <Button type="submit" variant="" class="text-md py-6">
             <Send class="w-4 h-4 mr-2" />
-            Anmelden</Button>
+            Anmelden</Button
+          >
         </div>
         <div class="flex flex-col mt-2 text-center">
-          <p>Du hast noch kein Benutzerkonto? <router-link to="/register" class="underline">Registrieren</router-link></p>
+          <p>
+            Du hast noch kein Benutzerkonto?
+            <router-link to="/register" class="underline">Registrieren</router-link>
+          </p>
         </div>
       </form>
-
     </div>
   </div>
-
 </template>
 
 <script>
-import Button from "@/components/ui/button/Button.vue";
-import Input from "@/components/ui/input/Input.vue";
-import IconGoogle from "@/components/icons/IconGoogle.vue";
-import {Send} from "lucide-vue-next";
-import Separator from "@/components/ui/separator/Separator.vue";
-import Label from "@/components/ui/label/Label.vue";
+import Button from '@/components/ui/button/Button.vue'
+import Input from '@/components/ui/input/Input.vue'
+import IconGoogle from '@/components/icons/IconGoogle.vue'
+import { Send } from 'lucide-vue-next'
+import Separator from '@/components/ui/separator/Separator.vue'
+import Label from '@/components/ui/label/Label.vue'
 
 export default {
-  name: "SignInView",
-  components: {Label, Separator, IconGoogle, Input, Button, Send},
+  name: 'SignInView',
+  components: { Label, Separator, IconGoogle, Input, Button, Send },
   methods: {
-    onSubmit() {
-
-    }
+    onSubmit() {}
   }
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
