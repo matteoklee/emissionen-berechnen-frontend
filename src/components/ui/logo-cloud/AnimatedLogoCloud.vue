@@ -3,9 +3,9 @@
     <div class="mx-auto w-full px-4 md:px-8">
       <div
           v-if="props.title"
-          class="text-center font-medium text-muted-foreground"
-      >
-        {{ props.title }} 222
+          class="text-center text-lg font-medium text-gray-900"
+      > <!-- text-muted-foreground -->
+        {{ props.title }}
       </div>
       <div
           :class="

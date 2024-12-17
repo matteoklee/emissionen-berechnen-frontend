@@ -3,7 +3,7 @@
   <nav class="bg-white border-gray-200 border-b fixed z-10 top-0 w-full">
     <div class="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between p-3">
       <a href="/" class="flex items-center space-x-3">
-        <Leaf color="#16a34a" :size="24" class="" /> <!-- 500:#22c55e 600: #16a34a 700: #15803d -->
+        <Leaf color="#0A5E33" :size="24" class="" /> <!-- 500:#22c55e 600: #16a34a 700: #15803d -->
         <span class="self-center text-xl font-medium">Emissionen-Berechnen.de</span>
       </a>
 
@@ -93,14 +93,14 @@
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Avatar>
-              <AvatarImage src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="@radix-vue" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarImage src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="Avatar" />
+              <AvatarFallback>Avatar</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuLabel>
               <span class="block text-sm text-gray-900 dark:text-white">Matteo Kleemann</span>
-              <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">kleemann@emissionen-berechnen.de</span>
+              <span class="block text-sm text-gray-500 truncate dark:text-gray-400">kleemann@emissionen-berechnen.de</span>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Dashboard</DropdownMenuItem>
@@ -112,7 +112,7 @@
       <div v-else>
         <div class="inline-flex flex-row space-x-3">
           <router-link to="/login"><Button variant="outlined" class="border">Anmelden</Button></router-link>
-          <router-link to="/register"><Button variant="destructive">Jetzt Starten</Button></router-link>
+          <router-link to="/register"><Button variant="" class="">Jetzt Starten</Button></router-link>
         </div>
       </div>
 

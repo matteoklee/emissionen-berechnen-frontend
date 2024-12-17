@@ -29,7 +29,7 @@
           <Input id="password" type="password" placeholder="" class="py-2.5 px-3 mt-1 border rounded-lg w-full" />
         </div>
         <div class="flex flex-col mb-4">
-          <Button type="submit" variant="destructive" class="text-md py-6">
+          <Button type="submit" variant="" class="text-md py-6">
             <Send class="w-4 h-4 mr-2" />
             Anmelden</Button>
         </div>
