@@ -11,7 +11,7 @@ const authService = {
             const response = await axiosAuthInstance.post('/token', new URLSearchParams({
                 grant_type: 'password',
                 client_id: 'emissionen-berechnen-frontend',
-                //scope: 'openid',
+                scope: 'openid',
                 username,
                 password,
             }));
@@ -28,8 +28,8 @@ const authService = {
         }
     },
 
-    logout() {
-        /*
+    async logout() {
+
         try {
             const refreshToken = localStorage.getItem('refresh_token');
             if (!refreshToken) {
@@ -46,21 +46,18 @@ const authService = {
             localStorage.removeItem('refresh_token');
 
             console.log('Logout erfolgreich.');
+            window.location.reload();
         } catch (error) {
             console.error('Fehler beim Logout:', error);
-        } finally {
-            const logoutOptions = {
-                redirectUri: 'http://localhost:5173/',
-                //idTokenHint: keycloak.idToken,
-            };
-            await keycloak.logout(logoutOptions);
         }
-        */
+
         //await keycloak.logout();
 
+        /*
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
         window.location.reload();
+        */
     },
     /*
     getAccessToken() {
@@ -83,13 +80,39 @@ const authService = {
         const token = this.getAccessToken();
         if (!token) throw new Error("Kein Access-Token gefunden.");
 
-        const response = await axiosAuthInstance.get('/userinfo', {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+        try {
+            const response = await axiosAuthInstance.get('/userinfo', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response && error.response.status === 401) {
+                await this.refreshToken();
+                return this.getUserInfo();
+            }
+            throw error;
+        }
+    },
 
-        return response.data;
+    async refreshToken() {
+        const refreshToken = localStorage.getItem('refresh_token');
+        if (!refreshToken) throw new Error("Kein Refresh-Token gefunden.");
+
+        try {
+            const response = await axiosAuthInstance.post('/token', new URLSearchParams({
+                grant_type: 'refresh_token',
+                client_id: 'emissionen-berechnen-frontend',
+                refresh_token: refreshToken,
+            }));
+            const { access_token, refresh_token } = response.data;
+            localStorage.setItem('access_token', access_token);
+            localStorage.setItem('refresh_token', refresh_token);
+        } catch (error) {
+            await this.logout();
+            throw new Error("Token-Aktualisierung fehlgeschlagen. Bitte erneut anmelden.");
+        }
     }
 
 };

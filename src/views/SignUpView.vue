@@ -4,7 +4,7 @@
       <h1 class="text-xl font-bold mb-2">Registrieren</h1>
       <p class="text-gray-900 mb-2">Enter your information to create an account.</p>
 
-      <form @submit="onSubmit">
+      <form @submit.prevent="onSubmit">
         <div class="flex flex-row mt-4 mb-4 w-full space-x-4">
           <div class="">
             <Label for="firstName" class="font-medium">Vorname</Label>
@@ -69,8 +69,15 @@ import Label from '@/components/ui/label/Label.vue'
 export default {
   name: 'SignUpView',
   components: { Label, IconGoogle, Input, Button, Send },
+  data() {
+    return {
+
+    }
+  },
   methods: {
-    onSubmit() {}
+    onSubmit() {
+
+    }
   }
 }
 </script>

@@ -6,8 +6,10 @@
       </div>
 
       <h1 class="text-center mb-2">This is the calculator page</h1>
-      <p>Willkommen, {{ userInfo.preferred_username }}</p>
-      <!--<p>Rollen: {{ userInfo.roles.join(', ') }}</p>-->
+      <p>preferred_username: {{ userInfo.preferred_username }}</p>
+      <p>email_verified: {{ userInfo.email_verified }}</p>
+      <p>family_name: {{ userInfo.family_name }}</p>
+      <p>given_name: {{ userInfo.given_name }}</p>
 
       <div>
         <CalculationForm></CalculationForm>
@@ -36,7 +38,8 @@ export default {
   },
   async created() {
     try {
-      //this.userInfo = await authService.getUserInfo();
+      this.userInfo = await authService.getUserInfo();
+      console.log(this.userInfo);
     } catch (error) {
       console.error("Fehler beim Abrufen der Benutzerinformationen:", error);
     }

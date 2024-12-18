@@ -82,13 +82,13 @@ export default {
     async onSubmit() {
       try {
         const response = await authService.login(this.username, this.password);
-        //window.location.reload();
         console.log(response);
-        this.$router.push({ name: 'calculator' });
-        return false;
+        //this.$router.push("/");
+        //this.$router.push({ name: 'calculator' });
+        //window.location.reload();
+        window.location.href = "/"
       } catch (error) {
         console.error(error.message);
-        return false;
       }
     }
   }

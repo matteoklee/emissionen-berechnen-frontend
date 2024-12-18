@@ -47,7 +47,8 @@ keycloak
     .catch((error) => {
         console.error('Keycloak initialisierung fehlgeschlagen:', error);
     });
-*/
+    */
+
 
 const app = createApp(App);
 
@@ -56,3 +57,4 @@ app.use(router);
 app.use(MotionPlugin);
 
 app.mount('#app');
+
