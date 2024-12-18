@@ -113,13 +113,22 @@
         </DropdownMenu>
       </div>
       <div v-else>
-        <div class="inline-flex flex-row space-x-3">
-          <router-link to="/login"
-            ><Button variant="outlined" class="border">Anmelden</Button></router-link
-          >
-          <router-link to="/calculator"
-            ><Button variant="" class="">Jetzt Starten</Button></router-link
-          >
+        <div class="">
+          <div v-if="isAuthenticated" class="inline-flex flex-row space-x-3">
+            <Button variant="outlined" class="border" @click="submitLogout">Abmelden</Button>
+            <router-link to="/calculator"
+              ><Button variant="" class="">Berechnen</Button></router-link
+            >
+          </div>
+          <div v-else class="inline-flex flex-row space-x-3">
+            <router-link to="/login"
+              ><Button variant="outlined" class="border">Anmelden</Button></router-link
+            >
+            <router-link to="/calculator"
+              ><Button variant="" class="">Jetzt Starten</Button></router-link
+            >
+          </div>
+
         </div>
       </div>
     </div>
@@ -144,6 +153,7 @@ import Avatar from '@/components/ui/avatar/Avatar.vue'
 import AvatarImage from '@/components/ui/avatar/AvatarImage.vue'
 import AvatarFallback from '@/components/ui/avatar/AvatarFallback.vue'
 import Button from '@/components/ui/button/Button.vue'
+import authService from "@/services/authService.js";
 export default {
   name: 'Header',
   components: {
@@ -169,6 +179,16 @@ export default {
   data() {
     return {
       isSignedIn: false
+    }
+  },
+  methods: {
+    submitLogout() {
+      authService.logout();
+    }
+  },
+  computed: {
+    isAuthenticated() {
+      return authService.isAuthenticated();
     }
   }
 }

@@ -4,7 +4,7 @@
       <h1 class="text-xl font-bold mb-2">Anmelden</h1>
       <p class="text-gray-900 mb-2">Enter your email below to login to your account.</p>
 
-      <form @submit="onSubmit">
+      <form @submit.prevent="onSubmit">
         <div class="flex flex-col mb-2">
           <Button type="submit" variant="outlined" class="text-md py-6 border">
             <IconGoogle class="w-4 h-4 mr-2" />
@@ -18,11 +18,12 @@
         </div> -->
         <Separator label="or continue with" class="my-6" />
         <div class="flex flex-col mb-4 mt-2">
-          <Label for="email" class="font-medium">Email</Label>
+          <Label for="username" class="font-medium">Benutzername</Label>
           <Input
-            id="email"
-            type="email"
-            placeholder="user@email.com"
+              v-model="username"
+            id="username"
+            type="username"
+            placeholder="user@email.com | user"
             class="py-2.5 px-3 mt-1 border rounded-lg w-full"
           />
         </div>
@@ -35,6 +36,7 @@
           </div>
 
           <Input
+              v-model="password"
             id="password"
             type="password"
             placeholder=""
@@ -65,12 +67,30 @@ import IconGoogle from '@/components/icons/IconGoogle.vue'
 import { Send } from 'lucide-vue-next'
 import Separator from '@/components/ui/separator/Separator.vue'
 import Label from '@/components/ui/label/Label.vue'
+import authService from "@/services/authService.js";
 
 export default {
   name: 'SignInView',
   components: { Label, Separator, IconGoogle, Input, Button, Send },
+  data() {
+    return {
+      username: "",
+      password: "",
+    }
+  },
   methods: {
-    onSubmit() {}
+    async onSubmit() {
+      try {
+        const response = await authService.login(this.username, this.password);
+        //window.location.reload();
+        console.log(response);
+        this.$router.push({ name: 'calculator' });
+        return false;
+      } catch (error) {
+        console.error(error.message);
+        return false;
+      }
+    }
   }
 }
 </script>
