@@ -1,6 +1,6 @@
 <template>
   <div class="h-full w-full flex flex-row justify-center items-center divide-x">
-    <div class="p-6 w-1/4 border rounded-lg">
+    <div class="p-6 xl:w-1/4 md:w-1/2 w-full mx-8 my-6 border rounded-lg">
       <h1 class="text-xl font-bold mb-2">Anmelden</h1>
       <p class="text-gray-900 mb-2">Enter your email below to login to your account.</p>
 
@@ -30,9 +30,9 @@
         <div class="flex flex-col mb-4">
           <div class="inline-flex flex-row justify-between items-center">
             <Label for="password" class="font-medium">Passwort</Label>
-            <router-link to="/register"
+            <!--<router-link to="/register"
               ><p class="font-medium underline">Passwort vergessen?</p></router-link
-            >
+            >-->
           </div>
 
           <Input
@@ -88,23 +88,26 @@ export default {
           "username": this.username,
           "password": this.password
         }
-        const response = await authService.login(credentials);
-        console.log(response);
-        //this.$router.push("/");
-        //window.location.reload();
-        //window.location.href = "/";
+        await authService.login(credentials);
+
         const userData = await userService.getUserInfo();
         userService.updateUserData(userData);
+        const userRoles = await userService.getUserRoles();
+        userService.updateUserRoles(userRoles);
+
         eventBus.emit('auth-changed', true);
         this.$router.push({ name: 'calculator' });
 
         toast('Du hast dich angemeldet.', {
           description: 'Sunday, December 03, 2023 at 9:00 AM',
+          duration: 5000,
           action: {
             label: 'Abmelden',
             onClick: () => {
               authService.logout();
-              window.location.href = "/"
+              userService.clearUserData();
+              eventBus.emit('auth-changed', false);
+              this.$router.push("/");
             }
           }
         })

@@ -14,6 +14,16 @@ const userService = {
             throw error;
         }
     },
+    async getUserRoles() {
+        try {
+            const response = await axiosInstance.get('/users/roles');
+            return response.data;
+        } catch (error) {
+            console.error('Fehler beim Abrufen der Nutzerrollen:', error);
+            throw error;
+        }
+    },
+
 
     /**
      * Aktualisiert die Nutzerdaten im lokalen Speicher.
@@ -23,14 +33,21 @@ const userService = {
         localStorage.setItem('userData', JSON.stringify(userData));
     },
 
+    updateUserRoles(userRoles) {
+        localStorage.setItem('userRoles', JSON.stringify(userRoles));
+    },
+
+    getStoredUserRoles() {
+        const userRoles = localStorage.getItem('userRoles');
+        return userRoles ? JSON.parse(userRoles) : null;
+    },
+
     /**
      * Holt die gespeicherten Nutzerdaten aus dem lokalen Speicher.
      * @returns {Object|null} Die gespeicherten Nutzerdaten oder null, wenn keine vorhanden sind.
      */
     getStoredUserData() {
         const userData = localStorage.getItem('userData');
-        console.log(userData);
-        console.log(JSON.parse(userData));
         return userData ? JSON.parse(userData) : null;
     },
 
@@ -39,6 +56,7 @@ const userService = {
      */
     clearUserData() {
         localStorage.removeItem('userData');
+        localStorage.removeItem('userRoles');
     }
 };
 

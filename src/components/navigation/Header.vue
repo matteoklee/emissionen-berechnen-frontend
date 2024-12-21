@@ -98,12 +98,18 @@
               <AvatarFallback>Avatar</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
+          <DropdownMenuContent class="max-w-xs">
             <DropdownMenuLabel>
               <span class="block text-sm text-gray-900 dark:text-white">{{ (userData.username != null ? userData.username : "username") }}</span>
               <span class="block text-sm text-gray-500 truncate dark:text-gray-400"
-                >{{ (userData.email != null ? userData.email : "email") }}</span
-              >
+                >{{ (userData.email != null ? userData.email : "email@example.com") }}</span>
+              <div v-if="userRoles != null">
+                <div v-for="role in userRoles" :key="role" class="inline-flex flex-row justify-center items-center mt-2">
+                  <Badge variant="primary" class="bg-gray-900 text-white">  {{ (role != null ? role : "unknown role") }}</Badge>
+                </div>
+
+              </div>
+
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Dashboard</DropdownMenuItem>
@@ -156,9 +162,11 @@ import Button from '@/components/ui/button/Button.vue'
 import authService from "@/services/authService.js";
 import {eventBus} from "@/services/util/eventBus.js";
 import userService from "@/services/userService.js";
+import Badge from "@/components/ui/badge/Badge.vue";
 export default {
   name: 'Header',
   components: {
+    Badge,
     Button,
     AvatarFallback,
     AvatarImage,
@@ -182,6 +190,7 @@ export default {
     return {
       isSignedIn: false,
       userData: [],
+      userRoles: []
     }
   },
   async mounted() {
@@ -189,13 +198,15 @@ export default {
     if(this.isSignedIn) {
       //const userData = await userService.getUserInfo();
       //userService.updateUserData(userData);
-      this.userData = userService.getStoredUserData();
+      this.getUserData();
+      this.getRoles();
     }
   },
   created() {
     eventBus.on('auth-changed', (status) => {
       this.isSignedIn = status;
-      this.userData = userService.getStoredUserData();
+      this.getUserData();
+      this.getRoles();
     });
   },
   methods: {
@@ -205,8 +216,27 @@ export default {
       eventBus.emit('auth-changed', false);
       this.$router.push("/");
     },
-    async checkAuth() {
+    getUserData() {
+      this.userData = userService.getStoredUserData();
+    },
+    getRoles() {
+      const defaultKeycloakRoles = [
+        'offline_access',
+        'uma_authorization',
+        'default-roles-emissionen-berechnen-realm',
+        'account_manage-account-links',
+        'account_view-profile',
+        'account_manage-account'
+      ];
 
+      this.userRoles = userService.getStoredUserRoles();
+      if(this.userRoles != null) {
+        this.userRoles = this.userRoles
+            .map(role => role.replace(/^ROLE_/, ''))
+            .filter(role =>
+                !defaultKeycloakRoles.includes(role.toLowerCase()))
+            .map(role => role.toUpperCase());
+      }
     }
   },
 }
