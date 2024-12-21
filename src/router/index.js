@@ -6,6 +6,8 @@ import SignUpView from '@/views/SignUpView.vue'
 import CalculatorView from '@/views/CalculatorView.vue'
 
 import authService from "@/services/authService.js";
+import ProfileView from "@/views/ProfileView.vue";
+import DashboardView from "@/views/DashboardView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,6 +43,20 @@ const router = createRouter({
       alias: '/signup',
       name: 'register',
       component: SignUpView
+    },
+    {
+      path: '/profile',
+      alias: '/profil',
+      name: 'profile',
+      component: ProfileView,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/dashboard',
+      alias: '/board',
+      name: 'dashboard',
+      component: DashboardView,
+      meta: { requiresAuth: true }
     },
     {
       path: '/:pathMatch(.*)*',

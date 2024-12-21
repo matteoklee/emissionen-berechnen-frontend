@@ -6,14 +6,8 @@
       </div>
 
       <h1 class="text-center mb-2">This is the calculator page</h1>
-      <p>preferred_username: {{ userData }}</p>
-      <!--
-      <p>preferred_username: {{ userInfo.preferred_username }}</p>
-      <p>email_verified: {{ userInfo.email_verified }}</p>
-      <p>family_name: {{ userInfo.family_name }}</p>
-      <p>given_name: {{ userInfo.given_name }}</p>
-      -->
-      <div>
+
+      <div class="hidden">
         <CalculationForm></CalculationForm>
       </div>
 
@@ -35,17 +29,8 @@ export default {
   components: { BackHome, CalculationForm, CalculationEvaluation },
   data() {
     return {
-      userData: []
     }
   },
-  async created() {
-    try {
-      this.userData = await userService.getStoredUserData()
-      console.log(this.userData);
-    } catch (error) {
-      console.error("Fehler beim Abrufen der Benutzerinformationen:", error);
-    }
-  }
 }
 </script>
 

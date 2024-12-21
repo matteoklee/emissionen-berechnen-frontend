@@ -10,23 +10,19 @@ const authService = {
      * @returns {Promise} Axios Promise mit der Serverantwort.
      */
     login(credentials) {
-        return axios.post(`${AUTH_BASE_URL}/login`, null, {
-            params: {
-                username: credentials.username,
-                password: credentials.password
-            }
-        }).then((response) => {
-            const { access_token, refresh_token, expires_in } = response.data;
-            localStorage.setItem('accessToken', access_token);
-            localStorage.setItem('refreshToken', refresh_token);
-            const expirationTime = Date.now() + expires_in * 1000;
-            localStorage.setItem('tokenExpiration', expirationTime);
-            return response.data;
-        })
-        .catch((error) => {
-            console.error('Login failed:', error.response?.data || error.message);
-            throw error;
-        });
+        return axios.post(`${AUTH_BASE_URL}/login`,  credentials)
+            .then((response) => {
+                const { access_token, refresh_token, expires_in } = response.data;
+                localStorage.setItem('accessToken', access_token);
+                localStorage.setItem('refreshToken', refresh_token);
+                const expirationTime = Date.now() + expires_in * 1000;
+                localStorage.setItem('tokenExpiration', expirationTime);
+                return response.data;
+            })
+            .catch((error) => {
+                console.error('Login failed:', error.response?.data || error.message);
+                throw error;
+            });
     },
 
     /**

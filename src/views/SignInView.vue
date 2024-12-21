@@ -83,37 +83,73 @@ export default {
   },
   methods: {
     async onSubmit() {
-      try {
-        const credentials = {
-          "username": this.username,
-          "password": this.password
+      const loadingToast = toast.loading('Anmeldung wird durchgeführt...', {
+        duration: 1000,
+        action: {
+          label: 'Abbrechen',
+          onClick: () => {
+            return;
+          },
+        },
+      });
+      setTimeout(async () => {
+        try {
+          const credentials = {
+            username: this.username,
+            password: this.password,
+          };
+          await authService.login(credentials);
+
+          const userData = await userService.getUserInfo();
+          userService.updateUserData(userData);
+          const userRoles = await userService.getUserRoles();
+          userService.updateUserRoles(userRoles);
+
+          eventBus.emit('auth-changed', true);
+          this.$router.push({name: 'calculator'});
+
+          toast.dismiss(loadingToast);
+
+          toast.success('Du hast dich angemeldet.', {
+            description: this.getCurrentDate(),
+            duration: 5000,
+            action: {
+              label: 'Abmelden',
+              onClick: () => {
+                authService.logout();
+                userService.clearUserData();
+                eventBus.emit('auth-changed', false);
+                this.$router.push("/");
+              },
+            },
+          });
+        } catch (error) {
+          console.error(error.message);
+          toast.dismiss(loadingToast);
+          toast.error('Anmeldung fehlgeschlagen.', {
+            description: error.message,
+            duration: 3000,
+            action: {
+              label: 'Ok',
+              onClick: () => {
+                console.log("close toast");
+              },
+            },
+          });
         }
-        await authService.login(credentials);
-
-        const userData = await userService.getUserInfo();
-        userService.updateUserData(userData);
-        const userRoles = await userService.getUserRoles();
-        userService.updateUserRoles(userRoles);
-
-        eventBus.emit('auth-changed', true);
-        this.$router.push({ name: 'calculator' });
-
-        toast('Du hast dich angemeldet.', {
-          description: 'Sunday, December 03, 2023 at 9:00 AM',
-          duration: 5000,
-          action: {
-            label: 'Abmelden',
-            onClick: () => {
-              authService.logout();
-              userService.clearUserData();
-              eventBus.emit('auth-changed', false);
-              this.$router.push("/");
-            }
-          }
-        })
-      } catch (error) {
-        console.error(error.message);
-      }
+      }, 1000);
+    },
+    getCurrentDate() {
+      const currentDate = new Date();
+      const options = {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      };
+      return currentDate.toLocaleDateString('de-DE', options);
     }
   }
 }

@@ -1,21 +1,21 @@
 <template>
   <nav class="bg-white border-gray-200 border-b fixed z-10 top-0 w-full">
-    <div class="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between p-3">
+    <div class="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between p-3 w-full">
       <a href="/" class="flex items-center space-x-3">
         <Leaf color="#0A5E33" :size="24" class="" />
         <!-- 500:#22c55e 600: #16a34a 700: #15803d -->
         <span class="self-center text-xl font-medium">Emissionen-Berechnen.de</span>
       </a>
 
-      <div class="ml-auto mr-4">
+      <div class="ml-auto">
         <NavigationMenu>
           <NavigationMenuList>
-            <NavigationMenuItem class="mr-4">
+            <NavigationMenuItem class="">
               <NavigationMenuLink>
                 <router-link to="/">Home</router-link>
               </NavigationMenuLink>
             </NavigationMenuItem>
-            <NavigationMenuItem class="mr-4">
+            <NavigationMenuItem class="">
               <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul
@@ -83,50 +83,47 @@
                 <router-link to="/about">About</router-link>
               </NavigationMenuLink>
             </NavigationMenuItem>
+            <NavigationMenuItem class="mr-4" v-if="isSignedIn">
+              <NavigationMenuLink>
+                <router-link to="/calculator">Rechner</router-link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       </div>
 
-      <div v-if="isSignedIn">
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Avatar>
-              <AvatarImage
-                src="https://cdn-icons-png.flaticon.com/512/147/147144.png"
-                alt="Avatar"
-              />
-              <AvatarFallback>Avatar</AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent class="max-w-xs">
-            <DropdownMenuLabel>
-              <span class="block text-sm text-gray-900 dark:text-white">{{ (userData.username != null ? userData.username : "username") }}</span>
-              <span class="block text-sm text-gray-500 truncate dark:text-gray-400"
-                >{{ (userData.email != null ? userData.email : "email@example.com") }}</span>
-              <div v-if="userRoles != null">
-                <div v-for="role in userRoles" :key="role" class="inline-flex flex-row justify-center items-center mt-2">
-                  <Badge variant="primary" class="bg-gray-900 text-white">  {{ (role != null ? role : "unknown role") }}</Badge>
-                </div>
 
+      <DropdownMenu v-if="isSignedIn" :modal="false">
+        <DropdownMenuTrigger as-child>
+          <Avatar>
+            <AvatarImage
+              src="https://cdn-icons-png.flaticon.com/512/147/147144.png"
+              alt="Avatar"
+            />
+            <AvatarFallback>Avatar</AvatarFallback>
+          </Avatar>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel>
+            <span class="block text-sm text-gray-900 dark:text-white">{{ (userData.username != null ? userData.username : "username") }}</span>
+            <span class="block text-sm text-gray-500 truncate dark:text-gray-400"
+              >{{ (userData.email != null ? userData.email : "email@example.com") }}</span>
+            <div v-if="userRoles != null">
+              <div v-for="role in userRoles" :key="role" class="inline-flex flex-row justify-center items-center mt-2">
+                <Badge variant="primary" class="bg-gray-900 text-white">  {{ (role != null ? role : "unknown role") }}</Badge>
               </div>
+            </div>
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem><router-link to="/dashboard">Dashboard</router-link></DropdownMenuItem>
+          <DropdownMenuItem><router-link to="/profile">Profil</router-link></DropdownMenuItem>
+          <DropdownMenuItem @click="submitLogout">Abmelden</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
 
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Dashboard</DropdownMenuItem>
-            <DropdownMenuItem>Einstellungen</DropdownMenuItem>
-            <DropdownMenuItem @click="submitLogout">Abmelden</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
       <div class="ml-4">
         <div class="">
-          <div v-if="isSignedIn" class="inline-flex flex-row space-x-3">
-            <!--<Button variant="outlined" class="border" @click="submitLogout">Abmelden</Button>-->
-            <router-link to="/calculator"
-              ><Button variant="" class="">Berechnen</Button></router-link
-            >
-          </div>
-          <div v-else class="inline-flex flex-row space-x-3">
+          <div v-if="!isSignedIn" class="inline-flex flex-row space-x-3">
             <router-link to="/login"
               ><Button variant="outlined" class="border">Anmelden</Button></router-link
             >
@@ -134,7 +131,6 @@
               ><Button variant="" class="">Jetzt Starten</Button></router-link
             >
           </div>
-
         </div>
       </div>
     </div>
@@ -163,6 +159,7 @@ import authService from "@/services/authService.js";
 import {eventBus} from "@/services/util/eventBus.js";
 import userService from "@/services/userService.js";
 import Badge from "@/components/ui/badge/Badge.vue";
+import {toast} from "vue-sonner";
 export default {
   name: 'Header',
   components: {
@@ -215,6 +212,16 @@ export default {
       userService.clearUserData();
       eventBus.emit('auth-changed', false);
       this.$router.push("/");
+      toast.info('Abmeldung erfolgreich.', {
+        description: 'Du wurdest abgemeldet',
+        duration: 5000,
+        action: {
+          label: 'Ok',
+          onClick: () => {
+            console.log("close toast");
+          }
+        }
+      })
     },
     getUserData() {
       this.userData = userService.getStoredUserData();
