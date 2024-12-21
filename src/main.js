@@ -8,7 +8,7 @@ import './assets/main.scss'
 import { MotionPlugin } from '@vueuse/motion'
 
 //import keycloak from "@/services/keycloak.js";
-//import authService from "@/services/authService.js";
+//import keycloakService from "@/services/keycloakService.js";
 
 /*
 keycloak
@@ -30,8 +30,8 @@ keycloak
             console.log("Nachname:", keycloak.tokenParsed.family_name);
             console.log("Rollen:", keycloak.tokenParsed.realm_access.roles);
             console.log(localStorage.getItem('access_token'));
-            console.log(authService.getAccessToken());
-            //console.log(authService.getUserInfo());
+            console.log(keycloakService.getAccessToken());
+            //console.log(keycloakService.getUserInfo());
         }
 
         const app = createApp(App);

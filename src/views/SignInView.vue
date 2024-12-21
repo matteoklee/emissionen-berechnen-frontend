@@ -68,6 +68,7 @@ import { Send } from 'lucide-vue-next'
 import Separator from '@/components/ui/separator/Separator.vue'
 import Label from '@/components/ui/label/Label.vue'
 import authService from "@/services/authService.js";
+import {toast} from "vue-sonner";
 
 export default {
   name: 'SignInView',
@@ -81,12 +82,27 @@ export default {
   methods: {
     async onSubmit() {
       try {
-        const response = await authService.login(this.username, this.password);
+        const credentials = {
+          "username": this.username,
+          "password": this.password
+        }
+        const response = await authService.login(credentials);
         console.log(response);
         //this.$router.push("/");
-        //this.$router.push({ name: 'calculator' });
         //window.location.reload();
-        window.location.href = "/"
+        //this.$router.push({ name: 'calculator' });
+        //window.location.href = "/";
+
+        toast('Du hast dich angemeldet.', {
+          description: 'Sunday, December 03, 2023 at 9:00 AM',
+          action: {
+            label: 'Abmelden',
+            onClick: () => {
+              authService.logout();
+              window.location.href = "/"
+            }
+          }
+        })
       } catch (error) {
         console.error(error.message);
       }

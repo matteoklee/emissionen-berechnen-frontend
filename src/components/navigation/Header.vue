@@ -184,11 +184,12 @@ export default {
   methods: {
     submitLogout() {
       authService.logout();
+      window.location.href = "/";
     }
   },
   computed: {
     isAuthenticated() {
-      return authService.isAuthenticated();
+      return authService.isLoggedIn();
     }
   }
 }
