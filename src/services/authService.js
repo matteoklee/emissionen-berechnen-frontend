@@ -1,4 +1,5 @@
 import axios from 'axios';
+import userService from "@/services/userService.js";
 
 const AUTH_BASE_URL = '/api/v1/auth';
 
@@ -108,7 +109,13 @@ const authService = {
     isLoggedIn() {
         const token = localStorage.getItem('accessToken');
         return !!token && !this.isTokenExpired();
-    }
+    },
+
+    checkAuthStatus() {
+        const token = localStorage.getItem('accessToken');
+        const isTokenValid = token && !this.isTokenExpired();
+        return isTokenValid;
+    },
 
 };
 

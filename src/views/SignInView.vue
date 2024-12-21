@@ -69,6 +69,8 @@ import Separator from '@/components/ui/separator/Separator.vue'
 import Label from '@/components/ui/label/Label.vue'
 import authService from "@/services/authService.js";
 import {toast} from "vue-sonner";
+import {eventBus} from "@/services/util/eventBus.js";
+import userService from "@/services/userService.js";
 
 export default {
   name: 'SignInView',
@@ -90,8 +92,11 @@ export default {
         console.log(response);
         //this.$router.push("/");
         //window.location.reload();
-        //this.$router.push({ name: 'calculator' });
         //window.location.href = "/";
+        const userData = await userService.getUserInfo();
+        userService.updateUserData(userData);
+        eventBus.emit('auth-changed', true);
+        this.$router.push({ name: 'calculator' });
 
         toast('Du hast dich angemeldet.', {
           description: 'Sunday, December 03, 2023 at 9:00 AM',

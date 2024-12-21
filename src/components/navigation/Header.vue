@@ -100,22 +100,22 @@
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuLabel>
-              <span class="block text-sm text-gray-900 dark:text-white">Matteo Kleemann</span>
+              <span class="block text-sm text-gray-900 dark:text-white">{{ (userData.username != null ? userData.username : "username") }}</span>
               <span class="block text-sm text-gray-500 truncate dark:text-gray-400"
-                >kleemann@emissionen-berechnen.de</span
+                >{{ (userData.email != null ? userData.email : "email") }}</span
               >
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Dashboard</DropdownMenuItem>
             <DropdownMenuItem>Einstellungen</DropdownMenuItem>
-            <DropdownMenuItem>Abmelden</DropdownMenuItem>
+            <DropdownMenuItem @click="submitLogout">Abmelden</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div v-else>
+      <div class="ml-4">
         <div class="">
-          <div v-if="isAuthenticated" class="inline-flex flex-row space-x-3">
-            <Button variant="outlined" class="border" @click="submitLogout">Abmelden</Button>
+          <div v-if="isSignedIn" class="inline-flex flex-row space-x-3">
+            <!--<Button variant="outlined" class="border" @click="submitLogout">Abmelden</Button>-->
             <router-link to="/calculator"
               ><Button variant="" class="">Berechnen</Button></router-link
             >
@@ -154,6 +154,8 @@ import AvatarImage from '@/components/ui/avatar/AvatarImage.vue'
 import AvatarFallback from '@/components/ui/avatar/AvatarFallback.vue'
 import Button from '@/components/ui/button/Button.vue'
 import authService from "@/services/authService.js";
+import {eventBus} from "@/services/util/eventBus.js";
+import userService from "@/services/userService.js";
 export default {
   name: 'Header',
   components: {
@@ -178,20 +180,35 @@ export default {
   },
   data() {
     return {
-      isSignedIn: false
+      isSignedIn: false,
+      userData: [],
     }
+  },
+  async mounted() {
+    this.isSignedIn = authService.checkAuthStatus();
+    if(this.isSignedIn) {
+      //const userData = await userService.getUserInfo();
+      //userService.updateUserData(userData);
+      this.userData = userService.getStoredUserData();
+    }
+  },
+  created() {
+    eventBus.on('auth-changed', (status) => {
+      this.isSignedIn = status;
+      this.userData = userService.getStoredUserData();
+    });
   },
   methods: {
     submitLogout() {
       authService.logout();
-      window.location.href = "/";
+      userService.clearUserData();
+      eventBus.emit('auth-changed', false);
+      this.$router.push("/");
+    },
+    async checkAuth() {
+
     }
   },
-  computed: {
-    isAuthenticated() {
-      return authService.isLoggedIn();
-    }
-  }
 }
 </script>
 

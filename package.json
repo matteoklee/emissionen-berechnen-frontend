@@ -25,6 +25,7 @@
     "axios": "^1.7.9",
     "keycloak-js": "^26.0.7",
     "lucide-vue-next": "^0.468.0",
+    "mitt": "^3.0.1",
     "pinia": "^2.1.7",
     "radix-vue": "^1.9.11",
     "vee-validate": "^4.14.7",

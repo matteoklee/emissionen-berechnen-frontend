@@ -6,7 +6,7 @@
       </div>
 
       <h1 class="text-center mb-2">This is the calculator page</h1>
-      <p>preferred_username: {{ userInfo }}</p>
+      <p>preferred_username: {{ userData }}</p>
       <!--
       <p>preferred_username: {{ userInfo.preferred_username }}</p>
       <p>email_verified: {{ userInfo.email_verified }}</p>
@@ -28,23 +28,20 @@
 import CalculationEvaluation from '@/components/calculation/CalculationEvaluation.vue'
 import CalculationForm from '@/components/calculation/CalculationForm.vue'
 import BackHome from '@/components/navigation/BackHome.vue'
+import userService from "@/services/userService.js";
 
 export default {
   name: 'CalculatorView',
   components: { BackHome, CalculationForm, CalculationEvaluation },
   data() {
     return {
-      userInfo: []
+      userData: []
     }
   },
   async created() {
     try {
-      this.userInfo = {
-        "access_token":  localStorage.getItem('accessToken'),
-        "refresh_token":  localStorage.getItem('refreshToken'),
-        "expires_in": localStorage.getItem('tokenExpiration')
-      }
-      console.log(this.userInfo);
+      this.userData = await userService.getStoredUserData()
+      console.log(this.userData);
     } catch (error) {
       console.error("Fehler beim Abrufen der Benutzerinformationen:", error);
     }

@@ -5,7 +5,7 @@ import SignInView from '@/views/SignInView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import CalculatorView from '@/views/CalculatorView.vue'
 
-import keycloakService from "@/services/keycloakService.js";
+import authService from "@/services/authService.js";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,7 +52,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.meta.requiresAuth) {
-      if (keycloakService.isAuthenticated()) {
+      if (authService.isLoggedIn()) {
         next();
       } else {
         return next({ name: 'login' });
