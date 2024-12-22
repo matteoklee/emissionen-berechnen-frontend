@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import { computed } from 'vue'
-import { cn } from '@/lib/utils'
+import { computed } from 'vue';
+import { cn } from '@/lib/utils';
 
 export default {
   name: 'TextHighlight',
@@ -30,16 +30,16 @@ export default {
     }
   },
   setup(props) {
-    const delayMs = computed(() => `${props.delay}ms`)
-    const durationMs = computed(() => `${props.duration}ms`)
+    const delayMs = computed(() => `${props.delay}ms`);
+    const durationMs = computed(() => `${props.duration}ms`);
 
     return {
       delayMs,
       durationMs,
       classProp: props.class
-    }
+    };
   }
-}
+};
 </script>
 
 <style scoped>

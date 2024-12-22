@@ -1,36 +1,36 @@
 <script setup>
-import { buttonVariants } from '@/components/ui/button'
-import { BulletLegend } from '@unovis/ts'
-import { VisBulletLegend } from '@unovis/vue'
-import { nextTick, onMounted, ref } from 'vue'
+import { buttonVariants } from '@/components/ui/button';
+import { BulletLegend } from '@unovis/ts';
+import { VisBulletLegend } from '@unovis/vue';
+import { nextTick, onMounted, ref } from 'vue';
 
 const props = defineProps({
   items: { type: Array, required: true, default: () => [] }
-})
+});
 
-const emits = defineEmits(['legendItemClick', 'update:items'])
+const emits = defineEmits(['legendItemClick', 'update:items']);
 
-const elRef = ref()
+const elRef = ref();
 
 onMounted(() => {
-  const selector = `.${BulletLegend.selectors.item}`
+  const selector = `.${BulletLegend.selectors.item}`;
   nextTick(() => {
-    const elements = elRef.value?.querySelectorAll(selector)
-    const classes = buttonVariants({ variant: 'ghost', size: 'xs' }).split(' ')
-    elements?.forEach((el) => el.classList.add(...classes, '!inline-flex', '!mr-2'))
-  })
-})
+    const elements = elRef.value?.querySelectorAll(selector);
+    const classes = buttonVariants({ variant: 'ghost', size: 'xs' }).split(' ');
+    elements?.forEach((el) => el.classList.add(...classes, '!inline-flex', '!mr-2'));
+  });
+});
 
 function onLegendItemClick(d, i) {
-  emits('legendItemClick', d, i)
-  const isBulletActive = !props.items[i].inactive
-  const isFilterApplied = props.items.some((i) => i.inactive)
+  emits('legendItemClick', d, i);
+  const isBulletActive = !props.items[i].inactive;
+  const isFilterApplied = props.items.some((i) => i.inactive);
   if (isFilterApplied && isBulletActive) {
     // reset filter
     emits(
       'update:items',
       props.items.map((item) => ({ ...item, inactive: false }))
-    )
+    );
   } else {
     // apply selection, set other item as inactive
     emits(
@@ -38,7 +38,7 @@ function onLegendItemClick(d, i) {
       props.items.map((item) =>
         item.name === d.name ? { ...d, inactive: false } : { ...item, inactive: true }
       )
-    )
+    );
   }
 }
 </script>

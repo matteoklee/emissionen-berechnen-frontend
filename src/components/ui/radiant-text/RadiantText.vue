@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import { computed } from 'vue'
-import { cn } from '@/lib/utils'
+import { computed } from 'vue';
+import { cn } from '@/lib/utils';
 
 export default {
   name: 'RadianText',
@@ -42,15 +42,15 @@ export default {
       return {
         '--radiant-anim-duration': `${props.duration}s`,
         '--radiant-width': `${props.radiantWidth}px`
-      }
-    })
+      };
+    });
 
     return {
       styleVar,
       classProp: props.class
-    }
+    };
   }
-}
+};
 </script>
 
 <style scoped>

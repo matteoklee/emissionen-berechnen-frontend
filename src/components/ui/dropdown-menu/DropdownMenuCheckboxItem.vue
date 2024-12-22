@@ -1,12 +1,12 @@
 <script setup>
-import { cn } from '@/lib/utils'
-import { Check } from 'lucide-vue-next'
+import { cn } from '@/lib/utils';
+import { Check } from 'lucide-vue-next';
 import {
   DropdownMenuCheckboxItem,
   DropdownMenuItemIndicator,
   useForwardPropsEmits
-} from 'radix-vue'
-import { computed } from 'vue'
+} from 'radix-vue';
+import { computed } from 'vue';
 
 const props = defineProps({
   checked: { type: [Boolean, String], required: false },
@@ -15,16 +15,16 @@ const props = defineProps({
   asChild: { type: Boolean, required: false },
   as: { type: null, required: false },
   class: { type: null, required: false }
-})
-const emits = defineEmits(['select', 'update:checked'])
+});
+const emits = defineEmits(['select', 'update:checked']);
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props
+  const { class: _, ...delegated } = props;
 
-  return delegated
-})
+  return delegated;
+});
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits)
+const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </script>
 
 <template>

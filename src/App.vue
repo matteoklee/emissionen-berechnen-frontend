@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import { Toaster } from 'vue-sonner'
-import Footer from '@/components/navigation/Footer.vue'
-import Header from '@/components/navigation/Header.vue'
+import { Toaster } from 'vue-sonner';
+import Footer from '@/components/navigation/Footer.vue';
+import Header from '@/components/navigation/Header.vue';
 
 export default {
   name: 'App',
@@ -37,12 +37,12 @@ export default {
           description: 'text-gray-600 dark:text-gray-300',
           actionButton: 'bg-blue-500 text-white px-2 py-1 rounded',
           cancelButton: 'bg-gray-200 text-gray-800 px-2 py-1 rounded mr-2',
-          closeButton: 'text-gray-400 hover:text-gray-600',
+          closeButton: 'text-gray-400 hover:text-gray-600'
         }
       }
-    }
+    };
   }
-}
+};
 </script>
 
 <style scoped></style>

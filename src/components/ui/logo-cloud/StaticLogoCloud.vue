@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { cn } from '~/lib/utils'
+import { cn } from '~/lib/utils';
 
 const props = defineProps({
   title: String,
@@ -28,5 +28,5 @@ const props = defineProps({
     required: true,
     default: () => []
   }
-})
+});
 </script>

@@ -12,7 +12,7 @@
             (tick, i) => {
               return typeof tick === 'number'
                 ? `$ ${new Intl.NumberFormat('us').format(tick).toString()}`
-                : ''
+                : '';
             }
           "
           :type="'stacked'"
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import BarChart from '@/components/ui/chart-bar/BarChart.vue'
+import BarChart from '@/components/ui/chart-bar/BarChart.vue';
 
 export default {
   name: 'CalculationEvaluation',
@@ -51,9 +51,9 @@ export default {
           predicted: Math.floor(Math.random() * 2000) + 500
         }
       ]
-    }
+    };
   }
-}
+};
 </script>
 
 <style scoped></style>

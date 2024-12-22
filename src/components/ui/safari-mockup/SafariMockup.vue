@@ -77,5 +77,5 @@ const props = defineProps({
     type: Number,
     default: 753
   }
-})
+});
 </script>

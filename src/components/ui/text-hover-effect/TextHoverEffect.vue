@@ -83,11 +83,11 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed } from 'vue';
 
-const svgRef = ref(null)
-const cursor = reactive({ x: 0, y: 0 })
-const hovered = ref(false)
+const svgRef = ref(null);
+const cursor = reactive({ x: 0, y: 0 });
+const hovered = ref(false);
 
 const props = defineProps({
   strokeWidth: {
@@ -106,52 +106,52 @@ const props = defineProps({
     type: Number,
     default: 0.75
   }
-})
+});
 
-const transitionDuration = props.duration ? props.duration * 1000 : 200
+const transitionDuration = props.duration ? props.duration * 1000 : 200;
 
 const maskPosition = computed(() => {
   if (svgRef.value) {
-    const svgRect = svgRef.value.getBoundingClientRect()
-    const cxPercentage = ((cursor.x - svgRect.left) / svgRect.width) * 100
-    const cyPercentage = ((cursor.y - svgRect.top) / svgRect.height) * 100
-    return { cx: `${cxPercentage}%`, cy: `${cyPercentage}%` }
+    const svgRect = svgRef.value.getBoundingClientRect();
+    const cxPercentage = ((cursor.x - svgRect.left) / svgRect.width) * 100;
+    const cyPercentage = ((cursor.y - svgRect.top) / svgRect.height) * 100;
+    return { cx: `${cxPercentage}%`, cy: `${cyPercentage}%` };
   }
-  return { cx: '50%', cy: '50%' }
-})
+  return { cx: '50%', cy: '50%' };
+});
 
 const strokeStyle = computed(() => ({
   strokeDashoffset: hovered.value ? '0' : '1000',
   strokeDasharray: '1000',
   transition: 'stroke-dashoffset 4s ease-in-out, stroke-dasharray 4s ease-in-out'
-}))
+}));
 
 function handleMouseEnter() {
-  hovered.value = true
+  hovered.value = true;
 }
 
 function handleMouseLeave() {
-  hovered.value = false
+  hovered.value = false;
 }
 
 function handleMouseMove(e) {
-  cursor.x = e.clientX
-  cursor.y = e.clientY
+  cursor.x = e.clientX;
+  cursor.y = e.clientY;
 }
 
 function handleTouchStart(e) {
-  hovered.value = true
-  handleTouchMove(e)
+  hovered.value = true;
+  handleTouchMove(e);
 }
 
 function handleTouchMove(e) {
-  const touch = e.touches[0]
-  cursor.x = touch.clientX
-  cursor.y = touch.clientY
+  const touch = e.touches[0];
+  cursor.x = touch.clientX;
+  cursor.y = touch.clientY;
 }
 
 function handleTouchEnd() {
-  hovered.value = false
+  hovered.value = false;
 }
 </script>
 

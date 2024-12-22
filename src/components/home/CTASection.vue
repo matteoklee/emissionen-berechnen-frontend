@@ -67,13 +67,13 @@
 </template>
 
 <script>
-import Badge from '@/components/ui/badge/Badge.vue'
-import Button from '@/components/ui/button/Button.vue'
-import { LeafIcon, ArrowRight } from 'lucide-vue-next'
-import RadianText from '@/components/ui/radiant-text/RadiantText.vue'
-import TextGenerateEffect from '@/components/ui/text-generate-effect/TextGenerateEffect.vue'
-import TextHighlight from '@/components/ui/text-highlight/TextHighlight.vue'
-import CompanySection from '@/components/home/CompanySection.vue'
+import Badge from '@/components/ui/badge/Badge.vue';
+import Button from '@/components/ui/button/Button.vue';
+import { LeafIcon, ArrowRight } from 'lucide-vue-next';
+import RadianText from '@/components/ui/radiant-text/RadiantText.vue';
+import TextGenerateEffect from '@/components/ui/text-generate-effect/TextGenerateEffect.vue';
+import TextHighlight from '@/components/ui/text-highlight/TextHighlight.vue';
+import CompanySection from '@/components/home/CompanySection.vue';
 
 export default {
   name: 'CTASection',
@@ -90,9 +90,9 @@ export default {
   data() {
     return {
       words: ['Automate ', 'your ', 'workflow ', 'with ', 'AI']
-    }
+    };
   }
-}
+};
 </script>
 
 <style scoped></style>

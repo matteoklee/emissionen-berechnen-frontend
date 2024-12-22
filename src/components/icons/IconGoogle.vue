@@ -11,7 +11,7 @@
 <script>
 export default {
   name: 'IconGoogle'
-}
+};
 </script>
 
 <style scoped></style>

@@ -83,14 +83,14 @@
 </template>
 
 <script>
-import Stepper from '@/components/ui/stepper/Stepper.vue'
-import StepperItem from '@/components/ui/stepper/StepperItem.vue'
-import StepperSeparator from '@/components/ui/stepper/StepperSeparator.vue'
-import StepperTrigger from '@/components/ui/stepper/StepperTrigger.vue'
-import StepperTitle from '@/components/ui/stepper/StepperTitle.vue'
-import StepperDescription from '@/components/ui/stepper/StepperDescription.vue'
-import Button from '@/components/ui/button/Button.vue'
-import { Check, Circle, Dot } from 'lucide-vue-next'
+import Stepper from '@/components/ui/stepper/Stepper.vue';
+import StepperItem from '@/components/ui/stepper/StepperItem.vue';
+import StepperSeparator from '@/components/ui/stepper/StepperSeparator.vue';
+import StepperTrigger from '@/components/ui/stepper/StepperTrigger.vue';
+import StepperTitle from '@/components/ui/stepper/StepperTitle.vue';
+import StepperDescription from '@/components/ui/stepper/StepperDescription.vue';
+import Button from '@/components/ui/button/Button.vue';
+import { Check, Circle, Dot } from 'lucide-vue-next';
 
 export default {
   name: 'CalculationForm',
@@ -126,25 +126,25 @@ export default {
           description: 'Choose a drink'
         }
       ]
-    }
+    };
   },
   methods: {
     nextStep() {
       if (this.stepIndex < this.steps.length) {
-        this.stepIndex++
+        this.stepIndex++;
       }
     },
     prevStep() {
       if (this.stepIndex > 1) {
-        this.stepIndex--
+        this.stepIndex--;
       }
     },
     onSubmit() {
-      alert('Form submitted successfully!')
-      console.log('Form submitted')
+      alert('Form submitted successfully!');
+      console.log('Form submitted');
     }
   }
-}
+};
 </script>
 
 <style scoped></style>

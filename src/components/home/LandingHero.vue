@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import GlowBorder from '@/components/ui/glow-border/GlowBorder.vue'
+import GlowBorder from '@/components/ui/glow-border/GlowBorder.vue';
 
 export default {
   name: 'LandingHero',
   components: { GlowBorder }
-}
+};
 </script>
 
 <style scoped></style>

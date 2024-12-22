@@ -22,8 +22,8 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { cn } from '@/lib/utils.js'
+import { computed } from 'vue';
+import { cn } from '@/lib/utils.js';
 
 const props = defineProps({
   borderRadius: {
@@ -46,11 +46,11 @@ const props = defineProps({
     type: String,
     default: ''
   }
-})
+});
 
 const parentStyles = computed(() => {
-  return { '--border-radius': `${props.borderRadius}px` }
-})
+  return { '--border-radius': `${props.borderRadius}px` };
+});
 
 const childStyles = computed(() => ({
   '--border-width': `${props.borderWidth}px`,
@@ -60,7 +60,7 @@ const childStyles = computed(() => ({
   '--background-radial-gradient': `radial-gradient(circle, transparent, ${
     Array.isArray(props.color) ? props.color.join(',') : props.color
   }, transparent)`
-}))
+}));
 </script>
 
 <style scoped>

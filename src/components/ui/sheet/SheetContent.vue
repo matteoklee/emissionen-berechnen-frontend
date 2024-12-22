@@ -1,19 +1,19 @@
 <script setup>
-import { cn } from '@/lib/utils'
-import { X } from 'lucide-vue-next'
+import { cn } from '@/lib/utils';
+import { X } from 'lucide-vue-next';
 import {
   DialogClose,
   DialogContent,
   DialogOverlay,
   DialogPortal,
   useForwardPropsEmits
-} from 'radix-vue'
-import { computed } from 'vue'
-import { sheetVariants } from '.'
+} from 'radix-vue';
+import { computed } from 'vue';
+import { sheetVariants } from '.';
 
 defineOptions({
   inheritAttrs: false
-})
+});
 
 const props = defineProps({
   class: { type: null, required: false },
@@ -23,7 +23,7 @@ const props = defineProps({
   disableOutsidePointerEvents: { type: Boolean, required: false },
   asChild: { type: Boolean, required: false },
   as: { type: null, required: false }
-})
+});
 
 const emits = defineEmits([
   'escapeKeyDown',
@@ -32,15 +32,15 @@ const emits = defineEmits([
   'interactOutside',
   'openAutoFocus',
   'closeAutoFocus'
-])
+]);
 
 const delegatedProps = computed(() => {
-  const { class: _, side, ...delegated } = props
+  const { class: _, side, ...delegated } = props;
 
-  return delegated
-})
+  return delegated;
+});
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits)
+const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </script>
 
 <template>

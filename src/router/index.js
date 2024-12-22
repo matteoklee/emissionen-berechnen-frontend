@@ -1,13 +1,13 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import NotFound from '@/views/NotFound.vue'
-import SignInView from '@/views/SignInView.vue'
-import SignUpView from '@/views/SignUpView.vue'
-import CalculatorView from '@/views/CalculatorView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import NotFound from '@/views/NotFound.vue';
+import SignInView from '@/views/SignInView.vue';
+import SignUpView from '@/views/SignUpView.vue';
+import CalculatorView from '@/views/CalculatorView.vue';
 
-import authService from "@/services/authService.js";
-import ProfileView from "@/views/ProfileView.vue";
-import DashboardView from "@/views/DashboardView.vue";
+import authService from '@/services/authService.js';
+import ProfileView from '@/views/ProfileView.vue';
+import DashboardView from '@/views/DashboardView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -64,18 +64,18 @@ const router = createRouter({
       component: NotFound
     }
   ]
-})
-
-router.beforeEach((to, from, next) => {
-    if (to.meta.requiresAuth) {
-      if (authService.isLoggedIn()) {
-        next();
-      } else {
-        return next({ name: 'login' });
-      }
-    } else {
-      next();
-    }
 });
 
-export default router
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    if (authService.isLoggedIn()) {
+      next();
+    } else {
+      return next({ name: 'login' });
+    }
+  } else {
+    next();
+  }
+});
+
+export default router;

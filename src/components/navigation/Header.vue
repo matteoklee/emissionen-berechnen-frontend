@@ -92,25 +92,30 @@
         </NavigationMenu>
       </div>
 
-
       <DropdownMenu v-if="isSignedIn" :modal="false">
         <DropdownMenuTrigger as-child>
           <Avatar>
-            <AvatarImage
-              src="https://cdn-icons-png.flaticon.com/512/147/147144.png"
-              alt="Avatar"
-            />
+            <AvatarImage src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="Avatar" />
             <AvatarFallback>Avatar</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>
-            <span class="block text-sm text-gray-900 dark:text-white">{{ (userData.username != null ? userData.username : "username") }}</span>
-            <span class="block text-sm text-gray-500 truncate dark:text-gray-400"
-              >{{ (userData.email != null ? userData.email : "email@example.com") }}</span>
+            <span class="block text-sm text-gray-900 dark:text-white">{{
+              userData.username != null ? userData.username : 'username'
+            }}</span>
+            <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{
+              userData.email != null ? userData.email : 'email@example.com'
+            }}</span>
             <div v-if="userRoles != null">
-              <div v-for="role in userRoles" :key="role" class="inline-flex flex-row justify-center items-center mt-2">
-                <Badge variant="primary" class="bg-gray-900 text-white">  {{ (role != null ? role : "unknown role") }}</Badge>
+              <div
+                v-for="role in userRoles"
+                :key="role"
+                class="inline-flex flex-row justify-center items-center mt-2"
+              >
+                <Badge variant="primary" class="bg-gray-900 text-white">
+                  {{ role != null ? role : 'unknown role' }}</Badge
+                >
               </div>
             </div>
           </DropdownMenuLabel>
@@ -138,28 +143,28 @@
 </template>
 
 <script>
-import { User, Leaf } from 'lucide-vue-next'
-import DropdownMenu from '@/components/ui/dropdown-menu/DropdownMenu.vue'
-import DropdownMenuTrigger from '@/components/ui/dropdown-menu/DropdownMenuTrigger.vue'
-import DropdownMenuContent from '@/components/ui/dropdown-menu/DropdownMenuContent.vue'
-import DropdownMenuLabel from '@/components/ui/dropdown-menu/DropdownMenuLabel.vue'
-import DropdownMenuItem from '@/components/ui/dropdown-menu/DropdownMenuItem.vue'
-import NavigationMenu from '@/components/ui/navigation-menu/NavigationMenu.vue'
-import NavigationMenuList from '@/components/ui/navigation-menu/NavigationMenuList.vue'
-import NavigationMenuItem from '@/components/ui/navigation-menu/NavigationMenuItem.vue'
-import NavigationMenuTrigger from '@/components/ui/navigation-menu/NavigationMenuTrigger.vue'
-import NavigationMenuContent from '@/components/ui/navigation-menu/NavigationMenuContent.vue'
-import NavigationMenuLink from '@/components/ui/navigation-menu/NavigationMenuLink.vue'
-import DropdownMenuSeparator from '@/components/ui/dropdown-menu/DropdownMenuSeparator.vue'
-import Avatar from '@/components/ui/avatar/Avatar.vue'
-import AvatarImage from '@/components/ui/avatar/AvatarImage.vue'
-import AvatarFallback from '@/components/ui/avatar/AvatarFallback.vue'
-import Button from '@/components/ui/button/Button.vue'
-import authService from "@/services/authService.js";
-import {eventBus} from "@/services/util/eventBus.js";
-import userService from "@/services/userService.js";
-import Badge from "@/components/ui/badge/Badge.vue";
-import {toast} from "vue-sonner";
+import { User, Leaf } from 'lucide-vue-next';
+import DropdownMenu from '@/components/ui/dropdown-menu/DropdownMenu.vue';
+import DropdownMenuTrigger from '@/components/ui/dropdown-menu/DropdownMenuTrigger.vue';
+import DropdownMenuContent from '@/components/ui/dropdown-menu/DropdownMenuContent.vue';
+import DropdownMenuLabel from '@/components/ui/dropdown-menu/DropdownMenuLabel.vue';
+import DropdownMenuItem from '@/components/ui/dropdown-menu/DropdownMenuItem.vue';
+import NavigationMenu from '@/components/ui/navigation-menu/NavigationMenu.vue';
+import NavigationMenuList from '@/components/ui/navigation-menu/NavigationMenuList.vue';
+import NavigationMenuItem from '@/components/ui/navigation-menu/NavigationMenuItem.vue';
+import NavigationMenuTrigger from '@/components/ui/navigation-menu/NavigationMenuTrigger.vue';
+import NavigationMenuContent from '@/components/ui/navigation-menu/NavigationMenuContent.vue';
+import NavigationMenuLink from '@/components/ui/navigation-menu/NavigationMenuLink.vue';
+import DropdownMenuSeparator from '@/components/ui/dropdown-menu/DropdownMenuSeparator.vue';
+import Avatar from '@/components/ui/avatar/Avatar.vue';
+import AvatarImage from '@/components/ui/avatar/AvatarImage.vue';
+import AvatarFallback from '@/components/ui/avatar/AvatarFallback.vue';
+import Button from '@/components/ui/button/Button.vue';
+import authService from '@/services/authService.js';
+import { eventBus } from '@/services/util/eventBus.js';
+import userService from '@/services/userService.js';
+import Badge from '@/components/ui/badge/Badge.vue';
+import { toast } from 'vue-sonner';
 export default {
   name: 'Header',
   components: {
@@ -188,11 +193,11 @@ export default {
       isSignedIn: false,
       userData: [],
       userRoles: []
-    }
+    };
   },
   async mounted() {
     this.isSignedIn = authService.checkAuthStatus();
-    if(this.isSignedIn) {
+    if (this.isSignedIn) {
       //const userData = await userService.getUserInfo();
       //userService.updateUserData(userData);
       this.getUserData();
@@ -211,17 +216,17 @@ export default {
       authService.logout();
       userService.clearUserData();
       eventBus.emit('auth-changed', false);
-      this.$router.push("/");
+      this.$router.push('/');
       toast.info('Abmeldung erfolgreich.', {
         description: 'Du wurdest abgemeldet',
         duration: 5000,
         action: {
           label: 'Ok',
           onClick: () => {
-            console.log("close toast");
+            console.log('close toast');
           }
         }
-      })
+      });
     },
     getUserData() {
       this.userData = userService.getStoredUserData();
@@ -237,16 +242,15 @@ export default {
       ];
 
       this.userRoles = userService.getStoredUserRoles();
-      if(this.userRoles != null) {
+      if (this.userRoles != null) {
         this.userRoles = this.userRoles
-            .map(role => role.replace(/^ROLE_/, ''))
-            .filter(role =>
-                !defaultKeycloakRoles.includes(role.toLowerCase()))
-            .map(role => role.toUpperCase());
+          .map((role) => role.replace(/^ROLE_/, ''))
+          .filter((role) => !defaultKeycloakRoles.includes(role.toLowerCase()))
+          .map((role) => role.toUpperCase());
       }
     }
-  },
-}
+  }
+};
 </script>
 
 <style scoped></style>

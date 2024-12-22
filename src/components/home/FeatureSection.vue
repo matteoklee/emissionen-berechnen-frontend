@@ -71,12 +71,12 @@
 </template>
 
 <script>
-import { Hotel, Calculator } from 'lucide-vue-next'
-import Badge from '@/components/ui/badge/Badge.vue'
+import { Hotel, Calculator } from 'lucide-vue-next';
+import Badge from '@/components/ui/badge/Badge.vue';
 export default {
   name: 'FeatureSection',
   components: { Badge, Hotel, Calculator }
-}
+};
 </script>
 
 <style scoped></style>

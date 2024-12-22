@@ -64,13 +64,13 @@
 </template>
 
 <script>
-import NumberTicker from '@/components/ui/number-ticker/NumberTicker.vue'
-import Badge from '@/components/ui/badge/Badge.vue'
+import NumberTicker from '@/components/ui/number-ticker/NumberTicker.vue';
+import Badge from '@/components/ui/badge/Badge.vue';
 
 export default {
   name: 'StatsSection',
   components: { Badge, NumberTicker }
-}
+};
 </script>
 
 <style scoped></style>

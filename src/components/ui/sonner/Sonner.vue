@@ -1,5 +1,5 @@
 <script setup>
-import { Toaster as Sonner } from 'vue-sonner'
+import { Toaster as Sonner } from 'vue-sonner';
 
 const props = defineProps({
   invert: { type: Boolean, required: false },
@@ -21,7 +21,7 @@ const props = defineProps({
   containerAriaLabel: { type: String, required: false },
   pauseWhenPageIsHidden: { type: Boolean, required: false },
   cn: { type: Function, required: false }
-})
+});
 </script>
 
 <template>

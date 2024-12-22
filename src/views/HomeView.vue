@@ -16,7 +16,7 @@
                       label: 'Undo',
                       onClick: () => console.log('Undo')
                     }
-                  })
+                  });
                 }
               "
               >Sonner Test</Button
@@ -109,28 +109,28 @@
 </template>
 
 <script>
-import PricingSection from '@/components/home/PricingSection.vue'
-import { toast } from 'vue-sonner'
-import Button from '@/components/ui/button/Button.vue'
-import Sheet from '@/components/ui/sheet/Sheet.vue'
-import SheetTrigger from '@/components/ui/sheet/SheetTrigger.vue'
-import SheetContent from '@/components/ui/sheet/SheetContent.vue'
-import SheetHeader from '@/components/ui/sheet/SheetHeader.vue'
-import SheetTitle from '@/components/ui/sheet/SheetTitle.vue'
-import SheetDescription from '@/components/ui/sheet/SheetDescription.vue'
-import Input from '@/components/ui/input/Input.vue'
-import TooltipProvider from '@/components/ui/tooltip/TooltipProvider.vue'
-import Tooltip from '@/components/ui/tooltip/Tooltip.vue'
-import TooltipTrigger from '@/components/ui/tooltip/TooltipTrigger.vue'
-import TooltipContent from '@/components/ui/tooltip/TooltipContent.vue'
-import CTASection from '@/components/home/CTASection.vue'
-import StatsSection from '@/components/home/StatsSection.vue'
-import CompanySection from '@/components/home/CompanySection.vue'
-import MultiStepLoader from '@/components/ui/multi-step-loader/MultiStepLoader.vue'
-import FeatureSection from '@/components/home/FeatureSection.vue'
-import SheetFooter from '@/components/ui/sheet/SheetFooter.vue'
-import SheetClose from '@/components/ui/sheet/SheetClose.vue'
-import Label from '@/components/ui/label/Label.vue'
+import PricingSection from '@/components/home/PricingSection.vue';
+import { toast } from 'vue-sonner';
+import Button from '@/components/ui/button/Button.vue';
+import Sheet from '@/components/ui/sheet/Sheet.vue';
+import SheetTrigger from '@/components/ui/sheet/SheetTrigger.vue';
+import SheetContent from '@/components/ui/sheet/SheetContent.vue';
+import SheetHeader from '@/components/ui/sheet/SheetHeader.vue';
+import SheetTitle from '@/components/ui/sheet/SheetTitle.vue';
+import SheetDescription from '@/components/ui/sheet/SheetDescription.vue';
+import Input from '@/components/ui/input/Input.vue';
+import TooltipProvider from '@/components/ui/tooltip/TooltipProvider.vue';
+import Tooltip from '@/components/ui/tooltip/Tooltip.vue';
+import TooltipTrigger from '@/components/ui/tooltip/TooltipTrigger.vue';
+import TooltipContent from '@/components/ui/tooltip/TooltipContent.vue';
+import CTASection from '@/components/home/CTASection.vue';
+import StatsSection from '@/components/home/StatsSection.vue';
+import CompanySection from '@/components/home/CompanySection.vue';
+import MultiStepLoader from '@/components/ui/multi-step-loader/MultiStepLoader.vue';
+import FeatureSection from '@/components/home/FeatureSection.vue';
+import SheetFooter from '@/components/ui/sheet/SheetFooter.vue';
+import SheetClose from '@/components/ui/sheet/SheetClose.vue';
+import Label from '@/components/ui/label/Label.vue';
 
 export default {
   name: 'CalculatorView',
@@ -169,13 +169,13 @@ export default {
         isSimpleLoading: false,
         isAfterTextLoading: false,
         closeSimple: () => {
-          this.uiState.isSimpleLoading = false
+          this.uiState.isSimpleLoading = false;
         },
         closeAsync: () => {
-          this.uiState.isAfterTextLoading = false
+          this.uiState.isAfterTextLoading = false;
         }
       }
-    }
+    };
   },
   computed: {
     simpleLoadingSteps() {
@@ -186,7 +186,7 @@ export default {
         { text: 'Processing Request', duration: 1800 },
         { text: 'Finalizing', duration: 1000 },
         { text: 'Redirecting', duration: 1000, action: this.handleSimpleLoadingComplete }
-      ]
+      ];
     },
     asyncLoadingSteps() {
       return [
@@ -206,7 +206,7 @@ export default {
           afterText: 'Email Sent'
         },
         { text: 'Redirecting', duration: 1000, action: this.handleAsyncLoadingComplete }
-      ]
+      ];
     }
   },
   methods: {
@@ -218,38 +218,38 @@ export default {
       // Handle Loading Complete
     },
     handleSimpleLoadingComplete() {
-      alert('Simple loading complete, redirecting...')
-      this.uiState.isSimpleLoading = false
+      alert('Simple loading complete, redirecting...');
+      this.uiState.isSimpleLoading = false;
     },
     handleAsyncLoadingComplete() {
-      alert('Async loading complete, redirecting...')
-      this.uiState.isAfterTextLoading = false
+      alert('Async loading complete, redirecting...');
+      this.uiState.isAfterTextLoading = false;
     },
     toggleSimpleLoading() {
-      this.uiState.isSimpleLoading = !this.uiState.isSimpleLoading
+      this.uiState.isSimpleLoading = !this.uiState.isSimpleLoading;
     },
     async startAsyncLoading() {
-      this.uiState.isAfterTextLoading = true
+      this.uiState.isAfterTextLoading = true;
 
-      this.$set(this.loaderStates, 'isProcessing', true)
-      this.$set(this.loaderStates, 'isSavingOrder', true)
-      this.$set(this.loaderStates, 'sendingMails', true)
+      this.$set(this.loaderStates, 'isProcessing', true);
+      this.$set(this.loaderStates, 'isSavingOrder', true);
+      this.$set(this.loaderStates, 'sendingMails', true);
 
       const simulateAsyncStep = (stateProp, delay) => {
         return new Promise((resolve) => {
           setTimeout(() => {
-            this.loaderStates[stateProp] = false
-            resolve()
-          }, delay)
-        })
-      }
+            this.loaderStates[stateProp] = false;
+            resolve();
+          }, delay);
+        });
+      };
 
       try {
-        await simulateAsyncStep('isProcessing', 2000)
-        await simulateAsyncStep('isSavingOrder', 3000)
-        await simulateAsyncStep('sendingMails', 2500)
+        await simulateAsyncStep('isProcessing', 2000);
+        await simulateAsyncStep('isSavingOrder', 3000);
+        await simulateAsyncStep('sendingMails', 2500);
       } catch (error) {
-        this.uiState.isAfterTextLoading = false
+        this.uiState.isAfterTextLoading = false;
       }
     }
   },
@@ -263,10 +263,10 @@ export default {
           !this.loaderStates.isSavingOrder &&
           !this.loaderStates.sendingMails
         ) {
-          this.handleAsyncLoadingComplete()
+          this.handleAsyncLoadingComplete();
         }
       }
     }
   }
-}
+};
 </script>

@@ -135,69 +135,69 @@ export default {
       stepStartTime: Date.now(),
       isLastStepComplete: false,
       currentTimer: null
-    }
+    };
   },
   methods: {
     async executeStepAction(step) {
       if (typeof step.action === 'function') {
-        await step.action()
+        await step.action();
       }
     },
     async proceedToNextStep() {
-      const currentStep = this.steps[this.currentState]
-      if (!currentStep) return
+      const currentStep = this.steps[this.currentState];
+      if (!currentStep) return;
 
-      await this.executeStepAction(currentStep)
+      await this.executeStepAction(currentStep);
 
       if (this.currentState < this.steps.length - 1) {
-        this.currentState++
-        this.stepStartTime = Date.now()
-        this.$emit('state-change', this.currentState)
-        this.processCurrentStep()
+        this.currentState++;
+        this.stepStartTime = Date.now();
+        this.$emit('state-change', this.currentState);
+        this.processCurrentStep();
       } else {
-        this.isLastStepComplete = true
-        this.$emit('complete')
+        this.isLastStepComplete = true;
+        this.$emit('complete');
       }
     },
     processCurrentStep() {
       if (this.currentTimer) {
-        clearTimeout(this.currentTimer)
+        clearTimeout(this.currentTimer);
       }
-      const currentStep = this.steps[this.currentState]
-      const duration = currentStep?.duration || this.defaultDuration
+      const currentStep = this.steps[this.currentState];
+      const duration = currentStep?.duration || this.defaultDuration;
 
       if (!currentStep?.async) {
         this.currentTimer = setTimeout(() => {
-          this.proceedToNextStep()
-        }, duration)
+          this.proceedToNextStep();
+        }, duration);
       }
     },
     isStepComplete(index) {
       return (
         index < this.currentState ||
         (index === this.steps.length - 1 && index === this.currentState && this.isLastStepComplete)
-      )
+      );
     },
     close() {
-      this.$emit('close')
+      this.$emit('close');
     }
   },
   watch: {
     loading(newLoading) {
       if (newLoading) {
-        this.currentState = 0
-        this.stepStartTime = Date.now()
-        this.isLastStepComplete = false
-        this.processCurrentStep()
+        this.currentState = 0;
+        this.stepStartTime = Date.now();
+        this.isLastStepComplete = false;
+        this.processCurrentStep();
       } else if (this.currentTimer) {
-        clearTimeout(this.currentTimer)
+        clearTimeout(this.currentTimer);
       }
     }
   },
   beforeUnmount() {
     if (this.currentTimer) {
-      clearTimeout(this.currentTimer)
+      clearTimeout(this.currentTimer);
     }
   }
-}
+};
 </script>

@@ -20,7 +20,7 @@
         <div class="flex flex-col mb-4 mt-2">
           <Label for="username" class="font-medium">Benutzername</Label>
           <Input
-              v-model="username"
+            v-model="username"
             id="username"
             type="username"
             placeholder="user@email.com | user"
@@ -36,7 +36,7 @@
           </div>
 
           <Input
-              v-model="password"
+            v-model="password"
             id="password"
             type="password"
             placeholder=""
@@ -61,25 +61,25 @@
 </template>
 
 <script>
-import Button from '@/components/ui/button/Button.vue'
-import Input from '@/components/ui/input/Input.vue'
-import IconGoogle from '@/components/icons/IconGoogle.vue'
-import { Send } from 'lucide-vue-next'
-import Separator from '@/components/ui/separator/Separator.vue'
-import Label from '@/components/ui/label/Label.vue'
-import authService from "@/services/authService.js";
-import {toast} from "vue-sonner";
-import {eventBus} from "@/services/util/eventBus.js";
-import userService from "@/services/userService.js";
+import Button from '@/components/ui/button/Button.vue';
+import Input from '@/components/ui/input/Input.vue';
+import IconGoogle from '@/components/icons/IconGoogle.vue';
+import { Send } from 'lucide-vue-next';
+import Separator from '@/components/ui/separator/Separator.vue';
+import Label from '@/components/ui/label/Label.vue';
+import authService from '@/services/authService.js';
+import { toast } from 'vue-sonner';
+import { eventBus } from '@/services/util/eventBus.js';
+import userService from '@/services/userService.js';
 
 export default {
   name: 'SignInView',
   components: { Label, Separator, IconGoogle, Input, Button, Send },
   data() {
     return {
-      username: "",
-      password: "",
-    }
+      username: '',
+      password: ''
+    };
   },
   methods: {
     async onSubmit() {
@@ -89,14 +89,14 @@ export default {
           label: 'Abbrechen',
           onClick: () => {
             return;
-          },
-        },
+          }
+        }
       });
       setTimeout(async () => {
         try {
           const credentials = {
             username: this.username,
-            password: this.password,
+            password: this.password
           };
           await authService.login(credentials);
 
@@ -106,7 +106,7 @@ export default {
           userService.updateUserRoles(userRoles);
 
           eventBus.emit('auth-changed', true);
-          this.$router.push({name: 'calculator'});
+          this.$router.push({ name: 'calculator' });
 
           toast.dismiss(loadingToast);
 
@@ -119,9 +119,9 @@ export default {
                 authService.logout();
                 userService.clearUserData();
                 eventBus.emit('auth-changed', false);
-                this.$router.push("/");
-              },
-            },
+                this.$router.push('/');
+              }
+            }
           });
         } catch (error) {
           console.error(error.message);
@@ -132,9 +132,9 @@ export default {
             action: {
               label: 'Ok',
               onClick: () => {
-                console.log("close toast");
-              },
-            },
+                console.log('close toast');
+              }
+            }
           });
         }
       }, 1000);
@@ -147,12 +147,12 @@ export default {
         month: 'long',
         year: 'numeric',
         hour: '2-digit',
-        minute: '2-digit',
+        minute: '2-digit'
       };
       return currentDate.toLocaleDateString('de-DE', options);
     }
   }
-}
+};
 </script>
 
 <style scoped></style>

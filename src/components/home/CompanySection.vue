@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import AnimatedLogoCloud from '@/components/ui/logo-cloud/AnimatedLogoCloud.vue'
+import AnimatedLogoCloud from '@/components/ui/logo-cloud/AnimatedLogoCloud.vue';
 export default {
   name: 'CompanySection',
   components: { AnimatedLogoCloud },
@@ -44,9 +44,9 @@ export default {
           path: "https://res.cloudinary.com/dfhp33ufc/image/upload/v1715276558/logos/pmblusboe7vkw8vxdknx.svg",
         },*/
       ]
-    }
+    };
   }
-}
+};
 </script>
 
 <style scoped></style>

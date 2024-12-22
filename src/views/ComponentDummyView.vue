@@ -49,12 +49,12 @@
 </template>
 
 <script>
-import LandingHero from '@/components/home/LandingHero.vue'
-import AnimatedLogoCloud from '@/components/ui/logo-cloud/AnimatedLogoCloud.vue'
-import Marquee from '@/components/ui/marquee/Marquee.vue'
-import NumberTicker from '@/components/ui/number-ticker/NumberTicker.vue'
-import TextHoverEffect from '@/components/ui/text-hover-effect/TextHoverEffect.vue'
-import SafariMockup from '@/components/ui/safari-mockup/SafariMockup.vue'
+import LandingHero from '@/components/home/LandingHero.vue';
+import AnimatedLogoCloud from '@/components/ui/logo-cloud/AnimatedLogoCloud.vue';
+import Marquee from '@/components/ui/marquee/Marquee.vue';
+import NumberTicker from '@/components/ui/number-ticker/NumberTicker.vue';
+import TextHoverEffect from '@/components/ui/text-hover-effect/TextHoverEffect.vue';
+import SafariMockup from '@/components/ui/safari-mockup/SafariMockup.vue';
 
 export default {
   name: 'CalculatorView',
@@ -102,7 +102,7 @@ export default {
           path: 'https://res.cloudinary.com/dfhp33ufc/image/upload/v1715276558/logos/tyos2ayezryjskox3wzs.svg'
         }
       ]
-    }
+    };
   }
-}
+};
 </script>

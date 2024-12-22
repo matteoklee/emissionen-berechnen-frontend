@@ -1,8 +1,8 @@
 <script setup>
-import { cn } from '@/lib/utils'
-import { StepperRoot, useForwardPropsEmits } from 'radix-vue'
+import { cn } from '@/lib/utils';
+import { StepperRoot, useForwardPropsEmits } from 'radix-vue';
 
-import { computed } from 'vue'
+import { computed } from 'vue';
 
 const props = defineProps({
   defaultValue: { type: Number, required: false },
@@ -13,16 +13,16 @@ const props = defineProps({
   asChild: { type: Boolean, required: false },
   as: { type: null, required: false },
   class: { type: null, required: false }
-})
-const emits = defineEmits(['update:modelValue'])
+});
+const emits = defineEmits(['update:modelValue']);
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props
+  const { class: _, ...delegated } = props;
 
-  return delegated
-})
+  return delegated;
+});
 
-const forwarded = useForwardPropsEmits(delegatedProps, emits)
+const forwarded = useForwardPropsEmits(delegatedProps, emits);
 </script>
 
 <template>

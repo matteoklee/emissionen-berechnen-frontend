@@ -11,7 +11,7 @@
 <script>
 export default {
   name: 'IntroductionSection'
-}
+};
 </script>
 
 <style scoped></style>

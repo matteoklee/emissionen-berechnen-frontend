@@ -61,25 +61,21 @@
 </template>
 
 <script>
-import Button from '@/components/ui/button/Button.vue'
-import Input from '@/components/ui/input/Input.vue'
-import { Send } from 'lucide-vue-next'
-import IconGoogle from '@/components/icons/IconGoogle.vue'
-import Label from '@/components/ui/label/Label.vue'
+import Button from '@/components/ui/button/Button.vue';
+import Input from '@/components/ui/input/Input.vue';
+import { Send } from 'lucide-vue-next';
+import IconGoogle from '@/components/icons/IconGoogle.vue';
+import Label from '@/components/ui/label/Label.vue';
 export default {
   name: 'SignUpView',
   components: { Label, IconGoogle, Input, Button, Send },
   data() {
-    return {
-
-    }
+    return {};
   },
   methods: {
-    onSubmit() {
-
-    }
+    onSubmit() {}
   }
-}
+};
 </script>
 
 <style scoped></style>

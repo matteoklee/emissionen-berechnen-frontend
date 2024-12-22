@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue'
-import { cn } from '@/lib/utils'
+import { ref, computed, onMounted } from 'vue';
+import { cn } from '@/lib/utils';
 
 export default {
   name: 'TextGenerateEffect',
@@ -42,38 +42,38 @@ export default {
     }
   },
   setup(props) {
-    const scope = ref(null)
-    const wordsArray = computed(() => props.words.split(' '))
+    const scope = ref(null);
+    const wordsArray = computed(() => props.words.split(' '));
 
-    const computedClass = computed(() => cn('leading-snug tracking-wide', props.class))
+    const computedClass = computed(() => cn('leading-snug tracking-wide', props.class));
 
     const spanStyle = computed(() => ({
       opacity: 0,
       filter: props.filter ? 'blur(10px)' : 'none',
       transition: `opacity ${props.duration}s, filter ${props.duration}s`
-    }))
+    }));
 
     onMounted(() => {
       if (scope.value) {
-        const spans = scope.value.querySelectorAll('span')
+        const spans = scope.value.querySelectorAll('span');
 
         setTimeout(() => {
           spans.forEach((span, index) => {
             setTimeout(() => {
-              span.style.opacity = '1'
-              span.style.filter = props.filter ? 'blur(0px)' : 'none'
-            }, index * 200)
-          })
-        }, props.delay)
+              span.style.opacity = '1';
+              span.style.filter = props.filter ? 'blur(0px)' : 'none';
+            }, index * 200);
+          });
+        }, props.delay);
       }
-    })
+    });
 
     return {
       scope,
       wordsArray,
       computedClass,
       spanStyle
-    }
+    };
   }
-}
+};
 </script>
