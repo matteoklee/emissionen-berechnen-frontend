@@ -25,7 +25,7 @@
             </div>
           </TableHead>
           <TableHead class="w-[200px]">Private Space Consumption - Actual</TableHead>
-          <TableHead>Private Space Consumption - Estimated</TableHead>
+          <TableHead style="width: 200px;">Private Space Consumption - Estimated</TableHead>
           <TableHead>Outsourced Laundry (kWh)</TableHead>
           <TableHead>Total (kWh)</TableHead>
           <TableHead class="w-1/2">Default or Manual CO2e Emission Factors (EFs)*</TableHead>

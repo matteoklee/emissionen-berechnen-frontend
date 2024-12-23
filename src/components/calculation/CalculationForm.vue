@@ -72,7 +72,7 @@
             </template>
 
             <template v-if="stepIndex === 2">
-              <div class="max-w-screen-lg">
+              <div class="">
                 <h3 class="text-lg font-semibold mb-4">Energy Consumption</h3>
                 <EnergyConsumption />
               </div>
