@@ -1,4 +1,5 @@
 <template>
+
   <div class="h-full w-full flex flex-row justify-center items-center divide-x">
     <div class="p-6 xl:w-1/4 md:w-1/2 w-full mx-8 my-6 border rounded-lg">
       <h1 class="text-xl font-bold mb-2">Anmelden</h1>
@@ -21,6 +22,8 @@
           <Label for="username" class="font-medium">Benutzername</Label>
           <Input
             v-model="username"
+            autocomplete="username"
+            required
             id="username"
             type="username"
             placeholder="user@email.com | user"
@@ -37,6 +40,8 @@
 
           <Input
             v-model="password"
+            autocomplete="password"
+            required
             id="password"
             type="password"
             placeholder=""

@@ -7,11 +7,11 @@
 
       <h1 class="text-center mb-2">This is the calculator page</h1>
 
-      <div class="hidden">
+      <div class="">
         <CalculationForm></CalculationForm>
       </div>
 
-      <div>
+      <div class="hidden">
         <CalculationEvaluation></CalculationEvaluation>
       </div>
     </div>

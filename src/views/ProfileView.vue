@@ -3,7 +3,7 @@
     <h1 class="text-center my-6 hidden">This is your profile page</h1>
 
     <div class="w-full mt-12">
-      <div class="max-w-screen-lg mx-auto text-black">
+      <div class="max-w-screen-xl mx-auto text-black">
         <div>
           <h1 class="text-xl font-medium">Profil</h1>
           <p class="text-gray-900 mt-2">

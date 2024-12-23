@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-white border-gray-200 border-b fixed z-10 top-0 w-full">
+  <nav class="bg-white border-gray-200 border-b fixed z-20 top-0 w-full">
     <div class="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between p-3 w-full">
       <a href="/" class="flex items-center space-x-3">
         <Leaf color="#0A5E33" :size="24" class="" />
@@ -7,7 +7,9 @@
         <span class="self-center text-xl font-medium">Emissionen-Berechnen.de</span>
       </a>
 
-      <div class="ml-auto">
+
+
+      <div class="hidden md:flex items-center space-x-4 ml-auto">
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem class="">
@@ -92,48 +94,95 @@
         </NavigationMenu>
       </div>
 
-      <DropdownMenu v-if="isSignedIn" :modal="false">
-        <DropdownMenuTrigger as-child>
-          <Avatar>
-            <AvatarImage src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="Avatar" />
-            <AvatarFallback>Avatar</AvatarFallback>
-          </Avatar>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuLabel>
-            <span class="block text-sm text-gray-900 dark:text-white">{{
-              userData.username != null ? userData.username : 'username'
-            }}</span>
-            <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{
-              userData.email != null ? userData.email : 'email@example.com'
-            }}</span>
-            <div v-if="userRoles != null">
-              <div
-                v-for="role in userRoles"
-                :key="role"
-                class="inline-flex flex-row justify-center items-center mt-2"
-              >
-                <Badge variant="primary" class="bg-gray-900 text-white">
-                  {{ role != null ? role : 'unknown role' }}</Badge
-                >
-              </div>
+      <!-- Mobile Dropdown Menu -->
+      <div class="md:hidden">
+        <DropdownMenu :modal="false" class="absolute top-full left-0 w-full bg-white border-t border-gray-200 shadow-md md:hidden">
+          <DropdownMenuTrigger>
+            <button
+                @click="toggleMobileMenu"
+                class="p-2 rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-gray-200"
+            >
+              <Menu :size="24" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent class="w-screen">
+            <DropdownMenuItem>
+              <router-link to="/">Home</router-link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <router-link to="/about">About</router-link>
+            </DropdownMenuItem>
+            <DropdownMenuItem v-if="isSignedIn">
+              <router-link to="/calculator">Rechner</router-link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <div v-if="isSignedIn">
+              <DropdownMenuLabel>
+                <span class="block text-sm font-medium">{{ userData.username }}</span>
+                <span class="block text-sm text-gray-500 truncate">{{ userData.email }}</span>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <router-link to="/dashboard">Dashboard</router-link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <router-link to="/profile">Profil</router-link>
+              </DropdownMenuItem>
+              <DropdownMenuItem v-if="isSignedIn" @click="submitLogout">Abmelden</DropdownMenuItem>
             </div>
-          </DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem><router-link to="/dashboard">Dashboard</router-link></DropdownMenuItem>
-          <DropdownMenuItem><router-link to="/profile">Profil</router-link></DropdownMenuItem>
-          <DropdownMenuItem @click="submitLogout">Abmelden</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+            <div v-else>
+              <DropdownMenuItem><router-link to="/login">Anmelden</router-link></DropdownMenuItem>
+            </div>
 
-      <div class="ml-4">
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
+      <div class="ml-2 hidden md:flex">
+        <DropdownMenu v-if="isSignedIn" :modal="false">
+          <DropdownMenuTrigger as-child>
+            <Avatar>
+              <AvatarImage src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="Avatar" />
+              <AvatarFallback>Avatar</AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>
+            <span class="block text-sm text-gray-900 dark:text-white">{{
+                userData.username != null ? userData.username : 'username'
+              }}</span>
+              <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{
+                  userData.email != null ? userData.email : 'email@example.com'
+                }}</span>
+              <div v-if="userRoles != null">
+                <div
+                    v-for="role in userRoles"
+                    :key="role"
+                    class="inline-flex flex-row justify-center items-center mt-2"
+                >
+                  <Badge variant="primary" class="bg-gray-900 text-white">
+                    {{ role != null ? role : 'unknown role' }}</Badge
+                  >
+                </div>
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem><router-link to="/dashboard">Dashboard</router-link></DropdownMenuItem>
+            <DropdownMenuItem><router-link to="/profile">Profil</router-link></DropdownMenuItem>
+            <DropdownMenuItem @click="submitLogout">Abmelden</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+      </div>
+
+      <div class="hidden md:flex">
         <div class="">
           <div v-if="!isSignedIn" class="inline-flex flex-row space-x-3">
             <router-link to="/login"
               ><Button variant="outlined" class="border">Anmelden</Button></router-link
             >
-            <router-link to="/calculator"
-              ><Button variant="" class="">Jetzt Starten</Button></router-link
+            <router-link to="/register"
+              ><Button variant="" class="">Registrieren</Button></router-link
             >
           </div>
         </div>
@@ -143,7 +192,7 @@
 </template>
 
 <script>
-import { User, Leaf } from 'lucide-vue-next';
+import { User, Leaf, Menu } from 'lucide-vue-next';
 import DropdownMenu from '@/components/ui/dropdown-menu/DropdownMenu.vue';
 import DropdownMenuTrigger from '@/components/ui/dropdown-menu/DropdownMenuTrigger.vue';
 import DropdownMenuContent from '@/components/ui/dropdown-menu/DropdownMenuContent.vue';
@@ -186,13 +235,15 @@ export default {
     DropdownMenuTrigger,
     DropdownMenu,
     User,
-    Leaf
+    Leaf,
+    Menu
   },
   data() {
     return {
       isSignedIn: false,
       userData: [],
-      userRoles: []
+      userRoles: [],
+      isMobileMenuOpen: false
     };
   },
   async mounted() {
@@ -212,6 +263,9 @@ export default {
     });
   },
   methods: {
+    toggleMobileMenu() {
+      this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    },
     submitLogout() {
       authService.logout();
       userService.clearUserData();

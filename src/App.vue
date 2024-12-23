@@ -1,14 +1,22 @@
 <template>
-  <div class="flex flex-col min-h-screen">
-    <div v-if="isSignedIn">
-      <p class="text-right hidden">LOGGED IN</p>
+  <div class="bg-white">
+    <!--
+    <div v-if="authService.isLoggedIn()" class="">
+      <SidebarProvider class="">
+        <DashboardSidebar class="hidden lg:block"></DashboardSidebar>
+        <SidebarTrigger class=""></SidebarTrigger>
+        <div class="w-full">
+          <router-view class="flex-grow"></router-view>
+          <Footer class="mx-auto"></Footer>
+        </div>
+      </SidebarProvider>
     </div>
-    <div v-else>
-      <p class="text-right hidden">NOT LOGGED IN</p>
+    v-else -->
+    <div class="flex flex-col min-h-screen">
+      <Header></Header>
+      <router-view class="flex-grow"></router-view>
+      <Footer></Footer>
     </div>
-    <Header></Header>
-    <router-view class="flex-grow"></router-view>
-    <Footer></Footer>
   </div>
 
   <Toaster :toastOptions="toastOptions" />
@@ -18,10 +26,16 @@
 import { Toaster } from 'vue-sonner';
 import Footer from '@/components/navigation/Footer.vue';
 import Header from '@/components/navigation/Header.vue';
+import authService from "@/services/authService.js";
 
 export default {
   name: 'App',
-  components: { Header, Footer, Toaster },
+  computed: {
+    authService() {
+      return authService
+    }
+  },
+  components: {Header, Footer, Toaster },
   data() {
     return {
       isSignedIn: false,

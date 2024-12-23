@@ -10,17 +10,17 @@
   },
   "scripts": {
     "dev": "vite --config=vite.config.dev.mjs",
-    "build": "vite build  --config=vite.config.prod.mjs",
+    "build": "vite build --config=vite.config.prod.mjs",
     "preview": "vite preview --config='./vite.config.prod.mjs'",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist --config=vite.config.prod.mjs"
   },
   "dependencies": {
     "@unovis/ts": "^1.5.0",
     "@unovis/vue": "^1.5.0",
     "@vee-validate/zod": "^4.14.7",
-    "@vueuse/core": "^12.0.0",
+    "@vueuse/core": "^12.2.0",
     "@vueuse/motion": "^2.2.6",
     "axios": "^1.7.9",
     "keycloak-js": "^26.0.7",
