@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white">
+  <div class="bg-white text-black">
     <!--
     <div v-if="authService.isLoggedIn()" class="">
       <SidebarProvider class="">

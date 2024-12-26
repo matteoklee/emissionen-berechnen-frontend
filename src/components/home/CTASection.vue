@@ -1,6 +1,6 @@
 <template>
   <section
-    class="min-h-screen flex flex-col justify-center items-center max-w-screen-xl mx-auto text-black"
+    class="min-h-screen flex flex-col justify-center items-center max-w-screen-xl mx-auto text-black my-6 mx-4"
   >
     <div class="bg-white w-full">
       <div class="flex flex-col justify-center items-center">

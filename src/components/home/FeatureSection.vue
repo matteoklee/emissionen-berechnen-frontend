@@ -7,9 +7,9 @@
     <div class="bg-white w-full">
       <div class="flex flex-col justify-center items-center">
         <Badge variant="" class="bg-primary uppercase">Features</Badge>
-        <h1 class="text-5xl font-bold mt-2 mb-6">Alle Funktionen auf einen Blick</h1>
+        <h1 class="text-5xl font-bold mt-2 mb-6 text-center">Alle Funktionen auf einen Blick</h1>
 
-        <div class="grid grid-cols-4 gap-8 mt-12">
+        <div class="grid lg:grid-cols-4 grid-cols-1 gap-8 mt-12">
           <div
             class="flex flex-col justify-center items-center"
             v-motion-slide-visible-left

@@ -1,6 +1,6 @@
 <template>
   <section
-    class="min-h-screen flex flex-col justify-center items-center max-w-screen-xl mx-auto text-black border-t"
+    class="min-h-screen flex flex-col justify-center items-center max-w-screen-xl mx-auto text-black border-t py-6 mx-4"
     v-motion-slide-visible-top
     :duration="1000"
   >
@@ -21,16 +21,16 @@
     <div class="bg-white w-full">
       <div class="flex flex-col justify-center items-center">
         <Badge variant="" class="bg-primary uppercase">Pricing</Badge>
-        <h1 class="text-5xl font-bold mt-2 mb-6">Wähle den passenden Plan für dich</h1>
+        <h1 class="text-5xl font-bold mt-2 mb-6 text-center">Wähle den passenden Plan für dich</h1>
         <div class="flex items-center space-x-2">
           <Label for="airplane-mode">Monatlich</Label>
           <Switch id="airplane-mode" />
           <Label for="airplane-mode">Jährlich</Label>
         </div>
       </div>
-      <div class="grid grid-cols-3 gap-0 my-8 w-5/6 mx-auto">
+      <div class="grid lg:grid-cols-3 grid-cols-1 gap-0 my-8 w-5/6 mx-auto">
         <div
-          class="flex flex-col p-4 border-y-2 border-l-2 rounded-l-xl min-h-60 my-4 ml-4"
+          class="flex flex-col p-4 lg:border-y-2 lg:border-l-2 lg:rounded-l-xl border-2 rounded-lg min-h-60 my-4 lg:ml-4"
           v-motion-slide-visible-left
           :duration="1000"
           :delay="500"
@@ -102,7 +102,7 @@
           </div>
         </div>
         <div
-          class="flex flex-col justify-center items-center p-4 border-y-2 border-r-2 rounded-r-xl min-h-60 my-4 mr-4"
+          class="flex flex-col justify-center items-center p-4 border-2 rounded-lg lg:border-y-2 lg:border-r-2 lg:rounded-r-xl min-h-60 my-4 lg:mr-4"
           v-motion-slide-visible-right
           :duration="1000"
           :delay="500"
