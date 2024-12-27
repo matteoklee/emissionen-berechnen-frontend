@@ -1,11 +1,11 @@
 <template>
-  <section class="flex flex-col justify-center items-center max-w-screen-xl mx-auto text-black">
+  <div class="flex flex-col justify-center items-center text-black">
     <div class="bg-white w-full">
       <div class="flex flex-col justify-center items-center">
-        <AnimatedLogoCloud :logos="logos" title="Wir arbeiten zusammen mit" />
+        <AnimatedLogoCloud class="" :logos="logos" title="Wir arbeiten zusammen mit" />
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>

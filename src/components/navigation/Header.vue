@@ -1,13 +1,11 @@
 <template>
-  <nav class="bg-white border-gray-200 border-b fixed z-20 top-0 w-full">
+  <nav class="bg-white border-gray-200 border-b z-20 sticky top-0 w-full">
     <div class="max-w-screen-xl mx-auto flex flex-wrap items-center justify-between p-3 w-full">
       <a href="/" class="flex items-center space-x-3">
         <Leaf color="#0A5E33" :size="24" class="" />
         <!-- 500:#22c55e 600: #16a34a 700: #15803d -->
         <span class="self-center text-xl font-medium">Emissionen-Berechnen.de</span>
       </a>
-
-
 
       <div class="hidden md:flex items-center space-x-4 ml-auto">
         <NavigationMenu>

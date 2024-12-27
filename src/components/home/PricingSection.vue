@@ -1,6 +1,6 @@
 <template>
   <section
-    class="min-h-screen flex flex-col justify-center items-center max-w-screen-xl mx-auto text-black border-t py-6 mx-4"
+    class="flex flex-col justify-center items-center max-w-screen-xl text-black py-6 mx-auto"
     v-motion-slide-visible-top
     :duration="1000"
   >
@@ -28,9 +28,9 @@
           <Label for="airplane-mode">Jährlich</Label>
         </div>
       </div>
-      <div class="grid lg:grid-cols-3 grid-cols-1 gap-0 my-8 w-5/6 mx-auto">
+      <div class="grid xl:grid-cols-3 grid-cols-1 xl:gap-0 gap-4 my-8">
         <div
-          class="flex flex-col p-4 lg:border-y-2 lg:border-l-2 lg:rounded-l-xl border-2 rounded-lg min-h-60 my-4 lg:ml-4"
+          class="flex flex-col p-4 lg:border-y-2 lg:border-l-2 lg:rounded-l-xl border-2 lg:border-0 rounded-xl lg:rounded-none min-h-60 my-4 lg:ml-4 mx-auto lg:mx-0"
           v-motion-slide-visible-left
           :duration="1000"
           :delay="500"
@@ -63,7 +63,7 @@
           </div>
         </div>
         <div
-          class="flex flex-col justify-center items-center p-4 border rounded-xl min-h-60 border-green-600 border-4"
+          class="flex flex-col justify-center items-center p-4 border rounded-xl min-h-60 border-green-600 border-4 mx-auto lg:mx-0"
           v-motion-slide-visible-bottom
           :duration="1000"
           :delay="500"
@@ -102,7 +102,7 @@
           </div>
         </div>
         <div
-          class="flex flex-col justify-center items-center p-4 border-2 rounded-lg lg:border-y-2 lg:border-r-2 lg:rounded-r-xl min-h-60 my-4 lg:mr-4"
+          class="flex flex-col justify-center items-center p-4 border-2 rounded-xl lg:border-y-2 lg:border-r-2 lg:rounded-r-xl lg:border-0 lg:rounded-none min-h-60 my-4 lg:mr-4 mx-auto lg:mx-0"
           v-motion-slide-visible-right
           :duration="1000"
           :delay="500"

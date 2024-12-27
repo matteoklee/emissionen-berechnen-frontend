@@ -1,6 +1,6 @@
 <template>
-  <div id="cta" class="mt-16">
-    <div class="text-center mt-2 hidden">
+  <div id="cta" class="w-full">
+    <div class="text-center hidden">
       <h1 class="text-center mb-2">This is the home page</h1>
 
       <TooltipProvider>
@@ -90,7 +90,7 @@
       </div>
     </div>
 
-    <div id="hero">
+    <div id="hero" class="">
       <CTASection></CTASection>
     </div>
 
@@ -102,7 +102,7 @@
       <FeatureSection></FeatureSection>
     </div>
 
-    <div id="pricing">
+    <div id="pricing" class="">
       <PricingSection></PricingSection>
     </div>
   </div>

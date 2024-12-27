@@ -1,6 +1,6 @@
 <template>
-  <section
-    class="min-h-[50vh] py-24 flex flex-col justify-center items-center max-w-screen-xl mx-auto text-black mx-4"
+  <div
+    class="min-h-[50vh] py-24 flex flex-col justify-center items-center max-w-screen-xl mx-auto text-black"
     v-motion-slide-visible-top
     :duration="1000"
   >
@@ -14,7 +14,7 @@
             Hunderte Hotels vertrauen auf unsere Lösung und errechnen Ihre jährliche CO2-Bilanz.
           </p>
         </div>
-        <div class="grid lg:grid-cols-3 grid-cols-1 gap-4 mt-12">
+        <div class="grid xl:grid-cols-3 grid-cols-1 gap-4 mt-12">
           <div class="border-l border-gray-300 px-4 py-2">
             <div class="">
               <h1 class="text-2xl font-bold">
@@ -60,7 +60,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>

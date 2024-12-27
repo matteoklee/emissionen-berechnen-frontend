@@ -1,8 +1,8 @@
 <template>
   <section
-    class="min-h-screen flex flex-col justify-center items-center max-w-screen-xl mx-auto text-black my-6 mx-4"
+    class="xl:min-h-screen min-h-[50vh] flex flex-col justify-center items-center max-w-screen-xl mx-auto text-black xl:my-0 my-12"
   >
-    <div class="bg-white w-full">
+    <div class="bg-white w-full mx-0">
       <div class="flex flex-col justify-center items-center">
         <div class="max-w-screen-md flex flex-col justify-center items-center">
           <Badge

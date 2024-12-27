@@ -1,5 +1,5 @@
 <template>
-  <section
+  <div
     class="min-h-[50vh] py-24 flex flex-col justify-center items-center max-w-screen-xl mx-auto text-black"
     v-motion-slide-visible-bottom
     :duration="1000"
@@ -9,9 +9,9 @@
         <Badge variant="" class="bg-primary uppercase">Features</Badge>
         <h1 class="text-5xl font-bold mt-2 mb-6 text-center">Alle Funktionen auf einen Blick</h1>
 
-        <div class="grid lg:grid-cols-4 grid-cols-1 gap-8 mt-12">
+        <div class="grid xl:grid-cols-4 lg:grid-cols-2 grid-cols-1 gap-0 mt-12">
           <div
-            class="flex flex-col justify-center items-center"
+            class="flex flex-col justify-center items-center my-2 mx-2"
             v-motion-slide-visible-left
             :duration="1000"
             :delay="500"
@@ -25,7 +25,7 @@
             </p>
           </div>
           <div
-            class="flex flex-col justify-center items-center"
+            class="flex flex-col justify-center items-center my-2 mx-2"
             v-motion-slide-visible-bottom
             :duration="1000"
             :delay="500"
@@ -37,7 +37,7 @@
             <p class="text-lg text-gray-900 mt-3 text-center">Vollständig HCMI-kompatibel.</p>
           </div>
           <div
-            class="flex flex-col justify-center items-center"
+            class="flex flex-col justify-center items-center my-2 mx-2"
             v-motion-slide-visible-bottom
             :duration="1000"
             :delay="500"
@@ -51,7 +51,7 @@
             </p>
           </div>
           <div
-            class="flex flex-col justify-center items-center"
+            class="flex flex-col justify-center items-center my-2 mx-2"
             v-motion-slide-visible-right
             :duration="1000"
             :delay="500"
@@ -67,7 +67,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
