@@ -111,6 +111,15 @@
       </div>
 
     </div>
+
+      <MultiStepLoader
+          :steps="simpleLoadingSteps"
+          :loading="uiState.isSimpleLoading"
+          :prevent-close="true"
+          @state-change="handleStateChange"
+          @complete="handleComplete"
+      />
+
   </section>
 </template>
 
@@ -125,10 +134,12 @@ import Button from '@/components/ui/button/Button.vue';
 import { Check, Circle, Dot } from 'lucide-vue-next';
 import HotelDetails from "@/components/calculation/HotelDetails.vue";
 import EnergyConsumption from "@/components/calculation/EnergyConsumption.vue";
+import MultiStepLoader from "@/components/ui/multi-step-loader/MultiStepLoader.vue";
 
 export default {
   name: 'CalculationForm',
   components: {
+    MultiStepLoader,
     EnergyConsumption,
     HotelDetails,
     Button,
@@ -176,14 +187,46 @@ export default {
           title: 'Result',
           description: 'CO2 calculation result - CO2 calculation result'
         }
-      ]
+      ],
+      uiState: {
+        isSimpleLoading: false,
+        isAfterTextLoading: false,
+        closeSimple: () => {
+          this.uiState.isSimpleLoading = false;
+        },
+        closeAsync: () => {
+          this.uiState.isAfterTextLoading = false;
+        }
+      }
     };
+  },
+  computed: {
+    simpleLoadingSteps() {
+      return [
+        { text: 'Überprüfe Eingaben', duration: 1000 },
+        { text: 'Sende Eingaben an Server', duration: 1000 },
+        { text: 'Server validiert Eingaben', duration: 1000 },
+        { text: 'Server sendet Ergebnisse', duration: 1000, action: this.handleSimpleLoadingComplete }
+      ];
+    },
   },
   methods: {
     nextStep() {
       if (this.stepIndex < this.steps.length) {
         this.stepIndex++;
       }
+      this.toggleSimpleLoading();
+    },
+    handleStateChange(state) {
+    },
+    handleComplete() {
+    },
+    handleSimpleLoadingComplete() {
+      alert('Simple loading complete, redirecting...');
+      this.uiState.isSimpleLoading = false;
+    },
+    toggleSimpleLoading() {
+      this.uiState.isSimpleLoading = !this.uiState.isSimpleLoading;
     },
     setActiveStep(step) {
       this.stepIndex = step;
