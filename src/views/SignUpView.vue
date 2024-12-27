@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-16 mx-8">
+  <div class="mt-4 mx-8">
     <div class="h-full my-4 w-full flex flex-row justify-center items-center divide-x">
       <div class="p-6 xl:w-1/3 md:w-2/3 w-full border rounded-lg">
         <h1 class="text-xl font-bold mb-2">Registrieren</h1>
@@ -119,12 +119,21 @@
               </li>
             </ul>
           </div>
+          <div class="flex items-center mb-4">
+            <Checkbox required v-model="terms" id="terms" class="mr-2" />
+            <Label
+                for="terms"
+                class="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Ich stimme der Verarbeitung meiner Daten gemäß der Datenschutzerklärung zu.
+            </Label>
+          </div>
 
           <div class="flex flex-col mb-4">
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>
-                  <Button type="submit" variant="" :disabled="!isPasswordValid" class="text-md py-6 w-full">
+                  <Button type="submit" variant="" class="text-md py-6 w-full"> <!-- :disabled="!isPasswordValid" -->
                     <Send class="w-4 h-4 mr-2" />
                     Benutzerkonto erstellen</Button
                   >
@@ -163,9 +172,11 @@ import TooltipProvider from "@/components/ui/tooltip/TooltipProvider.vue";
 import Tooltip from "@/components/ui/tooltip/Tooltip.vue";
 import TooltipTrigger from "@/components/ui/tooltip/TooltipTrigger.vue";
 import TooltipContent from "@/components/ui/tooltip/TooltipContent.vue";
+import Checkbox from "@/components/ui/checkbox/Checkbox.vue";
 export default {
   name: 'SignUpView',
   components: {
+    Checkbox,
     TooltipContent,
     TooltipTrigger, Tooltip, TooltipProvider, Label, IconGoogle, Input, Button, Send, Eye, EyeOff, X, Check },
   data() {
@@ -178,6 +189,7 @@ export default {
       confirmPassword: "",
       showPassword: false,
       showConfirmPassword: false,
+      terms: false
     };
   },
   methods: {

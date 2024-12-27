@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-16 mx-8">
+  <div class="mt-4 mx-8">
     <h1 class="text-center my-6 hidden">This is your profile page</h1>
 
     <div class="w-full mt-12">

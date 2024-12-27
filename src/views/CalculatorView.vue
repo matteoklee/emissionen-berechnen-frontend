@@ -1,5 +1,5 @@
 <template>
-  <div id="calculator" class="mt-16">
+  <div id="calculator" class="mt-4">
     <div class="mt-2">
       <div class="max-w-screen-xl mx-auto">
         <BackHome></BackHome>
