@@ -159,32 +159,47 @@ export default {
       steps: [
         {
           step: 1,
-          title: 'Hotel Details',
-          description: 'Basic information'
+          title: 'Hotel Kontakt',
+          description: 'Contact information'
         },
         {
           step: 2,
-          title: 'Energy Consumption',
-          description: 'Enter energy usage data'
+          title: 'Hotel Details',
+          description: 'Basic informations'
         },
         {
           step: 3,
-          title: 'Outsourced Laundry',
-          description: 'Laundry service details'
+          title: 'Konfiguration',
+          description: 'Configuration Questions'
         },
         {
           step: 4,
-          title: 'Refrigerants',
-          description: 'Refrigerant usage information'
+          title: 'Hotel Emissionen',
+          description: 'Hotel Emissionen'
         },
         {
-          step: 5,
-          title: 'Client Report',
+          step: 5,//4.1
+          title: 'Erneuerbare Energien',
+          description: 'Hotel Emissionen'
+        },
+        {
+          step: 6,//4.2
+          title: 'Wäsche',
+          description: 'Hotel Emissionen'
+        },
+        {
+          step: 7,//4.3
+          title: 'Kühlmittel',
+          description: 'Hotel Emissionen'
+        },
+        {
+          step: 8,
+          title: 'Manuelle Emissionsfaktoren',
           description: 'Summary for client'
         },
         {
-          step: 6,
-          title: 'Result',
+          step: 9,
+          title: 'Ergebnis',
           description: 'CO2 calculation result - CO2 calculation result'
         }
       ],
@@ -215,7 +230,7 @@ export default {
       if (this.stepIndex < this.steps.length) {
         this.stepIndex++;
       }
-      this.toggleSimpleLoading();
+      //this.toggleSimpleLoading();
     },
     handleStateChange(state) {
     },
