@@ -83,7 +83,7 @@
                 <router-link to="/about">About</router-link>
               </NavigationMenuLink>
             </NavigationMenuItem>
-            <NavigationMenuItem class="mr-4" v-if="isSignedIn">
+            <NavigationMenuItem class="mr-2" v-if="isSignedIn">
               <NavigationMenuLink>
                 <router-link to="/calculator">Rechner</router-link>
               </NavigationMenuLink>
@@ -121,7 +121,7 @@
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <router-link to="/dashboard">Dashboard</router-link>
+                <router-link class="w-full" to="/dashboard">Dashboard</router-link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <router-link to="/profile">Profil</router-link>
@@ -139,10 +139,7 @@
       <div class="ml-2 hidden md:flex">
         <DropdownMenu v-if="isSignedIn" :modal="false">
           <DropdownMenuTrigger as-child>
-            <Avatar>
-              <AvatarImage src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="Avatar" />
-              <AvatarFallback>Avatar</AvatarFallback>
-            </Avatar>
+            <User strokeWidth="2" :size="24"/>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuLabel>
@@ -190,7 +187,7 @@
 </template>
 
 <script>
-import { User, Leaf, Menu } from 'lucide-vue-next';
+import { Leaf, Menu, User } from 'lucide-vue-next';
 import DropdownMenu from '@/components/ui/dropdown-menu/DropdownMenu.vue';
 import DropdownMenuTrigger from '@/components/ui/dropdown-menu/DropdownMenuTrigger.vue';
 import DropdownMenuContent from '@/components/ui/dropdown-menu/DropdownMenuContent.vue';

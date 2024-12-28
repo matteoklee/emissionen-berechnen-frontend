@@ -9,7 +9,7 @@
           <form @submit.prevent="onSubmit">
             <Stepper orientation="vertical" class="flex w-full max-w-md flex-col justify-start gap-10" v-model="stepIndex">
               <StepperItem
-                  v-for="step in steps"
+                  v-for="step in filteredSteps"
                   :key="step.step"
                   v-slot="{ state }"
                   class="relative flex w-full items-start gap-6"
@@ -160,6 +160,7 @@ import MultiStepLoader from "@/components/ui/multi-step-loader/MultiStepLoader.v
 import HotelContact from "@/components/calculation/form/HotelContact.vue";
 import RenewableEnergy from "@/components/calculation/form/RenewableEnergy.vue";
 import ConfigurationQuestions from "@/components/calculation/form/ConfigurationQuestions.vue";
+import {useCalculationStore} from "@/stores/calculationStore.js";
 
 export default {
   name: 'CalculationForm',
@@ -180,6 +181,12 @@ export default {
     Check,
     Circle,
     Dot
+  },
+  setup() {
+    const calculationStore = useCalculationStore();
+    return {
+      calculationStore
+    }
   },
   data() {
     return {
@@ -252,6 +259,23 @@ export default {
         { text: 'Server sendet Ergebnisse', duration: 1000, action: this.handleSimpleLoadingComplete }
       ];
     },
+    filteredSteps() {
+      return this.steps.filter((step) => {
+        if (step.step === 5 && !this.showStep5) return false;
+        if (step.step === 6 && !this.showStep6) return false;
+        if (step.step === 7 && !this.showStep7) return false;
+        return true;
+      });
+    },
+    showStep5() {
+      return this.calculationStore.hasPrivateSpace;
+    },
+    showStep6() {
+      return this.calculationStore.knowsPrivateSpaceEnergy;
+    },
+    showStep7() {
+      return this.calculationStore.includeVehicles === "Manuell";
+    },
   },
   methods: {
     nextStep() {
@@ -288,7 +312,8 @@ export default {
       alert('Form submitted successfully!');
       console.log('Form submitted');
     }
-  }
+  },
+
 };
 </script>
 
