@@ -21,7 +21,7 @@
       </TableHeader>
       <TableBody>
         <TableRow v-for="(row, index) in rows" :key="index">
-          <TableCell>
+          <TableCell class="w-1/2">
             <Select v-model="row.energyType" class="w-full border rounded px-2 py-1">
               <SelectTrigger>
                 <SelectValue placeholder="Wähle einen Energieträger" />

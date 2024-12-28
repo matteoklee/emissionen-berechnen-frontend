@@ -97,7 +97,7 @@
             <template v-if="stepIndex === 5">
               <div class="max-w-screen-lg mx-auto">
                 <h3 class="text-lg font-semibold mb-4">{{this.steps[this.stepIndex-1].title}}</h3>
-                <!-- Add input fields for outsourced laundry -->
+                <RenewableEnergy></RenewableEnergy>
               </div>
             </template>
 
@@ -158,10 +158,12 @@ import HotelDetails from "@/components/calculation/form/HotelDetails.vue";
 import EnergyConsumption from "@/components/calculation/form/EnergyConsumption.vue";
 import MultiStepLoader from "@/components/ui/multi-step-loader/MultiStepLoader.vue";
 import HotelContact from "@/components/calculation/form/HotelContact.vue";
+import RenewableEnergy from "@/components/calculation/form/RenewableEnergy.vue";
 
 export default {
   name: 'CalculationForm',
   components: {
+    RenewableEnergy,
     HotelContact,
     MultiStepLoader,
     EnergyConsumption,
