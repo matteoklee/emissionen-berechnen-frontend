@@ -66,43 +66,65 @@
           <div v-motion-slide-bottom :duration="1000" :key="stepIndex">
             <template v-if="stepIndex === 1">
               <div class="max-w-screen-lg">
-                <h3 class="text-lg font-semibold mb-4">Hotel Details</h3>
-                <HotelDetails class="w-full" />
+                <h3 class="text-lg font-semibold mb-4">Hotel Kontakt</h3>
+                <HotelContact class="w-full" />
               </div>
             </template>
 
             <template v-if="stepIndex === 2">
               <div class="">
-                <h3 class="text-lg font-semibold mb-4">Energy Consumption</h3>
-                <EnergyConsumption />
+                <h3 class="text-lg font-semibold mb-4">Hotel Details</h3>
+                <HotelDetails class="w-full" />
               </div>
             </template>
-
 
             <template v-if="stepIndex === 3">
-              <div class="max-w-screen-lg mx-auto">
-                <h3 class="text-lg font-semibold mb-4">Outsourced Laundry</h3>
-                <!-- Add input fields for outsourced laundry -->
+              <div class="">
+                <h3 class="text-lg font-semibold mb-4">Konfiguration</h3>
+
               </div>
             </template>
 
+
             <template v-if="stepIndex === 4">
-              <div class="max-w-screen-lg mx-auto">
-                <h3 class="text-lg font-semibold mb-4">Refrigerants</h3>
-                <!-- Add input fields for refrigerants -->
+              <div class="">
+                <h3 class="text-lg font-semibold mb-4">Energy Consumption</h3>
+                <EnergyConsumption class="w-full" />
               </div>
             </template>
+
 
             <template v-if="stepIndex === 5">
               <div class="max-w-screen-lg mx-auto">
-                <h3 class="text-lg font-semibold mb-4">Client Report</h3>
-                <!-- Add input fields or summary for client report -->
+                <h3 class="text-lg font-semibold mb-4">{{this.steps[this.stepIndex-1].title}}</h3>
+                <!-- Add input fields for outsourced laundry -->
               </div>
             </template>
 
             <template v-if="stepIndex === 6">
               <div class="max-w-screen-lg mx-auto">
-                <h3 class="text-lg font-semibold mb-4">Result</h3>
+                <h3 class="text-lg font-semibold mb-4">{{this.steps[this.stepIndex-1].title}}</h3>
+                <!-- Add input fields for refrigerants -->
+              </div>
+            </template>
+
+            <template v-if="stepIndex === 7">
+              <div class="max-w-screen-lg mx-auto">
+                <h3 class="text-lg font-semibold mb-4">{{this.steps[this.stepIndex-1].title}}</h3>
+                <!-- Add input fields or summary for client report -->
+              </div>
+            </template>
+
+            <template v-if="stepIndex === 8">
+              <div class="max-w-screen-lg mx-auto">
+                <h3 class="text-lg font-semibold mb-4">{{this.steps[this.stepIndex-1].title}}</h3>
+                <!-- Display calculation results -->
+              </div>
+            </template>
+
+            <template v-if="stepIndex === 9">
+              <div class="max-w-screen-lg mx-auto">
+                <h3 class="text-lg font-semibold mb-4">{{this.steps[this.stepIndex-1].title}}</h3>
                 <!-- Display calculation results -->
               </div>
             </template>
@@ -132,13 +154,15 @@ import StepperTitle from '@/components/ui/stepper/StepperTitle.vue';
 import StepperDescription from '@/components/ui/stepper/StepperDescription.vue';
 import Button from '@/components/ui/button/Button.vue';
 import { Check, Circle, Dot } from 'lucide-vue-next';
-import HotelDetails from "@/components/calculation/HotelDetails.vue";
-import EnergyConsumption from "@/components/calculation/EnergyConsumption.vue";
+import HotelDetails from "@/components/calculation/form/HotelDetails.vue";
+import EnergyConsumption from "@/components/calculation/form/EnergyConsumption.vue";
 import MultiStepLoader from "@/components/ui/multi-step-loader/MultiStepLoader.vue";
+import HotelContact from "@/components/calculation/form/HotelContact.vue";
 
 export default {
   name: 'CalculationForm',
   components: {
+    HotelContact,
     MultiStepLoader,
     EnergyConsumption,
     HotelDetails,
