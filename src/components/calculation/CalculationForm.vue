@@ -81,7 +81,7 @@
             <template v-if="stepIndex === 3">
               <div class="">
                 <h3 class="text-lg font-semibold mb-4">Konfiguration</h3>
-
+                <ConfigurationQuestions class="w-full" />
               </div>
             </template>
 
@@ -159,10 +159,12 @@ import EnergyConsumption from "@/components/calculation/form/EnergyConsumption.v
 import MultiStepLoader from "@/components/ui/multi-step-loader/MultiStepLoader.vue";
 import HotelContact from "@/components/calculation/form/HotelContact.vue";
 import RenewableEnergy from "@/components/calculation/form/RenewableEnergy.vue";
+import ConfigurationQuestions from "@/components/calculation/form/ConfigurationQuestions.vue";
 
 export default {
   name: 'CalculationForm',
   components: {
+    ConfigurationQuestions,
     RenewableEnergy,
     HotelContact,
     MultiStepLoader,
