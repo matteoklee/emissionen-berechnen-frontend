@@ -70,7 +70,7 @@
         <Button @click="setAnswer('includeVehicles', 'Default')">Standard nutzen</Button>
         <Button @click="setAnswer('includeVehicles', 'Ignorieren')">Ignorieren</Button>
          -->
-        <Select v-model="includeVehicles" @change="calculationStore.setIncludeVehicles(includeVehicles)" class="w-1/2 border rounded px-2 py-1">
+        <Select v-model="includeVehicles" class="w-1/2 border rounded px-2 py-1">
           <SelectTrigger>
             <SelectValue placeholder="Wähle eine Option" />
           </SelectTrigger>
@@ -97,7 +97,7 @@
         <Button @click="setAnswer('includeLeakedRefrigerants', 'Default')">Standard nutzen</Button>
         <Button @click="setAnswer('includeLeakedRefrigerants', 'Ignorieren')">Ignorieren</Button>
         -->
-        <Select v-model="includeLeakedRefrigerants" @change="calculationStore.setIncludeLeakedRefrigerants(includeLeakedRefrigerants)" class="w-1/2 border rounded px-2 py-1">
+        <Select v-model="includeLeakedRefrigerants" class="w-1/2 border rounded px-2 py-1">
           <SelectTrigger>
             <SelectValue placeholder="Wähle eine Option" />
           </SelectTrigger>
@@ -182,6 +182,14 @@ export default {
     },
     nextStep() {
       this.currentStepConfiguration += 1;
+    }
+  },
+  watch: {
+    includeVehicles(newValue, oldValue) {
+      this.calculationStore.setIncludeVehicles(newValue);
+    },
+    includeLeakedRefrigerants(newValue, oldValue) {
+      this.calculationStore.setIncludeLeakedRefrigerants(newValue);
     }
   }
 }
