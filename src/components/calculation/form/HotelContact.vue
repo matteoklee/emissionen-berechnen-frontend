@@ -1,9 +1,8 @@
 <template>
-
-  <div class="flex flex-col justify-start border rounded-lg p-6">
+  <div class="border border-blue-500 rounded-lg p-8">
     <form @submit.prevent="onSubmit">
       <div class="flex flex-col mb-2">
-        <Button type="button" variant="outlined" class="text-md py-6 border">
+        <Button type="button" variant="outlined" class="text-md py-6 border bg-black text-white">
           <Upload class="w-4 h-4 mr-2" />
           Hotelkontakt übernehmen</Button
         >
@@ -135,122 +134,6 @@
           />
         </div>
       </div>
-
-      <div class="hidden">
-        <div class="flex flex-col mb-4 mt-2">
-          <Label for="username" class="font-medium">Name</Label>
-          <Input
-              v-model="name"
-              autocomplete="username"
-              required
-              id="username"
-              type="username"
-              placeholder="user@email.com | user"
-              class="py-2.5 px-3 mt-2 border rounded-lg w-full"
-          />
-        </div>
-        <div class="flex flex-col mb-4">
-          <div class="inline-flex flex-row justify-between items-center">
-            <Label for="password" class="font-medium">Job Title</Label>
-          </div>
-
-          <Input
-              v-model="password"
-              autocomplete="password"
-              required
-              id="password"
-              type="password"
-              placeholder=""
-              class="py-2.5 px-3 mt-2 border rounded-lg w-full"
-          />
-        </div>
-        <div class="flex flex-col mb-4">
-          <div class="inline-flex flex-row justify-between items-center">
-            <Label for="password" class="font-medium">Name of Hotel</Label>
-          </div>
-
-          <Input
-              v-model="password"
-              autocomplete="password"
-              required
-              id="password"
-              type="password"
-              placeholder=""
-              class="py-2.5 px-3 mt-2 border rounded-lg w-full"
-          />
-        </div>
-        <div class="flex flex-col mb-4">
-          <div class="inline-flex flex-row justify-between items-center">
-            <Label for="password" class="font-medium">Name of Hotel Group</Label>
-          </div>
-
-          <Input
-              v-model="password"
-              autocomplete="password"
-              required
-              id="password"
-              type="password"
-              placeholder=""
-              class="py-2.5 px-3 mt-2 border rounded-lg w-full"
-          />
-        </div>
-        <div class="flex flex-col mb-4">
-          <div class="inline-flex flex-row justify-between items-center">
-            <Label for="password" class="font-medium">State</Label>
-          </div>
-
-          <Input
-              v-model="password"
-              autocomplete="password"
-              required
-              id="password"
-              type="password"
-              placeholder=""
-              class="py-2.5 px-3 mt-2 border rounded-lg w-full"
-          />
-        </div>
-        <div class="flex flex-col mb-4">
-          <div class="inline-flex flex-row justify-between items-center">
-            <Label for="password" class="font-medium">Address</Label>
-          </div>
-
-          <Input
-              v-model="password"
-              autocomplete="password"
-              required
-              id="password"
-              type="password"
-              placeholder=""
-              class="py-2.5 px-3 mt-2 border rounded-lg w-full"
-          />
-        </div>
-        <div class="flex flex-row mt-4 mb-4 w-full space-x-4 items-end">
-          <div class="w-1/2">
-            <Label for="firstName" class="font-medium">Postal Code</Label>
-            <Input
-                v-model="firstName"
-                autocomplete="given-name"
-                id="firstName"
-                type="text"
-                placeholder="Vorname"
-                class="py-2.5 px-3 mt-1 border rounded-lg w-full"
-            />
-          </div>
-          <div class="w-1/2">
-            <Label for="lastName" class="font-medium">City</Label>
-            <Input
-                v-model="lastName"
-                autocomplete="family-name"
-                id="lastName"
-                type="text"
-                placeholder="Nachname"
-                class="py-2.5 px-3 mt-1 border rounded-lg w-full"
-            />
-          </div>
-        </div>
-      </div>
-
-
     </form>
   </div>
 </template>
@@ -260,10 +143,11 @@ import Input from "@/components/ui/input/Input.vue";
 import Label from "@/components/ui/label/Label.vue";
 import Button from "@/components/ui/button/Button.vue";
 import {Upload} from "lucide-vue-next";
+import Separator from "@/components/ui/separator/Separator.vue";
 
 export default {
   name: "HotelContact",
-  components: {Button, Label, Input, Upload},
+  components: {Separator, Button, Label, Input, Upload},
   data() {
     return {
       name: "",
@@ -277,6 +161,11 @@ export default {
       country: "",
       state: "",
       postcode: "",
+    }
+  },
+  methods: {
+    onSubmit() {
+
     }
   }
 }

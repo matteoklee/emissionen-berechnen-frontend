@@ -11,7 +11,11 @@
         <CalculationFormNew></CalculationFormNew>
       </div>
 
-      <div class="hidden">
+      <div class="my-12 border-t-4 hidden">
+        <CalculationForm></CalculationForm>
+      </div>
+
+      <div class="my-12 border-t-4 hidden">
         <CalculationEvaluation></CalculationEvaluation>
       </div>
     </div>
