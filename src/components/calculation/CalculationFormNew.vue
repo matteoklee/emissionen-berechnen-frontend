@@ -67,22 +67,22 @@
 
       <div class="w-full">
         <div class="flex justify-center items-center">
-          <div v-motion-slide-bottom :duration="1000" :key="currentStep" class="">
+          <div v-motion-slide-bottom :duration="1000" :key="currentStep" class="w-full">
             <template v-if="currentStep === 0">
               <div class="">
-                <HotelContact class="" />
+                <HotelContact class="w-1/2 mx-auto" />
               </div>
             </template>
 
             <template v-if="currentStep === 1">
               <div class="">
-                <HotelDetails class="w-full" />
+                <HotelDetails class="w-1/2 mx-auto" />
               </div>
             </template>
 
             <template v-if="currentStep === 2">
               <div class="">
-                <ConfigurationQuestions class="w-full" />
+                <ConfigurationQuestionsAccordion class="w-full" />
               </div>
             </template>
 
@@ -123,9 +123,11 @@ import HotelContact from "@/components/calculation/form/HotelContact.vue";
 import ConfigurationQuestions from "@/components/calculation/form/ConfigurationQuestions.vue";
 import EnergyConsumption from "@/components/calculation/form/EnergyConsumption.vue";
 import RenewableEnergy from "@/components/calculation/form/RenewableEnergy.vue";
+import ConfigurationQuestionsAccordion from "@/components/calculation/form/ConfigurationQuestionsAccordion.vue";
 export default {
   name: "CalculationFormNew",
   components: {
+    ConfigurationQuestionsAccordion,
     RenewableEnergy,
     EnergyConsumption,
     ConfigurationQuestions, HotelContact, HotelDetails, Button, X, Send, Check, ChevronRight, ChevronLeft},

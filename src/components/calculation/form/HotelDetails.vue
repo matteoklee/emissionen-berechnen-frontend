@@ -1,9 +1,9 @@
 <template>
 
-  <div class="flex flex-col justify-start border rounded-lg p-6">
+  <div class="border border-blue-500 rounded-lg p-8">
     <form @submit.prevent="onSubmit">
       <div class="flex flex-col mb-2">
-        <Button type="button" variant="outlined" class="text-md py-6 border">
+        <Button type="button" variant="outlined" class="text-md py-6 border bg-black text-white">
           <Upload class="w-4 h-4 mr-2" />
           Hoteldetails übernehmen</Button
         >
