@@ -17,7 +17,7 @@
               >
                 <StepperSeparator
                     v-if="step.step !== steps[steps.length - 1].step"
-                    class="absolute left-[18px] top-[38px] block h-[105%] w-0.5 shrink-0 rounded-full bg-muted group-data-[state=completed]:bg-primary"
+                    class="absolute left-[18px] top-[38px] block h-[100%] w-0.5 shrink-0 rounded-full bg-muted group-data-[state=completed]:bg-green-500"
                 />
 
                 <StepperTrigger as-child>
@@ -29,7 +29,11 @@
                   >
                     <Check v-if="state === 'completed'" class="size-5" />
                     <Circle v-if="state === 'active'" />
-                    <Dot v-if="state === 'inactive'" />
+                    <div v-if="state === 'inactive'">
+                      <!-- <Dot v-if="state === 'inactive'" /> -->
+                      {{ step.step }}
+                    </div>
+
                   </Button>
                 </StepperTrigger>
 

@@ -30,7 +30,7 @@ const router = createRouter({
       alias: '/rechner',
       name: 'calculator',
       component: CalculatorView,
-      meta: { requiresAuth: true }
+      //meta: { requiresAuth: true }
     },
     {
       path: '/login',

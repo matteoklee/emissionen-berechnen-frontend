@@ -8,7 +8,7 @@
       <h1 class="text-center mb-2">This is the calculator page</h1>
 
       <div class="">
-        <CalculationForm></CalculationForm>
+        <CalculationFormNew></CalculationFormNew>
       </div>
 
       <div class="hidden">
@@ -23,10 +23,11 @@ import CalculationEvaluation from '@/components/calculation/CalculationEvaluatio
 import CalculationForm from '@/components/calculation/CalculationForm.vue';
 import BackHome from '@/components/navigation/BackHome.vue';
 import userService from '@/services/userService.js';
+import CalculationFormNew from "@/components/calculation/CalculationFormNew.vue";
 
 export default {
   name: 'CalculatorView',
-  components: { BackHome, CalculationForm, CalculationEvaluation },
+  components: {CalculationFormNew, BackHome, CalculationForm, CalculationEvaluation },
   data() {
     return {};
   }
