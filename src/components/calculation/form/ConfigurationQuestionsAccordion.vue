@@ -3,7 +3,7 @@
     <div class="border border-blue-500 rounded-lg p-8">
       <p>ConfigurationQuestionsAccordion</p>
 
-      <Accordion type="single" class="my-6 w-full bg-gray-50 border rounded-lg" collapsible :default-value="defaultValue">
+      <Accordion type="single" class="my-6 w-full bg-gray-50 border rounded-lg" collapsible :default-value="defaultValue" v-model="currentOpenItem">
         <AccordionItem
             v-for="(item) in accordionItems"
             :key="item.value"
@@ -82,6 +82,7 @@ export default {
   data() {
     return {
       defaultValue: "item-1",
+      currentOpenItem: 'item-1',
       accordionItems: [
         {
           value: 'item-1',
@@ -120,11 +121,14 @@ export default {
           (accordionItem) => accordionItem.value === item.value
       );
       const nextItem = this.accordionItems[currentIndex + 1];
-      this.defaultValue = this.defaultValue.filter((val) => val !== item.value);
-      if (nextItem) {
-        this.defaultValue.push(nextItem.value);
-      }
 
+      if (nextItem) {
+        this.$nextTick(() => {
+          this.currentOpenItem = nextItem.value;
+        });
+      } else {
+        this.currentOpenItem = "item-1";
+      }
     },
     moveDown(index) {
       const temp = this.accordionItems[index];

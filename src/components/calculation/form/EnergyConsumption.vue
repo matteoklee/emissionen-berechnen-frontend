@@ -1,82 +1,85 @@
 <template>
   <div class="w-full">
-    <div class="flex justify-end mb-4">
-      <Button
-          class="px-4 py-2 bg-primary"
-          @click="addRow"
-      >
-        Add Row
-      </Button>
+    <div class="border border-blue-500 rounded-lg p-8">
+      <div class="flex justify-end mb-4">
+        <Button
+            class="px-4 py-2 bg-primary"
+            @click="addRow"
+        >
+          Add Row
+        </Button>
+      </div>
+      <Table class="w-full overflow-x-scroll">
+        <TableCaption>Table of your energy consumption.</TableCaption>
+        <TableHeader class="w-full">
+          <TableRow class="w-full">
+            <TableHead>Energieträger</TableHead>
+            <TableHead class="text-center">Einheit</TableHead>
+            <TableHead class="text-center">Verbrauch</TableHead>
+            <TableHead class="text-center">Davon aus privaten Räumlichkeiten</TableHead>
+            <TableHead class="text-right text-xs">Aktionen</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow v-for="(row, index) in rows" :key="index">
+            <TableCell class="w-1/2">
+              <Select v-model="row.energyType" class="w-full border rounded px-2 py-1">
+                <SelectTrigger>
+                  <SelectValue placeholder="Wähle einen Energieträger" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Energieträger</SelectLabel>
+                    <SelectItem v-for="type in energyTypes" :key="type" :value="type">
+                      {{ type }}
+                    </SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </TableCell>
+            <TableCell class="text-center">
+              <Select v-model="row.unit" class="w-full border rounded px-2 py-1">
+                <SelectTrigger>
+                  <SelectValue placeholder="Wähle eine Einheit" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Einheit</SelectLabel>
+                    <SelectItem  v-for="unit in units" :key="unit" :value="unit">
+                      {{ unit }}
+                    </SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </TableCell>
+            <TableCell class="text-center">
+              <Input
+                  type="number"
+                  v-model.number="row.totalConsumption"
+                  class="w-full border rounded px-2 py-1 text-center"
+              />
+            </TableCell>
+            <TableCell class="text-center">
+              <Input
+                  type="number"
+                  v-model.number="row.privateSpaceActual"
+                  class="w-full border rounded px-2 py-1 text-center"
+              />
+            </TableCell>
+            <TableCell class="text-right">
+              <Button
+                  variant="outlined"
+                  class="text-red-500 inline-flex"
+                  @click="deleteRow(index)"
+              >
+                <CircleX :size="24" class="hover:scale-105" />
+              </Button>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
     </div>
-    <Table class="w-full overflow-x-scroll">
-      <TableCaption>Table of your energy consumption.</TableCaption>
-      <TableHeader class="w-full">
-        <TableRow class="w-full">
-          <TableHead>Energieträger</TableHead>
-          <TableHead class="text-center">Einheit</TableHead>
-          <TableHead class="text-center">Verbrauch</TableHead>
-          <TableHead class="text-center">Davon aus privaten Räumlichkeiten</TableHead>
-          <TableHead class="text-right text-xs">Aktionen</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        <TableRow v-for="(row, index) in rows" :key="index">
-          <TableCell class="w-1/2">
-            <Select v-model="row.energyType" class="w-full border rounded px-2 py-1">
-              <SelectTrigger>
-                <SelectValue placeholder="Wähle einen Energieträger" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Energieträger</SelectLabel>
-                  <SelectItem v-for="type in energyTypes" :key="type" :value="type">
-                    {{ type }}
-                  </SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </TableCell>
-          <TableCell class="text-center">
-            <Select v-model="row.unit" class="w-full border rounded px-2 py-1">
-              <SelectTrigger>
-                <SelectValue placeholder="Wähle eine Einheit" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Einheit</SelectLabel>
-                  <SelectItem  v-for="unit in units" :key="unit" :value="unit">
-                    {{ unit }}
-                  </SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </TableCell>
-          <TableCell class="text-center">
-            <Input
-                type="number"
-                v-model.number="row.totalConsumption"
-                class="w-full border rounded px-2 py-1 text-center"
-            />
-          </TableCell>
-          <TableCell class="text-center">
-            <Input
-                type="number"
-                v-model.number="row.privateSpaceActual"
-                class="w-full border rounded px-2 py-1 text-center"
-            />
-          </TableCell>
-          <TableCell class="text-right">
-            <Button
-                variant="outlined"
-                class="text-red-500 inline-flex"
-                @click="deleteRow(index)"
-            >
-              <CircleX :size="24" class="hover:scale-105" />
-            </Button>
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+
   </div>
 </template>
 
