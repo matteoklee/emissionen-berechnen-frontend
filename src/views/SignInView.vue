@@ -7,7 +7,7 @@
 
       <form @submit.prevent="onSubmit">
         <div class="flex flex-col mb-2">
-          <Button type="submit" variant="outlined" class="text-md py-6 border">
+          <Button type="submit" variant="outline" class="text-md py-6 border">
             <IconGoogle class="w-4 h-4 mr-2" />
             Anmelden mit Google</Button
           >

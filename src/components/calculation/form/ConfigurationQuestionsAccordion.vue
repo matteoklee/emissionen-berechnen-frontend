@@ -77,7 +77,7 @@
         </AccordionItem>
       </Accordion>
 
-      <div class="mt-2">
+      <div class="mt-2 hidden">
         <div v-for="(answer, index) in answers" :key="answer">
           <p>{{index}}: {{answer}}</p>
         </div>

@@ -151,7 +151,7 @@
 
           </div>
           <div class="flex flex-col mb-4">
-            <Button type="submit" variant="outlined" class="text-md py-6 border w-full">
+            <Button type="submit" variant="outline" class="text-md py-6 border w-full">
               <IconGoogle class="w-4 h-4 mr-2" />
               Anmelden mit Google</Button
             >

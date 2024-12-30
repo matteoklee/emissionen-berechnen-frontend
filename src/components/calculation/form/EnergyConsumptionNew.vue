@@ -6,29 +6,39 @@
         <div class="w-1/4 p-2">
           <h1 class="font-medium text-lg mx-2">Steps</h1>
           <div class="flex flex-col items-start">
-            <div v-for="step in steps" :key="step.id" class="w-full flex border rounded-lg items-center p-2 my-2">
+            <div v-for="step in steps" :key="step.id" class="w-full flex border items-center p-2 my-2">
               <div class="mr-2">
-                <div v-if="currentStep > step.id" class="mx-2 rounded-full bg-green-500 p-1">
-                  <Check strokeWidth="2" class="text-white" :size="16" />
+                <div v-if="currentStep > step.id" class="mx-2 rounded-full border border-2 p-1 border-green-500">
+                  <Check strokeWidth="2" class="text-green-500" :size="20" />
                 </div>
-                <div v-else-if="currentStep === step.id" class="mx-2">
-                  <Circle strokeWidth="3" class="text-blue-500" :size="24" />
+                <div v-else-if="currentStep === step.id" class="mx-2 w-8 aspect-square flex items-center justify-center rounded-full border-blue-500 border-2">
+                  <!-- <Circle strokeWidth="3" class="text-blue-500" :size="24" /> -->
+                  {{ step.id }}
                 </div>
-                <div v-else class="mx-2">
-                  <Circle strokeWidth="2" class="text-gray-400" :size="24" />
+                <div v-else class="mx-2 w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 text-gray-500"
+                >
+                  <!-- class="mx-2" <Circle strokeWidth="2" class="text-gray-400" :size="24" /> -->
+                  {{ step.id }}
                 </div>
               </div>
 
               <div class="flex flex-col">
-                <p class="font-medium mb-1">{{step.id}}. {{step.title}}</p>
-                <p>{{step.description}}</p>
+                <p class="font-medium mb-1"
+                   :class="{
+                      'text-green-500': currentStep > step.id,  // Grün für abgeschlossene Schritte
+                      'text-black': currentStep === step.id,   // Schwarz für aktuellen Schritt
+                      'text-gray-400': currentStep < step.id,  // Grau für kommende Schritte
+                    }">
+                  {{step.id}}. {{step.title}}
+                </p>
+                <p class="text-sm text-gray-900">{{step.description}}</p>
               </div>
             </div>
           </div>
         </div>
 
         <div class="w-3/4 p-3 flex flex-col">
-          <div class="flex justify-between mb-4">
+          <div class="flex justify-between hidden">
             <h1 class="font-medium text-lg mx-2">Formular</h1>
             <Button
                 class="px-4 py-2 bg-primary"
@@ -37,14 +47,15 @@
               Reihe hinzufügen
             </Button>
           </div>
-          <div class="flex-grow my-4">
+
+          <div class="flex-grow">
             <div class="w-full mx-2">
               <div v-motion-slide-bottom :duration="1000" :key="currentStep">
 
                 <template v-if="currentStep === 1">
                   <div class="max-w-screen-lg">
-                    <h3 class="font-semibold mb-4">{{steps[currentStep-1].title}}</h3>
-                    <Table class="w-full overflow-x-scroll">
+                    <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
+                    <Table class="w-full overflow-x-scroll border">
                       <TableCaption>Table of your energy consumption.</TableCaption>
                       <TableHeader class="w-full">
                         <TableRow class="w-full">
@@ -118,17 +129,17 @@
 
                 <template v-if="currentStep === 2">
                   <div class="">
-                    <h3 class="font-semibold mb-4">{{steps[currentStep-1].title}}</h3>
+                    <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
                   </div>
                 </template>
                 <template v-if="currentStep === 3">
                   <div class="">
-                    <h3 class="font-semibold mb-4">{{steps[currentStep-1].title}}</h3>
+                    <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
                   </div>
                 </template>
                 <template v-if="currentStep === 4">
                   <div class="">
-                    <h3 class="font-semibold mb-4">{{steps[currentStep-1].title}}</h3>
+                    <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
                   </div>
                 </template>
 
@@ -141,10 +152,10 @@
             <Button variant="outline" type="button" size="sm" @click="prevStep()">Zurück</Button>
 
             <div class="">
-              <Button v-if="currentStep !== steps.length" type="button" size="sm" @click="nextStep()">
+              <Button v-if="currentStep !== steps.length" variant="outline" class="bg-black text-white" type="button" size="sm" @click="nextStep()">
                 Nächster Schritt
               </Button>
-              <Button v-if="currentStep === steps.length" size="sm" type="submit">Bestätigen</Button>
+              <Button v-if="currentStep === steps.length" variant="outline" class="bg-black text-white" size="sm" type="submit">Bestätigen</Button>
             </div>
           </div>
         </div>

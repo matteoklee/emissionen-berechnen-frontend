@@ -61,7 +61,7 @@
       <div class="my-12 flex flex-col lg:flex-row justify-between lg:items-center lg:w-full lg:mx-0 mx-6">
         <h1 class="text-3xl font-medium">{{ this.steps[this.currentStep].id }}. {{ this.steps[this.currentStep].title }}</h1>
         <div>
-          <Button variant="outlined" class="border text-md p-5 lg:m-0 mt-4">Speichern & Beenden</Button>
+          <Button variant="outline" class="border text-md p-5 lg:m-0 mt-4">Speichern & Beenden</Button>
         </div>
       </div>
 

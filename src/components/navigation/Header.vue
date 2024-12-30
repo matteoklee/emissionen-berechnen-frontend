@@ -174,7 +174,7 @@
         <div class="">
           <div v-if="!isSignedIn" class="inline-flex flex-row space-x-3">
             <router-link to="/login"
-              ><Button variant="outlined" class="border">Anmelden</Button></router-link
+              ><Button variant="outline" class="border">Anmelden</Button></router-link
             >
             <router-link to="/register"
               ><Button variant="" class="">Registrieren</Button></router-link
