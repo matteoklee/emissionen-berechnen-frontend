@@ -89,7 +89,7 @@
 
             <template v-if="currentStep === 3">
               <div class="">
-                <EnergyConsumption class="w-full" />
+                <EnergyConsumptionNew class="w-full" />
               </div>
             </template>
 
@@ -124,9 +124,11 @@ import ConfigurationQuestions from "@/components/calculation/form/ConfigurationQ
 import EnergyConsumption from "@/components/calculation/form/EnergyConsumption.vue";
 import RenewableEnergy from "@/components/calculation/form/RenewableEnergy.vue";
 import ConfigurationQuestionsAccordion from "@/components/calculation/form/ConfigurationQuestionsAccordion.vue";
+import EnergyConsumptionNew from "@/components/calculation/form/EnergyConsumptionNew.vue";
 export default {
   name: "CalculationFormNew",
   components: {
+    EnergyConsumptionNew,
     ConfigurationQuestionsAccordion,
     RenewableEnergy,
     EnergyConsumption,
