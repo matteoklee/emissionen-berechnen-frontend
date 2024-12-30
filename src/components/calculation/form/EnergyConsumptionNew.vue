@@ -1,12 +1,12 @@
 <template>
   <div class="w-full">
     <div class="border border-blue-500 rounded-lg p-4">
-      <div class="flex">
+      <div class="flex flex-col lg:flex-row">
 
-        <div class="w-1/4 p-2">
+        <div class="lg:w-1/4 p-2">
           <h1 class="font-medium text-lg mx-2">Steps</h1>
           <div class="flex flex-col items-start">
-            <div v-for="step in steps" :key="step.id" class="w-full flex border items-center p-2 my-2">
+            <button @click="setActiveStep(step.id)" v-for="step in steps" :key="step.id" class="w-full flex border rounded-lg items-center p-2 my-2" :class="(currentStep === step.id ? 'border-b-2 border-b-blue-500' : '')">
               <div class="mr-2">
                 <div v-if="currentStep > step.id" class="mx-2 rounded-full border border-2 p-1 border-green-500">
                   <Check strokeWidth="2" class="text-green-500" :size="20" />
@@ -22,31 +22,22 @@
                 </div>
               </div>
 
-              <div class="flex flex-col">
+              <div class="flex flex-col items-start">
                 <p class="font-medium mb-1"
                    :class="{
-                      'text-green-500': currentStep > step.id,  // Grün für abgeschlossene Schritte
-                      'text-black': currentStep === step.id,   // Schwarz für aktuellen Schritt
-                      'text-gray-400': currentStep < step.id,  // Grau für kommende Schritte
+                      'text-green-500': currentStep > step.id,
+                      'text-black': currentStep === step.id,
+                      'text-gray-400': currentStep < step.id,
                     }">
                   {{step.id}}. {{step.title}}
                 </p>
                 <p class="text-sm text-gray-900">{{step.description}}</p>
               </div>
-            </div>
+            </button>
           </div>
         </div>
 
-        <div class="w-3/4 p-3 flex flex-col">
-          <div class="flex justify-between hidden">
-            <h1 class="font-medium text-lg mx-2">Formular</h1>
-            <Button
-                class="px-4 py-2 bg-primary"
-                @click="addRow"
-            >
-              Reihe hinzufügen
-            </Button>
-          </div>
+        <div class="lg:w-3/4 p-3 flex flex-col">
 
           <div class="flex-grow">
             <div class="w-full mx-2">
@@ -55,6 +46,14 @@
                 <template v-if="currentStep === 1">
                   <div class="max-w-screen-lg">
                     <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
+                    <div class="flex justify-end mb-4">
+                      <Button
+                          class="px-4 py-2 bg-primary"
+                          @click="addRow"
+                      >
+                        Reihe hinzufügen
+                      </Button>
+                    </div>
                     <Table class="w-full overflow-x-scroll border">
                       <TableCaption>Table of your energy consumption.</TableCaption>
                       <TableHeader class="w-full">
@@ -130,6 +129,7 @@
                 <template v-if="currentStep === 2">
                   <div class="">
                     <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
+                    <RenewableEnergy></RenewableEnergy>
                   </div>
                 </template>
                 <template v-if="currentStep === 3">
@@ -184,10 +184,12 @@ import SelectGroup from "@/components/ui/select/SelectGroup.vue";
 import SelectLabel from "@/components/ui/select/SelectLabel.vue";
 import SelectItem from "@/components/ui/select/SelectItem.vue";
 import Input from "@/components/ui/input/Input.vue";
+import RenewableEnergy from "@/components/calculation/form/RenewableEnergy.vue";
 
 export default {
   name: "EnergyConsumptionNew",
   components: {
+    RenewableEnergy,
     Input,
     SelectItem,
     SelectLabel,
@@ -247,8 +249,8 @@ export default {
         },
         {
           id: 5,
-          title: 'Erneuerbare Energien',
-          description: 'Hotel Emissionen'
+          title: 'Zusammenfassung',
+          description: ''
         },
       ],
     };

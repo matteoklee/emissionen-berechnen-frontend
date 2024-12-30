@@ -8,7 +8,7 @@
         Add Row
       </Button>
     </div>
-    <Table class="w-full overflow-x-scroll">
+    <Table class="w-full overflow-x-scroll border">
       <TableCaption>Table of your renewable energy.</TableCaption>
       <TableHeader class="w-full">
         <TableRow class="w-full">

@@ -60,8 +60,8 @@
 
       <div class="my-12 flex flex-col lg:flex-row justify-between lg:items-center lg:w-full lg:mx-0 mx-6">
         <h1 class="text-3xl font-medium">{{ this.steps[this.currentStep].id }}. {{ this.steps[this.currentStep].title }}</h1>
-        <div>
-          <Button variant="outline" class="border text-md p-5 lg:m-0 mt-4">Speichern & Beenden</Button>
+        <div class="">
+          <Button variant="outline" class="bg-black text-white text-md p-5 lg:m-0 mt-4">Speichern & Beenden</Button>
         </div>
       </div>
 
@@ -70,29 +70,27 @@
           <div v-motion-slide-bottom :duration="1000" :key="currentStep" class="w-full">
             <template v-if="currentStep === 0">
               <div class="">
-                <HotelContact class="w-1/2 mx-auto" />
+                <HotelContact class="lg:w-1/2 lg:mx-auto mx-4" />
               </div>
             </template>
 
             <template v-if="currentStep === 1">
               <div class="">
-                <HotelDetails class="w-1/2 mx-auto" />
+                <HotelDetails class="lg:w-1/2 lg:mx-auto mx-4" />
               </div>
             </template>
 
             <template v-if="currentStep === 2">
               <div class="">
-                <ConfigurationQuestionsAccordion class="w-full" />
+                <ConfigurationQuestionsAccordion class="px-4 lg:px-0" />
               </div>
             </template>
-
 
             <template v-if="currentStep === 3">
               <div class="">
-                <EnergyConsumptionNew class="w-full" />
+                <EnergyConsumptionNew class="px-4 lg:px-0" />
               </div>
             </template>
-
 
             <template v-if="currentStep === 4">
               <div class="">
