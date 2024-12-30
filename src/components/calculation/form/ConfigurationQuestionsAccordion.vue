@@ -3,49 +3,85 @@
     <div class="border border-blue-500 rounded-lg p-8">
       <p>ConfigurationQuestionsAccordion</p>
 
-      <Accordion type="single" class="my-6 w-full bg-gray-50 border rounded-lg" collapsible :default-value="defaultValue" v-model="currentOpenItem">
+      <Accordion type="single" class="my-6 w-full" collapsible :default-value="defaultValue" v-model="currentOpenItem">
         <AccordionItem
             v-for="(item) in accordionItems"
             :key="item.value"
             :value="item.value"
-            class=""
+            class="border rounded-lg my-4"
         > <!-- last:border-none -->
-          <div class="flex items-center px-4 py-2">
-            <div v-if="item.answered" class="mr-2 rounded-full bg-green-500 p-1">
-              <Check strokeWidth="2" class="text-white" :size="12" />
-            </div>
-            <div v-else>
-              <CircleHelp strokeWidth="3" class="mr-2 text-blue-500" :size="20" />
+
+          <AccordionTrigger class="w-full group">
+            <div class="flex items-center mx-2">
+              <div v-if="item.answered" class="mx-2"> <!-- rounded-full bg-green-500 p-1 -->
+                <Check strokeWidth="2" class="text-white hidden" :size="12" />
+                <CircleCheckBig strokeWidth="3" class="text-green-500" :size="20"/>
+              </div>
+              <div v-else>
+                <CircleHelp strokeWidth="3" class="mx-2 text-blue-500 hidden" :size="20" />
+                <Circle strokeWidth="2" class="mx-2 text-gray-400" :size="20"  />
+              </div>
+              <div class="font-medium mx-2 group-hover:underline">
+                {{ item.title }}
+              </div>
             </div>
 
-            <AccordionTrigger class="flex-grow font-medium">
-              {{ item.title }}
-            </AccordionTrigger>
-            <div class="flex items-center space-x-4 ml-auto">
-              <div class="flex items-center space-x-2">
-                <Switch id="answered" disabled v-model:checked="item.answered" />
-                <Label for="answered">Beantwortet</Label>
-              </div>
-              <div>
-                <button @click="deleteAnswer(item)">
-                  <Trash2 strokeWidth="2" :size="20" class="text-gray-600" />
-                </button>
+            <div class="flex justify-between items-center ml-auto">
+              <div class="flex items-center space-x-4 ">
+                <div class="flex items-center space-x-2">
+                  <Badge v-if="item.answered" for="answered" class="">Beantwortet</Badge>
+                  <Badge variant="outlined" v-else for="answered" class="">Offen</Badge>
+                  <Switch class="hidden" id="answered" disabled v-model:checked="item.answered" />
+                </div>
+                <div class="hidden">
+                  <button @click="deleteAnswer(item)">
+                    <Trash2 strokeWidth="2" :size="20" class="text-gray-600" />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <AccordionContent class="p-4 bg-white text-gray-700">
-            <p>{{ item.content }}</p>
-            <textarea
-                class="w-full mt-2 p-2 border rounded-md"
-                rows="3"
-                placeholder="Type your answer..."
-            ></textarea>
-            <div class="flex justify-end items-center">
-              <Button @click="answerQuestion(item)">Submit</Button>
+          </AccordionTrigger>
+
+
+          <AccordionContent class="px-4 flex flex-col">
+            <div class="flex justify-between">
+              <div>
+                <p class="font-medium mb-1">{{ item.question }}</p>
+                <p class="text-gray-700">{{ item.content }}</p>
+              </div>
+              <div v-if="item.type === 'switch'" class="flex justify-end items-center mt-2">
+                <Label for="submit" class=""></Label>
+                <Switch id="submit" v-model:checked="answers[item.answerKey]" @update:checked="answerQuestion(item, $event)" class="data-[state=checked]:bg-black" />
+              </div>
+            </div>
+            <div v-if="item.type === 'input'" class="flex items-center mt-2">
+              <Input id="input" type="number" placeholder="5" v-model="answers[item.answerKey]" @update:model-value="answerQuestion(item, $event)" class="mr-2" />
+              <Label for="input" class="">{{item.typeUnit}}</Label>
+            </div>
+            <div v-else-if="item.type === 'select'" class="flex items-center mt-2">
+              <Select id="select" class="" @update:model-value="answerQuestion(item, $event)" v-model="answers[item.answerKey]">
+                <SelectTrigger>
+                  <SelectValue placeholder="Wähle eine Option" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Optionen</SelectLabel>
+                    <SelectItem v-for="option in item.typeItems" :key="option" :value="option">
+                      {{ option }}
+                    </SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+
+      <div class="mt-2">
+        <div v-for="(answer, index) in answers" :key="answer">
+          <p>{{index}}: {{answer}}</p>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -63,13 +99,17 @@ import SelectGroup from "@/components/ui/select/SelectGroup.vue";
 import SelectLabel from "@/components/ui/select/SelectLabel.vue";
 import SelectItem from "@/components/ui/select/SelectItem.vue";
 import AccordionContent from "@/components/ui/accordion/AccordionContent.vue";
-import {CircleHelp, Check, Trash2} from "lucide-vue-next";
+import {CircleHelp, Check, Trash2, CircleCheckBig, Circle} from "lucide-vue-next";
 import Button from "@/components/ui/button/Button.vue";
 import Switch from "@/components/ui/switch/Switch.vue";
 import Label from "@/components/ui/label/Label.vue";
+import Badge from "@/components/ui/badge/Badge.vue";
+import Input from "@/components/ui/input/Input.vue";
 export default {
   name: "ConfigurationQuestionsAccordion",
   components: {
+    Input,
+    Badge,
     Label,
     Switch,
     Button,
@@ -78,45 +118,81 @@ export default {
     SelectLabel,
     SelectGroup,
     SelectContent, SelectValue, SelectTrigger, Select, AccordionTrigger, AccordionItem, Accordion,
-    CircleHelp, Check, Trash2},
+    CircleHelp, Check, Trash2, CircleCheckBig, Circle},
   data() {
     return {
-      defaultValue: "item-1",
+      defaultValue: 'item-1',
+      //defaultValue: '',
       currentOpenItem: 'item-1',
+      //currentOpenItem: '',
+      answers: {
+        hasOutsourcedLaundry: false,
+        hasPrivateSpace: false,
+        knowsPrivateSpaceEnergy: false,
+        privateSpaceAreaPercentage: 0,
+        includeVehicles: 'Default',
+        includeLeakedRefrigerants: 'Default',
+        usesCommonRefrigerants: false,
+      },
       accordionItems: [
         {
           value: 'item-1',
-          title: 'Question 1',
-          content: 'How can storytelling improve attention in your course?',
+          title: 'Externe Wäscherei',
+          question: 'Nutzen Sie eine externe Wäscherei?',
+          content: 'Wählen Sie "Ja", wenn Sie Ihre Wäsche auslagern.',
+          type: 'switch',
           answered: false,
+          answerKey: 'hasOutsourcedLaundry',
         },
         {
           value: 'item-2',
-          title: 'Question 2',
-          content: 'What are the benefits of storytelling in education?',
+          title: 'Private Räumlichkeiten',
+          question: 'Haben Sie private Räumlichkeiten, welche nicht für den Hotelbetrieb genutzt werden?',
+          content: 'z.B. private Wohnungen oder Büros',
+          type: 'switch',
           answered: false,
+          answerKey: 'hasPrivateSpace',
         },
         {
           value: 'item-3',
-          title: 'Question 3',
-          content: 'What are the benefits of storytelling in education?',
+          title: 'Energieverbrauch private Räume',
+          question: 'Kennen Sie den Energieverbrauch der privaten Räumlichkeiten?',
+          content: 'Separate Messung des Energieverbrauchs',
+          type: 'switch',
           answered: false,
+          answerKey: 'knowsPrivateSpaceEnergy',
         },
         {
           value: 'item-4',
-          title: 'Question 4',
-          content: 'What are the benefits of storytelling in education?',
+          title: 'Klimatisierte Fläche',
+          question: 'Wie viel Prozent der klimatisierten Fläche ist privat?',
+          type: 'input',
+          typeUnit: "%",
           answered: false,
+          answerKey: 'privateSpaceAreaPercentage',
         },
-      ]
+        {
+          value: 'item-5',
+          title: 'Fahrzeuge & Equipment',
+          question: 'Wie möchten Sie Fahrzeug- und Equipmentemissionen einbeziehen?',
+          type: 'select',
+          typeItems: ['Manuell', 'Standard nutzen', 'Ignorieren'],
+          answered: false,
+          answerKey: 'includeVehicles',
+        },
+      ],
     }
   },
   methods: {
     deleteAnswer(item) {
       item.answered = false;
     },
-    answerQuestion(item) {
-      item.answered = !item.answered;
+    answerQuestion(item, value) {
+      this.answers[item.answerKey] = value;
+      item.answered = Boolean(value);
+      console.log(item.answered)
+      console.log(value)
+
       const currentIndex = this.accordionItems.findIndex(
           (accordionItem) => accordionItem.value === item.value
       );
@@ -128,6 +204,7 @@ export default {
         });
       } else {
         this.currentOpenItem = "item-1";
+        //this.currentOpenItem = '';
       }
     },
     moveDown(index) {

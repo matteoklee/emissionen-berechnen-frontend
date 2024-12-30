@@ -17,7 +17,7 @@
           </button>
         </div>
 
-        <div v-for="step in steps" :key="step.id" class="flex justify-center items-center h-full w-full">
+        <button @click="setActiveStep(step.id-1)" v-for="step in steps" :key="step.id" class="flex justify-center items-center h-full w-full">
           <div v-if="step.status === 'Complete'" class="flex flex-col w-full space-y-4 p-4">
             <div class="inline-flex justify-between w-full items-center text-green-500">
               <p class="text-sm">{{ step.status }}</p>
@@ -46,7 +46,7 @@
               <p class="text-md text-gray-700">{{ step.subtitle }}</p>
             </div>
           </div>
-        </div>
+        </button>
 
         <div class="h-full flex justify-center items-center p-2">
           <button v-if="currentStep === steps.length-1" class="">
@@ -61,7 +61,7 @@
       <div class="my-12 flex flex-col lg:flex-row justify-between lg:items-center lg:w-full lg:mx-0 mx-6">
         <h1 class="text-3xl font-medium">{{ this.steps[this.currentStep].id }}. {{ this.steps[this.currentStep].title }}</h1>
         <div>
-          <Button variant="outlined" class="border text-md p-5 lg:m-0 mt-4">Save Progess & Close</Button>
+          <Button variant="outlined" class="border text-md p-5 lg:m-0 mt-4">Speichern & Beenden</Button>
         </div>
       </div>
 
