@@ -1,11 +1,9 @@
 <template>
-  <div id="calculator" class="mt-4">
+  <div id="calculator" class="">
     <div class="mt-2">
       <div class="max-w-screen-xl mx-auto">
         <BackHome></BackHome>
       </div>
-
-      <h1 class="text-center mb-2">This is the calculator page</h1>
 
       <div class="">
         <CalculationFormNew></CalculationFormNew>
