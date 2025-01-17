@@ -1,8 +1,8 @@
 <template>
-  <section
-      class="min-h-screen flex flex-col items-center max-w-screen-xl mx-auto text-black"
+  <Card
+      class="min-h-screen flex flex-col items-center max-w-screen-xl mx-auto text-black bg-white my-4"
   >
-    <div class="bg-white w-full mt-4">
+    <div class="w-full mt-4">
       <!-- hidden -->
       <div class="flex lg:m-0 mx-6 lg:justify-end items-center lg:my-2 hidden">
         <button class="inline-flex justify-center items-center text-red-600 group">
@@ -11,17 +11,17 @@
         </button>
       </div>
 
-      <div class="flex lg:flex-row h-full flex-col items-center lg:divide-y-0 divide-y lg:m-4 xl:m-0 mx-6 my-2"> <!-- lg:h-[120px] -->
-        <div class="h-full flex justify-center items-center p-2">
+      <div class="flex lg:flex-row h-full flex-col items-center lg:m-4 xl:m-0 mx-6 my-2"> <!-- lg:h-[120px] -->
+        <div class="h-full flex justify-center items-center p-2 hidden">
           <button :disabled="currentStep <= 0" class="" @click="prevStep()">
             <ChevronLeft strokeWidth="2" :size="28" />
           </button>
         </div>
 
-        <button @click="setActiveStep(step.id-1)" v-for="step in steps" :key="step.id" class="flex justify-start items-start h-full w-full mx-4">
-          <div v-if="step.status === 'Complete'" class="flex flex-col w-full p-4 border-t-4 border-green-500">
+        <button @click="setActiveStep(step.id-1)" v-for="step in steps" :key="step.id" class="flex justify-start items-start h-full w-full mx-4 lg:my-0 my-1">
+          <div v-if="step.status === 'Complete'" class="flex flex-col w-full p-4 lg:border-t-4 border-l-2 lg:border-l-0  border-green-500">
             <div class="inline-flex justify-between w-full items-center text-green-500">
-              <p class="text-sm">{{ step.status }}</p>
+              <p class="text-sm font-medium uppercase text-green-500">Abgeschlossen</p>
               <Check strokeWidth="2" class="" />
             </div>
             <div class="text-left">
@@ -29,18 +29,19 @@
               <p class="text-md text-gray-700">{{ step.subtitle }}</p>
             </div>
           </div>
-          <div v-else-if="step.status === 'Current'" class="flex flex-col w-full p-4 border-t-4 border-blue-500">
+          <div v-else-if="step.status === 'Current'" class="flex flex-col w-full p-4 lg:border-t-4 border-l-2 lg:border-l-0 border-blue-500">
             <div class="inline-flex justify-between w-full items-center text-blue-500">
-              <p class="text-sm">{{ step.status }}</p>
+              <p class="text-sm font-medium uppercase text-blue-500">in Bearbeitung</p>
             </div>
             <div class="text-left">
               <p class="font-medium text-lg">{{ step.id }} {{ step.title }}</p>
               <p class="text-md text-gray-700">{{ step.subtitle }}</p>
             </div>
           </div>
-          <div v-else class="flex flex-col w-full p-4 border-t-4 border-gray-400">
+          <div v-else class="flex flex-col w-full p-4 lg:border-t-4 border-l-2 lg:border-l-0 border-gray-400">
             <div class="inline-flex justify-between w-full items-center text-gray-800">
-              <p class="text-sm">{{ step.status }}</p>
+              <p class="text-sm font-medium uppercase text-gray-400">Schritt {{ step.id }}</p>
+              <!--<p class="text-sm">{{ step.status }}</p>-->
             </div>
             <div class="text-left">
               <p class="font-medium text-lg">{{ step.id }} {{ step.title }}</p>
@@ -49,7 +50,7 @@
           </div>
         </button>
 
-        <div class="h-full flex justify-center items-center p-2">
+        <div class="h-full flex justify-center items-center p-2 hidden">
           <button v-if="currentStep === steps.length-1" class="">
             <Send  strokeWidth="2" class="text-primary" />
           </button>
@@ -66,12 +67,12 @@
         </div>
       </div>
 
-      <div class="w-full">
-        <div class="flex justify-center items-center">
+      <div class="w-full mt-2 border-t">
+        <div class="flex justify-center items-center mt-2">
           <div v-motion-slide-bottom :duration="1000" :key="currentStep" class="w-full">
             <template v-if="currentStep === 0">
-              <div class="">
-                <HotelContact class="lg:w-1/2 lg:mx-auto mx-4" />
+              <div class="mx-4">
+                <HotelContact class="" />
               </div>
             </template>
 
@@ -110,7 +111,7 @@
 
       </div>
     </div>
-  </section>
+  </Card>
 
 </template>
 
@@ -124,9 +125,11 @@ import EnergyConsumption from "@/components/calculation/form/EnergyConsumption.v
 import RenewableEnergy from "@/components/calculation/form/RenewableEnergy.vue";
 import ConfigurationQuestionsAccordion from "@/components/calculation/form/ConfigurationQuestionsAccordion.vue";
 import EnergyConsumptionNew from "@/components/calculation/form/EnergyConsumptionNew.vue";
+import Card from "@/components/ui/card/Card.vue";
 export default {
   name: "CalculationFormNew",
   components: {
+    Card,
     EnergyConsumptionNew,
     ConfigurationQuestionsAccordion,
     RenewableEnergy,
