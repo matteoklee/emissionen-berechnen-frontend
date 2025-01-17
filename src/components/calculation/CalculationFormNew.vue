@@ -2,46 +2,47 @@
   <section
       class="min-h-screen flex flex-col items-center max-w-screen-xl mx-auto text-black"
   >
-    <div class="bg-white w-full">
-      <div class="flex lg:m-0 mx-6 lg:justify-end items-center lg:my-2">
+    <div class="bg-white w-full mt-4">
+      <!-- hidden -->
+      <div class="flex lg:m-0 mx-6 lg:justify-end items-center lg:my-2 hidden">
         <button class="inline-flex justify-center items-center text-red-600 group">
           <X strokeWidth="2" :size="24" class="" />
           <p class="group-hover:underline">Eingaben zurücksetzen</p>
         </button>
       </div>
 
-      <div class="flex lg:flex-row border h-full flex-col items-center lg:divide-y-0 divide-y lg:h-[120px] lg:m-4 xl:m-0 mx-6 my-2 lg:divide-x">
+      <div class="flex lg:flex-row h-full flex-col items-center lg:divide-y-0 divide-y lg:m-4 xl:m-0 mx-6 my-2"> <!-- lg:h-[120px] -->
         <div class="h-full flex justify-center items-center p-2">
           <button :disabled="currentStep <= 0" class="" @click="prevStep()">
             <ChevronLeft strokeWidth="2" :size="28" />
           </button>
         </div>
 
-        <button @click="setActiveStep(step.id-1)" v-for="step in steps" :key="step.id" class="flex justify-center items-center h-full w-full">
-          <div v-if="step.status === 'Complete'" class="flex flex-col w-full space-y-4 p-4">
+        <button @click="setActiveStep(step.id-1)" v-for="step in steps" :key="step.id" class="flex justify-start items-start h-full w-full mx-4">
+          <div v-if="step.status === 'Complete'" class="flex flex-col w-full p-4 border-t-4 border-green-500">
             <div class="inline-flex justify-between w-full items-center text-green-500">
               <p class="text-sm">{{ step.status }}</p>
               <Check strokeWidth="2" class="" />
             </div>
-            <div class="">
+            <div class="text-left">
               <p class="font-medium text-lg">{{ step.id }} {{ step.title }}</p>
               <p class="text-md text-gray-700">{{ step.subtitle }}</p>
             </div>
           </div>
-          <div v-else-if="step.status === 'Current'" class="flex flex-col space-y-4 w-full p-4 border-b-4 z-10 border-blue-500">
+          <div v-else-if="step.status === 'Current'" class="flex flex-col w-full p-4 border-t-4 border-blue-500">
             <div class="inline-flex justify-between w-full items-center text-blue-500">
               <p class="text-sm">{{ step.status }}</p>
             </div>
-            <div class="">
+            <div class="text-left">
               <p class="font-medium text-lg">{{ step.id }} {{ step.title }}</p>
               <p class="text-md text-gray-700">{{ step.subtitle }}</p>
             </div>
           </div>
-          <div v-else class="flex flex-col space-y-4 w-full p-4">
+          <div v-else class="flex flex-col w-full p-4 border-t-4 border-gray-400">
             <div class="inline-flex justify-between w-full items-center text-gray-800">
               <p class="text-sm">{{ step.status }}</p>
             </div>
-            <div class="">
+            <div class="text-left">
               <p class="font-medium text-lg">{{ step.id }} {{ step.title }}</p>
               <p class="text-md text-gray-700">{{ step.subtitle }}</p>
             </div>
@@ -58,7 +59,7 @@
         </div>
       </div>
 
-      <div class="my-12 flex flex-col lg:flex-row justify-between lg:items-center lg:w-full lg:mx-0 mx-6">
+      <div class="my-4 flex justify-between max-w-screen-lg mx-auto hidden">
         <h1 class="text-3xl font-medium">{{ this.steps[this.currentStep].id }}. {{ this.steps[this.currentStep].title }}</h1>
         <div class="">
           <Button variant="outline" class="bg-black text-white text-md p-5 lg:m-0 mt-4">Speichern & Beenden</Button>
