@@ -1,6 +1,6 @@
 <template>
   <section
-    class="xl:min-h-screen min-h-[50vh] flex flex-col justify-center items-center max-w-screen-xl mx-auto text-black xl:my-0 my-12"
+    class="xl:min-h-screen min-h-[50vh] flex flex-col justify-center items-center max-w-screen-xl mx-auto text-black my-6"
   >
     <div class="bg-white w-full mx-0">
       <div class="flex flex-col justify-center items-center">
@@ -60,7 +60,7 @@
         </div>
       </div>
     </div>
-    <div id="companies" class="mt-12" v-motion-slide-bottom :duration="1000" :delay="1700">
+    <div id="companies" class="mt-2" v-motion-slide-bottom :duration="1000" :delay="1700">
       <CompanySection></CompanySection>
     </div>
   </section>

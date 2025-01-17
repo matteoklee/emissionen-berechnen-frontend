@@ -77,25 +77,25 @@
             </template>
 
             <template v-if="currentStep === 1">
-              <div class="">
-                <HotelDetails class="lg:w-1/2 lg:mx-auto mx-4" />
+              <div class="mx-4">
+                <HotelDetails class="" />
               </div>
             </template>
 
             <template v-if="currentStep === 2">
-              <div class="">
-                <ConfigurationQuestionsAccordion class="px-4 lg:px-0" />
+              <div class="mx-4">
+                <ConfigurationQuestionsAccordion class="" />
               </div>
             </template>
 
             <template v-if="currentStep === 3">
-              <div class="">
-                <EnergyConsumptionNew class="px-4 lg:px-0" />
+              <div class="mx-4">
+                <EnergyConsumptionNew class="" />
               </div>
             </template>
 
             <template v-if="currentStep === 4">
-              <div class="">
+              <div class="mx-4">
                 <RenewableEnergy></RenewableEnergy>
               </div>
             </template>

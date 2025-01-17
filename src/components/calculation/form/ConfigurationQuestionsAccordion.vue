@@ -1,9 +1,8 @@
 <template>
   <div class="w-full">
-    <div class="border border-blue-500 rounded-lg p-8">
-      <p>ConfigurationQuestionsAccordion</p>
+    <div class="p-8">
 
-      <Accordion type="single" class="my-6 w-full" collapsible :default-value="defaultValue" v-model="currentOpenItem">
+      <Accordion type="single" class="w-full" collapsible :default-value="defaultValue" v-model="currentOpenItem">
         <AccordionItem
             v-for="(item) in accordionItems"
             :key="item.value"

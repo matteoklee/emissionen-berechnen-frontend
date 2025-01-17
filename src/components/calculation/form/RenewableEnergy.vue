@@ -1,73 +1,76 @@
 <template>
-  <div class="w-full">
+  <div class="w-full p-8">
     <div class="flex justify-end mb-4">
       <Button
           class="px-4 py-2 bg-primary"
           @click="addRow"
       >
-        Add Row
+        Reihe hinzufügen
       </Button>
     </div>
-    <Table class="w-full overflow-x-scroll border">
-      <TableCaption>Table of your renewable energy.</TableCaption>
-      <TableHeader class="w-full">
-        <TableRow class="w-full">
-          <TableHead>Beschreibung</TableHead>
-          <TableHead class="text-center">Kilowattstunden</TableHead>
-          <TableHead class="text-center">Kommentar</TableHead>
-          <TableHead class="text-right text-xs">Aktionen</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        <TableRow v-for="(row, index) in rows" :key="index">
-          <TableCell class="text-center hidden">
-            <Select v-model="row.unit" class="w-full border rounded px-2 py-1">
-              <SelectTrigger>
-                <SelectValue placeholder="Wähle eine Einheit" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Einheit</SelectLabel>
-                  <SelectItem  v-for="unit in units" :key="unit" :value="unit">
-                    {{ unit }}
-                  </SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </TableCell>
-          <TableCell class="text-center w-2/5">
-            <Input
-                type="text"
-                v-model="row.energyTypeDescription"
-                class="w-full border rounded px-2 py-1 text-center"
-            />
-          </TableCell>
-          <TableCell class="text-center">
-            <Input
-                type="number"
-                v-model.number="row.kwh"
-                class="w-full border rounded px-2 py-1 text-center"
-            />
-          </TableCell>
-          <TableCell class="text-center w-2/5">
-            <Input
-                type="text"
-                v-model="row.comment"
-                class="w-full border rounded px-2 py-1 text-center"
-            />
-          </TableCell>
-          <TableCell class="text-right">
-            <Button
-                variant="outlined"
-                class="text-red-500 inline-flex"
-                @click="deleteRow(index)"
-            >
-              <CircleX :size="24" class="hover:scale-105" />
-            </Button>
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+    <div class="border rounded-lg">
+      <Table class="w-full overflow-x-scroll">
+        <TableCaption class="hidden">Table of your renewable energy.</TableCaption>
+        <TableHeader class="w-full">
+          <TableRow class="w-full">
+            <TableHead>Beschreibung</TableHead>
+            <TableHead class="text-center">Kilowattstunden</TableHead>
+            <TableHead class="text-center">Kommentar</TableHead>
+            <TableHead class="text-right text-xs">Aktionen</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow v-for="(row, index) in rows" :key="index">
+            <TableCell class="text-center hidden">
+              <Select v-model="row.unit" class="w-full border rounded px-2 py-1">
+                <SelectTrigger>
+                  <SelectValue placeholder="Wähle eine Einheit" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Einheit</SelectLabel>
+                    <SelectItem  v-for="unit in units" :key="unit" :value="unit">
+                      {{ unit }}
+                    </SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </TableCell>
+            <TableCell class="text-center w-2/5">
+              <Input
+                  type="text"
+                  v-model="row.energyTypeDescription"
+                  class="w-full border rounded px-2 py-1 text-center"
+              />
+            </TableCell>
+            <TableCell class="text-center">
+              <Input
+                  type="number"
+                  v-model.number="row.kwh"
+                  class="w-full border rounded px-2 py-1 text-center"
+              />
+            </TableCell>
+            <TableCell class="text-center w-2/5">
+              <Input
+                  type="text"
+                  v-model="row.comment"
+                  class="w-full border rounded px-2 py-1 text-center"
+              />
+            </TableCell>
+            <TableCell class="text-right">
+              <Button
+                  variant="outlined"
+                  class="text-red-500 inline-flex"
+                  @click="deleteRow(index)"
+              >
+                <CircleX :size="24" class="hover:scale-105" />
+              </Button>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </div>
+
   </div>
 </template>
 
