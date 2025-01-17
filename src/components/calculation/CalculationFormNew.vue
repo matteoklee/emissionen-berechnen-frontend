@@ -2,7 +2,7 @@
   <Card
       class="min-h-screen flex flex-col items-center max-w-screen-xl mx-auto text-black bg-white my-4"
   >
-    <div class="w-full mt-4">
+    <div class="w-full min-h-screen mt-6">
       <!-- hidden -->
       <div class="flex lg:m-0 mx-6 lg:justify-end items-center lg:my-2 hidden">
         <button class="inline-flex justify-center items-center text-red-600 group">
@@ -12,11 +12,7 @@
       </div>
 
       <div class="flex lg:flex-row h-full flex-col items-center lg:m-4 xl:m-0 mx-6 my-2"> <!-- lg:h-[120px] -->
-        <div class="h-full flex justify-center items-center p-2 hidden">
-          <button :disabled="currentStep <= 0" class="" @click="prevStep()">
-            <ChevronLeft strokeWidth="2" :size="28" />
-          </button>
-        </div>
+
 
         <button @click="setActiveStep(step.id-1)" v-for="step in steps" :key="step.id" class="flex justify-start items-start h-full w-full mx-4 lg:my-0 my-1">
           <div v-if="step.status === 'Complete'" class="flex flex-col w-full p-4 lg:border-t-4 border-l-2 lg:border-l-0  border-green-500">
@@ -50,14 +46,7 @@
           </div>
         </button>
 
-        <div class="h-full flex justify-center items-center p-2 hidden">
-          <button v-if="currentStep === steps.length-1" class="">
-            <Send  strokeWidth="2" class="text-primary" />
-          </button>
-          <button v-else :disabled="currentStep >= steps.length" class="" @click="nextStep()">
-            <ChevronRight strokeWidth="2" :size="28" />
-          </button>
-        </div>
+
       </div>
 
       <div class="my-4 flex justify-between max-w-screen-lg mx-auto hidden">
@@ -109,6 +98,25 @@
           </div>
         </div>
 
+      </div>
+    </div>
+
+    <div class="w-full mt-auto border-t">
+      <div class="flex justify-between items-center p-2">
+        <div class="flex justify-center items-center p-2">
+          <button :disabled="currentStep <= 0" class="" @click="prevStep()">
+            <ChevronLeft strokeWidth="2" :size="28" />
+            <p></p>
+          </button>
+        </div>
+        <div class="h-full flex justify-center items-center p-2">
+          <button v-if="currentStep === steps.length-1" class="">
+            <Send  strokeWidth="2" class="text-primary" />
+          </button>
+          <button v-else :disabled="currentStep >= steps.length" class="" @click="nextStep()">
+            <ChevronRight strokeWidth="2" :size="28" />
+          </button>
+        </div>
       </div>
     </div>
   </Card>
