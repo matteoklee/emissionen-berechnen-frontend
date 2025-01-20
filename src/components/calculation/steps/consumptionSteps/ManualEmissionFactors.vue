@@ -80,10 +80,12 @@ import SelectLabel from "@/components/ui/select/SelectLabel.vue";
 import SelectItem from "@/components/ui/select/SelectItem.vue";
 import {useFootprintStore} from "@/stores/footprintStore.js";
 import {Trash2} from "lucide-vue-next";
+import Table from "@/components/ui/table/Table.vue";
 
 export default {
   name: "ManualEmissionFactors",
   components: {
+    Table,
     SelectItem,
     SelectLabel,
     SelectGroup,

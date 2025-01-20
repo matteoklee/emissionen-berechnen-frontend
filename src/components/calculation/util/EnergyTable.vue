@@ -1,6 +1,5 @@
 <template>
   <div class="max-w-screen-lg">
-    <h3 class="font-medium mb-4 text-lg">{{ title }}</h3>
     <div class="border rounded-lg">
       <Table class="w-full overflow-x-scroll">
         <TableCaption class="hidden">{{ caption }}</TableCaption>
@@ -72,7 +71,7 @@
         </TableBody>
       </Table>
     </div>
-    <div class="flex justify-end mb-4">
+    <div class="flex justify-end">
       <Button class="px-4 py-2 mt-4 bg-black text-white" size="lg" variant="outline" @click="$emit('add-row')">
         {{ addRowLabel }}
       </Button>
@@ -111,10 +110,6 @@ export default {
     SelectValue,
     SelectTrigger, Select, TableCell, TableBody, TableHead, TableRow, TableHeader, Table, TableCaption},
   props: {
-    title: {
-      type: String,
-      required: true,
-    },
     privateSpace: {
       type: Boolean,
       required: true,

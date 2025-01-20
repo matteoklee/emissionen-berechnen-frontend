@@ -58,27 +58,13 @@ export default {
       energyConsumptions: this.footprintStore.formData.energyConsumptions,
 
       energyTypes: [
-        "Purchased Electricity (Grid)",
-        "Natural Gas",
-        "Solar Energy",
-        "Wind Energy",
-        "Hydropower"
+        "PURCHASED_ENERGY_GRID",
+        "DIESEL_STATIONARY",
+        "PURCHASED_STEAM",
+        "NATURAL_GAS",
+        "PURCHASED_ELECTRICITY_PPA"
       ],
-      units: ["kWh", "m³", "GJ", "liters"],
-      rows: [
-        {
-          type: "Purchased Electricity (Grid)", // Energy Type
-          unit: "kWh",                                // Unit
-          totalConsumption: 1000,                     // Total Consumption
-          actualPrivateSpaceConsumption: 200,                    // Private Space Consumption - Actual
-        },
-        {
-          type: "Natural Gas",                  // Energy Type
-          unit: "m³",                                 // Unit
-          totalConsumption: 500,                      // Total Consumption
-          actualPrivateSpaceConsumption: 100,                    // Private Space Consumption - Actual
-        }
-      ]
+      units: ["KILOWATT_HOURS", "CUBIC_METERS", "GIGAJOULES", "LITERS"],
     };
   },
   methods: {

@@ -20,12 +20,12 @@ export const useFootprintStore = defineStore('footprintStore', {
                 },
             },
             configuration: {
-                hasOutsourcedLaundry: null,
-                hasPrivateSpace: null,
-                knowsPrivateSpaceEnergyConsumption: null,
+                hasOutsourcedLaundry: false,
+                hasPrivateSpace: false,
+                knowsPrivateSpaceEnergyConsumption: false,
                 includeVehicles: null,
                 includeLeakedRefridgerants: null,
-                usesCommonRefridgerants: null,
+                usesCommonRefridgerants: false,
             },
             hotelDetails: {
                 guestRoomArea: 0,
