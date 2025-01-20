@@ -19,7 +19,7 @@
       </div>
       <div v-if="includeVehicles === 'MANUAL'">
         <EnergyTable
-            :rows="rows"
+            :rows="energyConsumptions"
             :energyTypes="energyTypes"
             :units="units"
             @add-row="addRow"
@@ -61,6 +61,8 @@ export default {
   data() {
     return {
       includeVehicles: this.footprintStore.formData.configuration.includeVehicles,
+      energyConsumptions: this.footprintStore.formData.energyConsumptions,
+
       items: [
         { label: 'Ja (manuell)', value: 'MANUAL' },
         { label: 'Ja (Standardwert)', value: 'DEFAULT' },
@@ -74,20 +76,6 @@ export default {
         "Hydropower"
       ],
       units: ["kWh", "m³", "GJ", "liters"],
-      rows: [
-        {
-          energyType: "Purchased Electricity (Grid)", // Energy Type
-          unit: "kWh",                                // Unit
-          totalConsumption: 99,                     // Total Consumption
-          privateSpaceActual: 200,                    // Private Space Consumption - Actual
-        },
-        {
-          energyType: "Natural Gas",                  // Energy Type
-          unit: "m³",                                 // Unit
-          totalConsumption: 88,                      // Total Consumption
-          privateSpaceActual: 100,                    // Private Space Consumption - Actual
-        }
-      ]
     }
   },
   methods: {
@@ -96,15 +84,15 @@ export default {
       this.footprintStore.formData.configuration.includeVehicles = value;
     },
     addRow() {
-      this.rows.push({
-        energyType: "",
+      this.footprintStore.formData.energyConsumptions.push({
+        type: "",
         unit: "",
         totalConsumption: 0,
-        privateSpaceActual: 0,
+        actualPrivateSpaceConsumption: 0,
       });
     },
     deleteRow(index) {
-      this.rows.splice(index, 1);
+      this.footprintStore.formData.energyConsumptions.splice(index, 1);
     }
   }
 }

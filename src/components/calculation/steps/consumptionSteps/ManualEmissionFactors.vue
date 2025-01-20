@@ -12,9 +12,9 @@
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow v-for="(row, index) in rows" :key="index">
+            <TableRow v-for="(row, index) in manualEmissionFactors" :key="index">
               <TableCell class="text-left w-1/2">
-                <Select v-model="row.energyType" class="w-full border rounded px-2 py-1">
+                <Select v-model="row.type" class="w-full border rounded px-2 py-1">
                   <SelectTrigger>
                     <SelectValue placeholder="Wähle einen Energieträger" />
                   </SelectTrigger>
@@ -41,7 +41,7 @@
                     class="text-red-500 inline-flex"
                     @click="deleteRow(index)"
                 >
-                  <CircleX :size="24" class="hover:scale-105" />
+                  <Trash2 :size="24" class="hover:scale-105" />
                 </Button>
               </TableCell>
             </TableRow>
@@ -78,6 +78,8 @@ import SelectContent from "@/components/ui/select/SelectContent.vue";
 import SelectGroup from "@/components/ui/select/SelectGroup.vue";
 import SelectLabel from "@/components/ui/select/SelectLabel.vue";
 import SelectItem from "@/components/ui/select/SelectItem.vue";
+import {useFootprintStore} from "@/stores/footprintStore.js";
+import {Trash2} from "lucide-vue-next";
 
 export default {
   name: "ManualEmissionFactors",
@@ -88,9 +90,17 @@ export default {
     SelectContent,
     SelectValue,
     SelectTrigger,
-    Select, TableCell, TableBody, TableHead, Button, Input, TableRow, TableHeader, TableCaption},
+    Select, TableCell, TableBody, TableHead, Button, Input, TableRow, TableHeader, TableCaption, Trash2},
+  setup() {
+    const footprintStore = useFootprintStore();
+    return {
+      footprintStore
+    };
+  },
   data() {
     return {
+      manualEmissionFactors: this.footprintStore.formData.manualEmissionFactors,
+
       energyTypes: [
         "Purchased Electricity (Grid)",
         "Natural Gas",
@@ -98,20 +108,18 @@ export default {
         "Wind Energy",
         "Hydropower"
       ],
-      rows: [
-        {
-          energyType: "Purchased Electricity (Grid)",
-          factor: 2,
-        },
-        {
-          energyType: "Natural Gas",
-          factor: 1.25,
-        }
-      ]
     }
   },
   methods: {
-
+    addRow() {
+      this.footprintStore.formData.manualEmissionFactors.push({
+        type: "",
+        factor: 0,
+      });
+    },
+    deleteRow(index) {
+      this.footprintStore.formData.manualEmissionFactors.splice(index, 1);
+    }
   }
 }
 </script>

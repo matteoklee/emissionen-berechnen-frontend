@@ -22,7 +22,7 @@
 
       <div v-if="hasOutsourcedLaundry === true && knowsOutsourcedLaundryConsumption" class="mb-4">
         <EnergyTable
-            :rows="rows"
+            :rows="laundryEnergyConsumptions"
             :energyTypes="energyTypes"
             :units="units"
             @add-row="addRow"
@@ -74,6 +74,7 @@ export default {
       knowsOutsourcedLaundryConsumption: false,
       knowsLaundryTonnage: false,
       laundryTonnage: this.footprintStore.formData.outsourcedLaundry.laundryTonnage,
+      laundryEnergyConsumptions: this.footprintStore.formData.outsourcedLaundry.laundryEnergyConsumptions,
 
       energyTypes: [
         "Purchased Electricity (Grid)",
@@ -83,18 +84,6 @@ export default {
         "Hydropower"
       ],
       units: ["kWh", "m³", "GJ", "liters"],
-      rows: [
-        {
-          energyType: "Purchased Electricity (Grid)",
-          unit: "kWh",
-          totalConsumption: 22,
-        },
-        {
-          energyType: "Natural Gas",
-          unit: "m³",
-          totalConsumption: 22,
-        }
-      ]
     }
   },
   methods: {
@@ -106,15 +95,15 @@ export default {
     },
 
     addRow() {
-      this.rows.push({
-        energyType: "",
+      this.footprintStore.formData.outsourcedLaundry.laundryEnergyConsumptions.push({
+        type: "",
         unit: "",
         totalConsumption: 0,
-        privateSpaceActual: 0,
+        actualPrivateSpaceConsumption: 0,
       });
     },
     deleteRow(index) {
-      this.rows.splice(index, 1);
+      this.footprintStore.formData.outsourcedLaundry.laundryEnergyConsumptions.splice(index, 1);
     }
   }
 }

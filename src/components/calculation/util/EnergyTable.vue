@@ -16,7 +16,7 @@
         <TableBody>
           <TableRow v-for="(row, index) in rows" :key="index">
             <TableCell class="w-1/2">
-              <Select v-model="row.energyType" class="w-full border rounded px-2 py-1">
+              <Select v-model="row.type" class="w-full border rounded px-2 py-1">
                 <SelectTrigger>
                   <SelectValue placeholder="Wähle einen Energieträger" />
                 </SelectTrigger>
@@ -55,7 +55,7 @@
             <TableCell v-if="privateSpace" class="text-center">
               <Input
                   type="number"
-                  v-model.number="row.privateSpaceActual"
+                  v-model.number="row.actualPrivateSpaceConsumption"
                   class="w-full border rounded px-2 py-1 text-center"
               />
             </TableCell>
@@ -65,7 +65,7 @@
                   class="text-red-500 inline-flex"
                   @click="$emit('delete-row', index)"
               >
-                <CircleX :size="24" class="hover:scale-105" />
+                <Trash2 :size="24" class="hover:scale-105" />
               </Button>
             </TableCell>
           </TableRow>
@@ -97,13 +97,13 @@ import SelectLabel from "@/components/ui/select/SelectLabel.vue";
 import SelectItem from "@/components/ui/select/SelectItem.vue";
 import Input from "@/components/ui/input/Input.vue";
 import Button from "@/components/ui/button/Button.vue";
-import {CircleX} from "lucide-vue-next";
+import {Trash2} from "lucide-vue-next";
 export default {
   name: "EnergyTable",
   components: {
     Button,
     Input,
-    CircleX,
+    Trash2,
     SelectItem,
     SelectLabel,
     SelectGroup,

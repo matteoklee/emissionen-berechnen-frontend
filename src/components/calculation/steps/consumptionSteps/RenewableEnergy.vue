@@ -13,40 +13,25 @@
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow v-for="(row, index) in rows" :key="index">
-              <TableCell class="text-center hidden">
-                <Select v-model="row.unit" class="w-full border rounded px-2 py-1">
-                  <SelectTrigger>
-                    <SelectValue placeholder="Wähle eine Einheit" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Einheit</SelectLabel>
-                      <SelectItem  v-for="unit in units" :key="unit" :value="unit">
-                        {{ unit }}
-                      </SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </TableCell>
-              <TableCell class="text-center w-2/5">
+            <TableRow v-for="(row, index) in renewableEnergyPurchases" :key="index">
+              <TableCell class="text-center">
                 <Input
                     type="text"
-                    v-model="row.energyTypeDescription"
+                    v-model="row.description"
                     class="w-full border rounded px-2 py-1 text-center"
                 />
               </TableCell>
               <TableCell class="text-center">
                 <Input
                     type="number"
-                    v-model.number="row.kwh"
+                    v-model.number="row.amount"
                     class="w-full border rounded px-2 py-1 text-center"
                 />
               </TableCell>
-              <TableCell class="text-center w-2/5">
+              <TableCell class="text-center">
                 <Input
                     type="text"
-                    v-model="row.comment"
+                    v-model="row.comments"
                     class="w-full border rounded px-2 py-1 text-center"
                 />
               </TableCell>
@@ -56,7 +41,7 @@
                     class="text-red-500 inline-flex"
                     @click="deleteRow(index)"
                 >
-                  <CircleX :size="24" class="hover:scale-105" />
+                  <Trash2 :size="24" class="hover:scale-105" />
                 </Button>
               </TableCell>
             </TableRow>
@@ -94,7 +79,8 @@ import TableRow from "@/components/ui/table/TableRow.vue";
 import TableHeader from "@/components/ui/table/TableHeader.vue";
 import TableCaption from "@/components/ui/table/TableCaption.vue";
 import Table from "@/components/ui/table/Table.vue";
-import {CircleX} from "lucide-vue-next";
+import {Trash2} from "lucide-vue-next";
+import {useFootprintStore} from "@/stores/footprintStore.js";
 
 export default {
   name: "RenewableEnergy",
@@ -107,10 +93,18 @@ export default {
     SelectValue,
     SelectTrigger,
     Select,
-    Button, TableCell, TableBody, TableHead, TableRow, TableHeader, TableCaption, Table, CircleX
+    Button, TableCell, TableBody, TableHead, TableRow, TableHeader, TableCaption, Table, Trash2
+  },
+  setup() {
+    const footprintStore = useFootprintStore();
+    return {
+      footprintStore
+    };
   },
   data() {
     return {
+      renewableEnergyPurchases: this.footprintStore.formData.renewableEnergyPurchases,
+
       energyTypes: [
         "Purchased Electricity (Grid)",
         "Natural Gas",
@@ -119,30 +113,18 @@ export default {
         "Hydropower"
       ],
       units: ["kWh", "m³", "GJ", "liters"],
-      rows: [
-        {
-          energyTypeDescription: "Grüner Strom",
-          kwh: 42,
-          comment: "keine Braunkohle",
-        },
-        {
-          energyTypeDescription: "Grüner Strom2",
-          kwh: 52,
-          comment: "",
-        },
-      ]
     };
   },
   methods: {
     addRow() {
-      this.rows.push({
-        energyTypeDescription: "",
-        kwh: 0,
-        comment: "",
+      this.footprintStore.formData.renewableEnergyPurchases.push({
+        description: "",
+        amount: 0,
+        comments: "",
       });
     },
     deleteRow(index) {
-      this.rows.splice(index, 1);
+      this.footprintStore.formData.renewableEnergyPurchases.splice(index, 1);
     }
   },
 }

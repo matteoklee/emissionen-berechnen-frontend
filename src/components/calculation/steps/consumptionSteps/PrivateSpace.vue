@@ -22,7 +22,7 @@
 
       <div v-if="hasPrivateSpace === true && knowsPrivateSpaceEnergyConsumption" class="mb-4">
         <EnergyTable
-            :rows="rows"
+            :rows="energyConsumptions"
             :energyTypes="energyTypes"
             :units="units"
             @add-row="addRow"
@@ -66,6 +66,7 @@ export default {
       hasPrivateSpace: this.footprintStore.formData.configuration.hasPrivateSpace,
       knowsPrivateSpaceEnergyConsumption: this.footprintStore.formData.configuration.knowsPrivateSpaceEnergyConsumption,
       privateSpacePercentage: this.footprintStore.formData.hotelDetails.privateSpacePercentage,
+      energyConsumptions: this.footprintStore.formData.energyConsumptions,
 
       energyTypes: [
         "Purchased Electricity (Grid)",
@@ -75,20 +76,6 @@ export default {
         "Hydropower"
       ],
       units: ["kWh", "m³", "GJ", "liters"],
-      rows: [
-        {
-          energyType: "Purchased Electricity (Grid)",
-          unit: "kWh",
-          totalConsumption: 11,
-          privateSpaceActual: 200,
-        },
-        {
-          energyType: "Natural Gas",
-          unit: "m³",
-          totalConsumption: 88,
-          privateSpaceActual: 100,
-        }
-      ]
     }
   },
   methods: {
@@ -103,15 +90,15 @@ export default {
     },
 
     addRow() {
-      this.rows.push({
-        energyType: "",
+      this.footprintStore.formData.energyConsumptions.push({
+        type: "",
         unit: "",
         totalConsumption: 0,
-        privateSpaceActual: 0,
+        actualPrivateSpaceConsumption: 0,
       });
     },
     deleteRow(index) {
-      this.rows.splice(index, 1);
+      this.footprintStore.formData.energyConsumptions.splice(index, 1);
     }
   }
 }

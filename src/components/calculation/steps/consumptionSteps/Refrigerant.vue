@@ -40,16 +40,16 @@
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow v-for="(row, index) in rows" :key="index">
+              <TableRow v-for="(row, index) in refridgerants" :key="index">
                 <TableCell class="text-center">
-                  <Select v-model="row.refrigerants" class="w-full border rounded px-2 py-1">
+                  <Select v-model="row.type" class="w-full border rounded px-2 py-1">
                     <SelectTrigger>
                       <SelectValue placeholder="Wähle ein Kühlmittel" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
                         <SelectLabel>Kühlmittel</SelectLabel>
-                        <SelectItem  v-for="refrigerant in refrigerants" :key="refrigerant" :value="refrigerant">
+                        <SelectItem  v-for="refrigerant in refrigerantTypes" :key="refrigerant" :value="refrigerant">
                           {{ refrigerant }}
                         </SelectItem>
                       </SelectGroup>
@@ -69,7 +69,7 @@
                       class="text-red-500 inline-flex"
                       @click="deleteRow(index)"
                   >
-                    <CircleX :size="24" class="hover:scale-105" />
+                    <Trash2 :size="24" class="hover:scale-105" />
                   </Button>
                 </TableCell>
               </TableRow>
@@ -89,10 +89,7 @@
     </div>
   </div>
 </template>
-<!--
- "includeLeakedRefridgerants": "IGNORE",
-    "usesCommonRefridgerants": true
--->
+
 <script>
 import {useFootprintStore} from "@/stores/footprintStore.js";
 import Label from "@/components/ui/label/Label.vue";
@@ -113,6 +110,7 @@ import TableHead from "@/components/ui/table/TableHead.vue";
 import TableBody from "@/components/ui/table/TableBody.vue";
 import TableCell from "@/components/ui/table/TableCell.vue";
 import Input from "@/components/ui/input/Input.vue";
+import {Trash2} from "lucide-vue-next";
 
 export default {
   name: "Refrigerant",
@@ -126,7 +124,7 @@ export default {
     TableCaption,
     Table,
     Button,
-    Switch, SelectItem, SelectLabel, SelectGroup, SelectContent, SelectValue, SelectTrigger, Select, Label},
+    Switch, SelectItem, SelectLabel, SelectGroup, SelectContent, SelectValue, SelectTrigger, Select, Label, Trash2},
   setup() {
     const footprintStore = useFootprintStore();
     return {
@@ -137,12 +135,13 @@ export default {
     return {
       includeLeakedRefridgerants: this.footprintStore.formData.configuration.includeLeakedRefridgerants,
       usesCommonRefridgerants: this.footprintStore.formData.configuration.usesCommonRefridgerants,
+      refridgerants: this.footprintStore.formData.refridgerants,
+
       items: [
         { label: 'Ja (manuell)', value: 'MANUAL' },
         { label: 'Nein', value: 'IGNORE' }
       ],
-
-      refrigerants: ["HCFC-22/R22 (chlorodifluoromethane)", "HFC-134a/R-134A", "R-404A", "R-410A", "HFC-23", "HFC-32",
+      refrigerantTypes: ["HCFC-22/R22 (chlorodifluoromethane)", "HFC-134a/R-134A", "R-404A", "R-410A", "HFC-23", "HFC-32",
         "HFC-4",
         "HFC-125",
         "HFC-134",
@@ -179,16 +178,6 @@ export default {
         "R409A",
         "R502"
       ],
-      rows: [
-        {
-          refrigerant: "R-404A",
-          amount: 42,
-        },
-        {
-          refrigerant: "HFC-134a/R-134A",
-          amount: 90,
-        },
-      ]
     }
   },
   methods: {
@@ -200,14 +189,13 @@ export default {
     },
 
     addRow() {
-      this.rows.push({
-        energyTypeDescription: "",
-        kwh: 0,
-        comment: "",
+      this.footprintStore.formData.refridgerants.push({
+        amount: 0.0,
+        type: "",
       });
     },
     deleteRow(index) {
-      this.rows.splice(index, 1);
+      this.footprintStore.formData.refridgerants.splice(index, 1);
     }
   }
 }

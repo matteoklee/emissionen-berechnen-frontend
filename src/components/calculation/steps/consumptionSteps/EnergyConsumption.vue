@@ -2,7 +2,7 @@
   <div class="w-full">
     <div class="border rounded-lg p-8">
       <EnergyTable
-          :rows="rows"
+          :rows="energyConsumptions"
           :energyTypes="energyTypes"
           :units="units"
           @add-row="addRow"
@@ -31,6 +31,7 @@ import SelectLabel from "@/components/ui/select/SelectLabel.vue";
 import SelectItem from "@/components/ui/select/SelectItem.vue";
 import Input from "@/components/ui/input/Input.vue";
 import EnergyTable from "@/components/calculation/util/EnergyTable.vue";
+import {useFootprintStore} from "@/stores/footprintStore.js";
 
 export default {
   name: "EnergyConsumption",
@@ -46,8 +47,16 @@ export default {
     Select,
     Button, TableCell, TableBody, TableHead, TableRow, TableHeader, TableCaption, Table, CircleX
   },
+  setup() {
+    const footprintStore = useFootprintStore();
+    return {
+      footprintStore
+    };
+  },
   data() {
     return {
+      energyConsumptions: this.footprintStore.formData.energyConsumptions,
+
       energyTypes: [
         "Purchased Electricity (Grid)",
         "Natural Gas",
@@ -58,32 +67,32 @@ export default {
       units: ["kWh", "m³", "GJ", "liters"],
       rows: [
         {
-          energyType: "Purchased Electricity (Grid)", // Energy Type
+          type: "Purchased Electricity (Grid)", // Energy Type
           unit: "kWh",                                // Unit
           totalConsumption: 1000,                     // Total Consumption
-          privateSpaceActual: 200,                    // Private Space Consumption - Actual
+          actualPrivateSpaceConsumption: 200,                    // Private Space Consumption - Actual
         },
         {
-          energyType: "Natural Gas",                  // Energy Type
+          type: "Natural Gas",                  // Energy Type
           unit: "m³",                                 // Unit
           totalConsumption: 500,                      // Total Consumption
-          privateSpaceActual: 100,                    // Private Space Consumption - Actual
+          actualPrivateSpaceConsumption: 100,                    // Private Space Consumption - Actual
         }
       ]
     };
   },
   methods: {
     addRow() {
-      this.rows.push({
-        energyType: "",
+      this.footprintStore.formData.energyConsumptions.push({
+        type: "",
         unit: "",
         totalConsumption: 0,
-        privateSpaceActual: 0,
+        actualPrivateSpaceConsumption: 0,
       });
     },
     deleteRow(index) {
-      this.rows.splice(index, 1);
-    }
+      this.footprintStore.formData.energyConsumptions.splice(index, 1);
+    },
   },
 };
 </script>
