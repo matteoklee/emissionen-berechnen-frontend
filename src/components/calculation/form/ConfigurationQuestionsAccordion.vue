@@ -8,6 +8,7 @@
             :key="item.value"
             :value="item.value"
             class="border rounded-lg my-4"
+            :class="item.answered ? 'border-green-500' : ''"
         > <!-- last:border-none -->
 
           <AccordionTrigger class="w-full group">
