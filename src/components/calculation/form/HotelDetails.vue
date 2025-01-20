@@ -3,7 +3,7 @@
   <div class="w-full p-8">
     <form @submit.prevent="onSubmit">
       <div class="flex flex-col mb-2">
-        <Button type="button" variant="outlined" class="text-md py-6 border bg-black text-white">
+        <Button type="button" variant="outline" class="text-md py-6 border bg-black text-white">
           <Upload class="w-4 h-4 mr-2" />
           Hoteldetails übernehmen</Button
         >

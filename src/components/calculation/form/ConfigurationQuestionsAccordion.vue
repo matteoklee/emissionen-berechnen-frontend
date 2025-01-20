@@ -8,12 +8,12 @@
             :key="item.value"
             :value="item.value"
             class="border rounded-lg my-4"
-            :class="item.answered ? 'border-green-500' : ''"
+            :class="isAnswered(item) ? 'border-green-500' : ''"
         > <!-- last:border-none -->
 
           <AccordionTrigger class="w-full group">
             <div class="flex items-center mx-2">
-              <div v-if="item.answered" class="mx-2"> <!-- rounded-full bg-green-500 p-1 -->
+              <div v-if="isAnswered(item)" class="mx-2"> <!-- rounded-full bg-green-500 p-1 -->
                 <Check strokeWidth="2" class="text-white hidden" :size="12" />
                 <CircleCheckBig strokeWidth="3" class="text-green-500" :size="20"/>
               </div>
@@ -29,8 +29,9 @@
             <div class="flex justify-between items-center ml-auto">
               <div class="flex items-center space-x-4 ">
                 <div class="flex items-center space-x-2">
-                  <Badge v-if="item.answered" for="answered" class="">Beantwortet</Badge>
-                  <Badge variant="outlined" v-else for="answered" class="">Offen</Badge>
+                  <Badge :variant="isAnswered(item) ? '' : 'outlined'">
+                    {{ isAnswered(item) ? 'Beantwortet' : 'Offen' }}
+                  </Badge>
                   <Switch class="hidden" id="answered" disabled v-model:checked="item.answered" />
                 </div>
                 <div class="hidden">
@@ -51,15 +52,15 @@
               </div>
               <div v-if="item.type === 'switch'" class="flex justify-end items-center mt-2">
                 <Label for="submit" class=""></Label>
-                <Switch id="submit" v-model:checked="answers[item.answerKey]" @update:checked="answerQuestion(item, $event)" class="data-[state=checked]:bg-black" />
+                <Switch id="submit" v-model:checked="storedAnswers[item.answerKey]" @update:checked="updateAnswer(item, $event)" class="data-[state=checked]:bg-black" />
               </div>
             </div>
             <div v-if="item.type === 'input'" class="flex items-center mt-2">
-              <Input id="input" type="number" placeholder="5" v-model="answers[item.answerKey]" @update:model-value="answerQuestion(item, $event)" class="mr-2" />
+              <Input id="input" type="number" placeholder="5" v-model="storedAnswers[item.answerKey]" @update:model-value="updateAnswer(item, $event)" class="mr-2" /> <!-- @update:model-value="answerQuestion(item, $event)" -->
               <Label for="input" class="">{{item.typeUnit}}</Label>
             </div>
             <div v-else-if="item.type === 'select'" class="flex items-center mt-2">
-              <Select id="select" class="" @update:model-value="answerQuestion(item, $event)" v-model="answers[item.answerKey]">
+              <Select id="select" class="" @update:model-value="updateAnswer(item, $event)" v-model="storedAnswers[item.answerKey]">
                 <SelectTrigger>
                   <SelectValue placeholder="Wähle eine Option" />
                 </SelectTrigger>
@@ -77,8 +78,18 @@
         </AccordionItem>
       </Accordion>
 
-      <div class="mt-2 hidden">
-        <div v-for="(answer, index) in answers" :key="answer">
+      <div class="">
+        <Button variant="outline" class="w-full bg-black text-white text-md py-5 px-6" @click="resetAnswers()">Eingaben zurücksetzen</Button>
+      </div>
+
+      <div class="mt-4">
+        <div v-for="(answer, index) in storedAnswers" :key="answer">
+          <p>{{index}}: {{answer}}</p>
+        </div>
+      </div>
+
+      <div class="mt-2">
+        <div v-for="(answer, index) in footprintStore.formData.configuration" :key="answer">
           <p>{{index}}: {{answer}}</p>
         </div>
       </div>
@@ -105,6 +116,8 @@ import Switch from "@/components/ui/switch/Switch.vue";
 import Label from "@/components/ui/label/Label.vue";
 import Badge from "@/components/ui/badge/Badge.vue";
 import Input from "@/components/ui/input/Input.vue";
+import {useFootprintStore} from "@/stores/footprintStore.js";
+
 export default {
   name: "ConfigurationQuestionsAccordion",
   components: {
@@ -119,21 +132,20 @@ export default {
     SelectGroup,
     SelectContent, SelectValue, SelectTrigger, Select, AccordionTrigger, AccordionItem, Accordion,
     CircleHelp, Check, Trash2, CircleCheckBig, Circle},
+  setup() {
+    const footprintStore = useFootprintStore();
+    return {
+        footprintStore
+    };
+  },
   data() {
     return {
       defaultValue: 'item-1',
       //defaultValue: '',
       currentOpenItem: 'item-1',
       //currentOpenItem: '',
-      answers: {
-        hasOutsourcedLaundry: false,
-        hasPrivateSpace: false,
-        knowsPrivateSpaceEnergy: false,
-        privateSpaceAreaPercentage: 0,
-        includeVehicles: 'Default',
-        includeLeakedRefrigerants: 'Default',
-        usesCommonRefrigerants: false,
-      },
+
+      storedAnswers: this.footprintStore.formData.configuration,
       accordionItems: [
         {
           value: 'item-1',
@@ -160,7 +172,7 @@ export default {
           content: 'Separate Messung des Energieverbrauchs',
           type: 'switch',
           answered: false,
-          answerKey: 'knowsPrivateSpaceEnergy',
+          answerKey: 'knowsPrivateSpaceEnergyConsumption',
         },
         {
           value: 'item-4',
@@ -184,15 +196,29 @@ export default {
     }
   },
   methods: {
+    isAnswered(item) {
+      const answer = this.storedAnswers[item.answerKey];
+      return answer !== undefined && answer !== null && answer !== '' && item.answered;
+    },
+    updateAnswer(item, value) {
+      this.storedAnswers[item.answerKey] = value;
+      item.answered = true;
+    },
+    validateInput(item) {
+      const value = this.storedAnswers[item.answerKey];
+      if (isNaN(value) || value <= 0) {
+        this.footprintStore.updateAnswer(item.answerKey, null);
+      }
+    },
+    resetAnswers() {
+      this.storedAnswers = {};
+      this.footprintStore.formData.configuration = {};
+    },
+
     deleteAnswer(item) {
       item.answered = false;
     },
-    answerQuestion(item, value) {
-      this.answers[item.answerKey] = value;
-      item.answered = Boolean(value);
-      console.log(item.answered)
-      console.log(value)
-
+    nextQuestion(item) {
       const currentIndex = this.accordionItems.findIndex(
           (accordionItem) => accordionItem.value === item.value
       );
@@ -206,16 +232,6 @@ export default {
         this.currentOpenItem = "item-1";
         //this.currentOpenItem = '';
       }
-    },
-    moveDown(index) {
-      const temp = this.accordionItems[index];
-      this.accordionItems.splice(index, 1);
-      this.accordionItems.splice(index + 1, 0, temp);
-    },
-    moveUp(index) {
-      const temp = this.accordionItems[index];
-      this.accordionItems.splice(index, 1);
-      this.accordionItems.splice(index - 1, 0, temp);
     },
   },
 }
