@@ -152,7 +152,7 @@
                 <template v-if="currentStep === 5">
                   <div class="">
                     <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
-                    <Laundry></Laundry>
+                    <OutsourcedLaundry></OutsourcedLaundry>
                   </div>
                 </template>
                 <template v-if="currentStep === 6">
@@ -211,7 +211,7 @@ import RenewableEnergy from "@/components/calculation/steps/consumptionSteps/Ren
 import EnergyConsumption from "@/components/calculation/steps/consumptionSteps/EnergyConsumption.vue";
 import VehiclesAndEquipment from "@/components/calculation/steps/consumptionSteps/VehiclesAndEquipment.vue";
 import PrivateSpace from "@/components/calculation/steps/consumptionSteps/PrivateSpace.vue";
-import Laundry from "@/components/calculation/steps/consumptionSteps/Laundry.vue";
+import OutsourcedLaundry from "@/components/calculation/steps/consumptionSteps/OutsourcedLaundry.vue";
 import Refrigerant from "@/components/calculation/steps/consumptionSteps/Refrigerant.vue";
 import ManualEmissionFactors from "@/components/calculation/steps/consumptionSteps/ManualEmissionFactors.vue";
 
@@ -220,7 +220,7 @@ export default {
   components: {
     ManualEmissionFactors,
     Refrigerant,
-    Laundry,
+    OutsourcedLaundry,
     PrivateSpace,
     VehiclesAndEquipment,
     EnergyConsumption,
