@@ -1,11 +1,6 @@
 <template>
   <div class="max-w-screen-lg">
     <h3 class="font-medium mb-4 text-lg">{{ title }}</h3>
-    <div class="flex justify-end mb-4">
-      <Button class="px-4 py-2 bg-primary" @click="$emit('add-row')">
-        {{ addRowLabel }}
-      </Button>
-    </div>
     <div class="border rounded-lg">
       <Table class="w-full overflow-x-scroll">
         <TableCaption class="hidden">{{ caption }}</TableCaption>
@@ -14,7 +9,7 @@
             <TableHead>Energieträger</TableHead>
             <TableHead class="text-center">Einheit</TableHead>
             <TableHead class="text-center">Verbrauch</TableHead>
-            <TableHead class="text-center">Davon aus privaten Räumlichkeiten</TableHead>
+            <TableHead v-if="privateSpace" class="text-center">aus privaten Räumlichkeiten</TableHead>
             <TableHead class="text-right text-xs">Aktionen</TableHead>
           </TableRow>
         </TableHeader>
@@ -57,7 +52,7 @@
                   class="w-full border rounded px-2 py-1 text-center"
               />
             </TableCell>
-            <TableCell class="text-center">
+            <TableCell v-if="privateSpace" class="text-center">
               <Input
                   type="number"
                   v-model.number="row.privateSpaceActual"
@@ -76,6 +71,11 @@
           </TableRow>
         </TableBody>
       </Table>
+    </div>
+    <div class="flex justify-end mb-4">
+      <Button class="px-4 py-2 mt-4 bg-black text-white" size="lg" variant="outline" @click="$emit('add-row')">
+        {{ addRowLabel }}
+      </Button>
     </div>
   </div>
 </template>
@@ -113,6 +113,10 @@ export default {
   props: {
     title: {
       type: String,
+      required: true,
+    },
+    privateSpace: {
+      type: Boolean,
       required: true,
     },
     rows: {

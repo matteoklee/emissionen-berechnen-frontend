@@ -1,7 +1,13 @@
 <template>
   <div class="w-full">
     <div class="border rounded-lg p-8">
-
+      <EnergyTable
+          :rows="rows"
+          :energyTypes="energyTypes"
+          :units="units"
+          @add-row="addRow"
+          @delete-row="deleteRow"
+      />
     </div>
   </div>
 </template>
@@ -24,10 +30,12 @@ import SelectGroup from "@/components/ui/select/SelectGroup.vue";
 import SelectLabel from "@/components/ui/select/SelectLabel.vue";
 import SelectItem from "@/components/ui/select/SelectItem.vue";
 import Input from "@/components/ui/input/Input.vue";
+import EnergyTable from "@/components/calculation/util/EnergyTable.vue";
 
 export default {
   name: "EnergyConsumption",
   components: {
+    EnergyTable,
     Input,
     SelectItem,
     SelectLabel,

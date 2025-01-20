@@ -41,8 +41,7 @@
 
           <div class="flex-grow">
             <div class="w-full mx-2">
-              <div v-motion-slide-bottom :duration="1000" :key="currentStep">
-
+              <!-- <div v-motion-slide-bottom :duration="1000" :key="currentStep"> -->
                 <template v-if="currentStep === 1">
                   <div class="max-w-screen-lg hidden">
                     <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
@@ -128,7 +127,7 @@
 
                   </div>
 
-                  <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
+                  <h3 class="font-medium mb-1 text-lg">{{steps[currentStep-1].title}}</h3>
                   <EnergyConsumption></EnergyConsumption>
                 </template>
 
@@ -168,15 +167,13 @@
                     <ManualEmissionFactors></ManualEmissionFactors>
                   </div>
                 </template>
-
-              </div>
+              <!--</div>-->
             </div>
 
           </div>
 
           <div class="flex justify-between mt-4">
             <Button variant="outline" type="button" size="lg" @click="prevStep()">Zurück</Button>
-
             <div class="">
               <Button v-if="currentStep !== steps.length" variant="outline" class="bg-black text-white" type="button" size="lg" @click="nextStep()">
                 Weiter
