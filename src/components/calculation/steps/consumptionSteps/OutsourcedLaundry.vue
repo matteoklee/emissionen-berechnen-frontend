@@ -44,7 +44,7 @@
           <p class="font-medium mb-4">Please enter your laundry tonnage.</p>
           <div class="flex items-center">
             <Input id="input" type="number" placeholder="5" v-model="laundryTonnage" @update:model-value="updateLaundryTonnage($event)" class="mr-2" /> <!-- @update:model-value="answerQuestion(item, $event)" -->
-            <Label for="input" class="">m²</Label>
+            <Label for="input" class="">t</Label>
           </div>
         </div>
       </div>

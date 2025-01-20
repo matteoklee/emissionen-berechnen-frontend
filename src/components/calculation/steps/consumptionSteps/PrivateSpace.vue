@@ -34,7 +34,7 @@
           <p class="font-medium mb-4">Are you able to provide the area of private space as a % of the total conditioned area?</p>
           <div class="flex items-center">
             <Input id="input" type="number" placeholder="5" v-model="privateSpacePercentage" @update:model-value="updatePrivateSpacePercentage($event)" class="mr-2" /> <!-- @update:model-value="answerQuestion(item, $event)" -->
-            <Label for="input" class="">m²</Label>
+            <Label for="input" class="">%</Label>
           </div>
         </div>
       </div>

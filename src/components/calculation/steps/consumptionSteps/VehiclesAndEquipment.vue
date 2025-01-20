@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <div class="border rounded-lg p-8">
-      <div class="">
+      <div class="mb-4">
         <p class="font-medium mb-4">Möchten Sie den Kraftstoffverbrauch aller Fahrzeuge und anderer Geräte (z. B. Gartengeräte) berücksichtigen?</p>
         <Select id="select" class="" v-model="includeVehicles" @update:model-value="update($event)"> <!-- @update:model-value="update(item, $event)"  -->
           <SelectTrigger>
