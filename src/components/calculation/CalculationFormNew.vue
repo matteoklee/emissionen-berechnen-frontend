@@ -76,7 +76,7 @@
 
             <template v-if="currentStep === 2">
               <div class="mx-4">
-                <EnergyConsumptionStepper class="" />
+                <EnergyConsumptionStepper @next-step="nextStep" class="" />
               </div>
             </template>
 

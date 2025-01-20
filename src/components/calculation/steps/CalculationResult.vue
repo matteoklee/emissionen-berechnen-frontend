@@ -23,6 +23,12 @@
   <div class="px-8 my-4">
     {{this.footprintStore.formData.manualEmissionFactors}}
   </div>
+  <div class="bg-green-100 p-8 text-lg mb-4">
+    {{result}}
+  </div>
+  <div class="bg-green-100 p-8 text-lg">
+    {{this.footprintStore.result}}
+  </div>
 </template>
 
 <script>
@@ -38,7 +44,7 @@ export default {
   },
   data() {
     return {
-
+      result: this.footprintStore.result,
     }
   }
 }

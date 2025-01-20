@@ -106,22 +106,8 @@
 </template>
 
 <script>
-import Table from "@/components/ui/table/Table.vue";
-import TableCaption from "@/components/ui/table/TableCaption.vue";
-import TableHeader from "@/components/ui/table/TableHeader.vue";
-import TableRow from "@/components/ui/table/TableRow.vue";
-import TableHead from "@/components/ui/table/TableHead.vue";
-import TableBody from "@/components/ui/table/TableBody.vue";
-import TableCell from "@/components/ui/table/TableCell.vue";
 import Button from "@/components/ui/button/Button.vue";
 import { CircleX, Circle, Check } from "lucide-vue-next";
-import Select from "@/components/ui/select/Select.vue";
-import SelectTrigger from "@/components/ui/select/SelectTrigger.vue";
-import SelectValue from "@/components/ui/select/SelectValue.vue";
-import SelectContent from "@/components/ui/select/SelectContent.vue";
-import SelectGroup from "@/components/ui/select/SelectGroup.vue";
-import SelectLabel from "@/components/ui/select/SelectLabel.vue";
-import SelectItem from "@/components/ui/select/SelectItem.vue";
 import Input from "@/components/ui/input/Input.vue";
 import RenewableEnergy from "@/components/calculation/steps/consumptionSteps/RenewableEnergy.vue";
 import EnergyConsumption from "@/components/calculation/steps/consumptionSteps/EnergyConsumption.vue";
@@ -131,7 +117,6 @@ import OutsourcedLaundry from "@/components/calculation/steps/consumptionSteps/O
 import Refrigerant from "@/components/calculation/steps/consumptionSteps/Refrigerant.vue";
 import ManualEmissionFactors from "@/components/calculation/steps/consumptionSteps/ManualEmissionFactors.vue";
 import {useFootprintStore} from "@/stores/footprintStore.js";
-import footprintService from "@/services/footprintService.js";
 
 export default {
   name: "EnergyConsumptionStepper",
@@ -144,14 +129,7 @@ export default {
     EnergyConsumption,
     RenewableEnergy,
     Input,
-    SelectItem,
-    SelectLabel,
-    SelectGroup,
-    SelectContent,
-    SelectValue,
-    SelectTrigger,
-    Select,
-    Button, TableCell, TableBody, TableHead, TableRow, TableHeader, TableCaption, Table, CircleX, Check, Circle
+    Button, CircleX, Check, Circle
   },
   setup() {
     const footprintStore = useFootprintStore();
@@ -159,6 +137,7 @@ export default {
       footprintStore
     };
   },
+  emits: ['nextStep'],
   data() {
     return {
       currentStep: 1,
@@ -217,8 +196,8 @@ export default {
     },
 
     async calculate() {
-      const result = await footprintService.calculateFootprint(this.footprintStore.formData);
-      console.log(result);
+      await this.footprintStore.calculateFootprint();
+      this.$emit('nextStep', true);
     }
   },
 };
