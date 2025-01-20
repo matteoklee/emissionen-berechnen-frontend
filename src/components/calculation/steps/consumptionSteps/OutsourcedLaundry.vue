@@ -9,7 +9,7 @@
           <Label for="submit" class="">Ja</Label>
         </div>
       </div>
-      <div v-if="hasOutsourcedLaundry">
+      <div v-if="hasOutsourcedLaundry === true">
         <div class="flex justify-between items-center mb-4">
           <p class="font-medium">Can you get your share of the energy consumption from your laundry contractor for the reporting year?</p>
           <div class="flex justify-end items-center">
@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <div v-if="hasOutsourcedLaundry && knowsOutsourcedLaundryConsumption" class="mb-4">
+      <div v-if="hasOutsourcedLaundry === true && knowsOutsourcedLaundryConsumption" class="mb-4">
         <EnergyTable
             :rows="rows"
             :energyTypes="energyTypes"
@@ -29,7 +29,7 @@
             @delete-row="deleteRow"
         />
       </div>
-      <div v-if="hasOutsourcedLaundry && !knowsOutsourcedLaundryConsumption">
+      <div v-if="hasOutsourcedLaundry === true && !knowsOutsourcedLaundryConsumption">
         <div class="flex justify-between items-center mb-4">
           <p class="font-medium">Do you know your laundry tonnage?</p>
           <div class="flex justify-end items-center">

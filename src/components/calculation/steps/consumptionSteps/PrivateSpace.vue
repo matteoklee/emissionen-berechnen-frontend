@@ -9,7 +9,7 @@
           <Label for="submit" class="">Ja</Label>
         </div>
       </div>
-      <div v-if="hasPrivateSpace">
+      <div v-if="hasPrivateSpace === true">
         <div class="flex justify-between items-center mb-4">
           <p class="font-medium">Are you able to provide the energy consumption of the private space?</p>
           <div class="flex justify-end items-center">
@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <div v-if="hasPrivateSpace && knowsPrivateSpaceEnergyConsumption" class="mb-4">
+      <div v-if="hasPrivateSpace === true && knowsPrivateSpaceEnergyConsumption" class="mb-4">
         <EnergyTable
             :rows="rows"
             :energyTypes="energyTypes"
@@ -29,7 +29,7 @@
             @delete-row="deleteRow"
         />
       </div>
-      <div v-if="hasPrivateSpace && !knowsPrivateSpaceEnergyConsumption">
+      <div v-if="hasPrivateSpace === true && !knowsPrivateSpaceEnergyConsumption">
         <div class="flex flex-col">
           <p class="font-medium mb-4">Are you able to provide the area of private space as a % of the total conditioned area?</p>
           <div class="flex items-center">
