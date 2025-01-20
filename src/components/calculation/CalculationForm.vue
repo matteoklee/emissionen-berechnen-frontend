@@ -158,12 +158,12 @@ import StepperTitle from '@/components/ui/stepper/StepperTitle.vue';
 import StepperDescription from '@/components/ui/stepper/StepperDescription.vue';
 import Button from '@/components/ui/button/Button.vue';
 import { Check, Circle, Dot } from 'lucide-vue-next';
-import HotelDetails from "@/components/calculation/form/HotelDetails.vue";
-import EnergyConsumption from "@/components/calculation/form/EnergyConsumption.vue";
+import HotelDetails from "@/components/calculation/steps/HotelDetails.vue";
+import EnergyConsumption from "@/components/calculation/steps/consumptionSteps/EnergyConsumption.vue";
 import MultiStepLoader from "@/components/ui/multi-step-loader/MultiStepLoader.vue";
-import HotelContact from "@/components/calculation/form/HotelContact.vue";
-import RenewableEnergy from "@/components/calculation/form/RenewableEnergy.vue";
-import ConfigurationQuestions from "@/components/calculation/form/ConfigurationQuestions.vue";
+import HotelContact from "@/components/calculation/steps/HotelContact.vue";
+import RenewableEnergy from "@/components/calculation/steps/consumptionSteps/RenewableEnergy.vue";
+import ConfigurationQuestions from "@/components/calculation/steps/ConfigurationQuestions.vue";
 import {useCalculationStore} from "@/stores/calculationStore.js";
 
 export default {

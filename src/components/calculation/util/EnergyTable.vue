@@ -1,16 +1,14 @@
 <template>
-  <div class="w-full">
-    <div class="border border-blue-500 rounded-lg p-8">
-      <div class="flex justify-end mb-4">
-        <Button
-            class="px-4 py-2 bg-primary"
-            @click="addRow"
-        >
-          Add Row
-        </Button>
-      </div>
+  <div class="max-w-screen-lg">
+    <h3 class="font-medium mb-4 text-lg">{{ title }}</h3>
+    <div class="flex justify-end mb-4">
+      <Button class="px-4 py-2 bg-primary" @click="$emit('add-row')">
+        {{ addRowLabel }}
+      </Button>
+    </div>
+    <div class="border rounded-lg">
       <Table class="w-full overflow-x-scroll">
-        <TableCaption>Table of your energy consumption.</TableCaption>
+        <TableCaption class="hidden">{{ caption }}</TableCaption>
         <TableHeader class="w-full">
           <TableRow class="w-full">
             <TableHead>Energieträger</TableHead>
@@ -45,7 +43,7 @@
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Einheit</SelectLabel>
-                    <SelectItem  v-for="unit in units" :key="unit" :value="unit">
+                    <SelectItem v-for="unit in units" :key="unit" :value="unit">
                       {{ unit }}
                     </SelectItem>
                   </SelectGroup>
@@ -70,7 +68,7 @@
               <Button
                   variant="outlined"
                   class="text-red-500 inline-flex"
-                  @click="deleteRow(index)"
+                  @click="$emit('delete-row', index)"
               >
                 <CircleX :size="24" class="hover:scale-105" />
               </Button>
@@ -79,20 +77,17 @@
         </TableBody>
       </Table>
     </div>
-
   </div>
 </template>
 
 <script>
-import Table from "@/components/ui/table/Table.vue";
 import TableCaption from "@/components/ui/table/TableCaption.vue";
+import Table from "@/components/ui/table/Table.vue";
 import TableHeader from "@/components/ui/table/TableHeader.vue";
 import TableRow from "@/components/ui/table/TableRow.vue";
 import TableHead from "@/components/ui/table/TableHead.vue";
 import TableBody from "@/components/ui/table/TableBody.vue";
 import TableCell from "@/components/ui/table/TableCell.vue";
-import Button from "@/components/ui/button/Button.vue";
-import { CircleX } from "lucide-vue-next";
 import Select from "@/components/ui/select/Select.vue";
 import SelectTrigger from "@/components/ui/select/SelectTrigger.vue";
 import SelectValue from "@/components/ui/select/SelectValue.vue";
@@ -101,61 +96,49 @@ import SelectGroup from "@/components/ui/select/SelectGroup.vue";
 import SelectLabel from "@/components/ui/select/SelectLabel.vue";
 import SelectItem from "@/components/ui/select/SelectItem.vue";
 import Input from "@/components/ui/input/Input.vue";
-
+import Button from "@/components/ui/button/Button.vue";
+import {CircleX} from "lucide-vue-next";
 export default {
-  name: "EnergyConsumption",
+  name: "EnergyTable",
   components: {
+    Button,
     Input,
+    CircleX,
     SelectItem,
     SelectLabel,
     SelectGroup,
     SelectContent,
     SelectValue,
-    SelectTrigger,
-    Select,
-    Button, TableCell, TableBody, TableHead, TableRow, TableHeader, TableCaption, Table, CircleX
-  },
-  data() {
-    return {
-      energyTypes: [
-        "Purchased Electricity (Grid)",
-        "Natural Gas",
-        "Solar Energy",
-        "Wind Energy",
-        "Hydropower"
-      ],
-      units: ["kWh", "m³", "GJ", "liters"],
-      rows: [
-        {
-          energyType: "Purchased Electricity (Grid)", // Energy Type
-          unit: "kWh",                                // Unit
-          totalConsumption: 1000,                     // Total Consumption
-          privateSpaceActual: 200,                    // Private Space Consumption - Actual
-        },
-        {
-          energyType: "Natural Gas",                  // Energy Type
-          unit: "m³",                                 // Unit
-          totalConsumption: 500,                      // Total Consumption
-          privateSpaceActual: 100,                    // Private Space Consumption - Actual
-        }
-      ]
-    };
-  },
-  methods: {
-    addRow() {
-      this.rows.push({
-        energyType: "",
-        unit: "",
-        totalConsumption: 0,
-        privateSpaceActual: 0,
-      });
+    SelectTrigger, Select, TableCell, TableBody, TableHead, TableRow, TableHeader, Table, TableCaption},
+  props: {
+    title: {
+      type: String,
+      required: true,
     },
-    deleteRow(index) {
-      this.rows.splice(index, 1);
-    }
+    rows: {
+      type: Array,
+      required: true,
+    },
+    energyTypes: {
+      type: Array,
+      required: true,
+    },
+    units: {
+      type: Array,
+      required: true,
+    },
+    caption: {
+      type: String,
+      default: "Table of your energy consumption.",
+    },
+    addRowLabel: {
+      type: String,
+      default: "Energieträger hinzufügen",
+    },
   },
-};
+}
 </script>
 
 <style scoped>
+
 </style>

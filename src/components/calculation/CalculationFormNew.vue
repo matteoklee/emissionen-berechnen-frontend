@@ -59,6 +59,9 @@
       <div class="w-full mt-2 border-t">
         <div class="flex justify-center items-center mt-2">
           <div v-motion-slide-bottom :duration="1000" :key="currentStep" class="w-full">
+            <div class="mx-12 mt-6">
+              <h1 class="text-xl font-medium">{{this.steps[this.currentStep].id}}. {{this.steps[this.currentStep].title}}</h1>
+            </div>
             <template v-if="currentStep === 0">
               <div class="mx-4">
                 <HotelContact class="" />
@@ -73,25 +76,13 @@
 
             <template v-if="currentStep === 2">
               <div class="mx-4">
-                <ConfigurationQuestionsAccordion class="" />
+                <EnergyConsumptionNew class="" />
               </div>
             </template>
 
             <template v-if="currentStep === 3">
               <div class="mx-4">
-                <EnergyConsumptionNew class="" />
-              </div>
-            </template>
-
-            <template v-if="currentStep === 4">
-              <div class="mx-4">
-                <RenewableEnergy></RenewableEnergy>
-              </div>
-            </template>
-
-            <template v-if="currentStep === 5">
-              <div class="">
-                <!-- Add input fields for refrigerants -->
+                <CalculationResult></CalculationResult>
               </div>
             </template>
 
@@ -126,17 +117,19 @@
 <script>
 import {X, Send, Check, ChevronRight, ChevronLeft} from "lucide-vue-next";
 import Button from "@/components/ui/button/Button.vue";
-import HotelDetails from "@/components/calculation/form/HotelDetails.vue";
-import HotelContact from "@/components/calculation/form/HotelContact.vue";
-import ConfigurationQuestions from "@/components/calculation/form/ConfigurationQuestions.vue";
-import EnergyConsumption from "@/components/calculation/form/EnergyConsumption.vue";
-import RenewableEnergy from "@/components/calculation/form/RenewableEnergy.vue";
-import ConfigurationQuestionsAccordion from "@/components/calculation/form/ConfigurationQuestionsAccordion.vue";
-import EnergyConsumptionNew from "@/components/calculation/form/EnergyConsumptionNew.vue";
+import HotelDetails from "@/components/calculation/steps/HotelDetails.vue";
+import HotelContact from "@/components/calculation/steps/HotelContact.vue";
+import ConfigurationQuestions from "@/components/calculation/steps/ConfigurationQuestions.vue";
+import EnergyConsumption from "@/components/calculation/steps/consumptionSteps/EnergyConsumption.vue";
+import RenewableEnergy from "@/components/calculation/steps/consumptionSteps/RenewableEnergy.vue";
+import ConfigurationQuestionsAccordion from "@/components/calculation/steps/ConfigurationQuestionsAccordion.vue";
+import EnergyConsumptionNew from "@/components/calculation/steps/EnergyConsumptionNew.vue";
 import Card from "@/components/ui/card/Card.vue";
+import CalculationResult from "@/components/calculation/steps/CalculationResult.vue";
 export default {
   name: "CalculationFormNew",
   components: {
+    CalculationResult,
     Card,
     EnergyConsumptionNew,
     ConfigurationQuestionsAccordion,
@@ -149,32 +142,26 @@ export default {
       steps: [
         {
           id: 1,
-          title: "Hotel Kontakt",
+          title: "Hotel",
           subtitle: "Kontaktinformationen",
           status: "Current",
         },
         {
           id: 2,
-          title: "Hotel Details",
+          title: "Hotelkonfiguration",
           subtitle: "Basisinformationen",
           status: "Upcoming",
         },
         {
           id: 3,
-          title: "Konfiguration",
-          subtitle: "Konfigurationsfragen",
+          title: "Energieverbrauch",
+          subtitle: "Energieverbrauch",
           status: "Upcoming",
         },
         {
           id: 4,
-          title: "Hotel Emissionen",
-          subtitle: "Hotel Emissionen",
-          status: "Upcoming",
-        },
-        {
-          id: 5,
-          title: "Manuelle EF",
-          subtitle: "Manuelle EF",
+          title: "Ergebnis",
+          subtitle: "Ergebnis",
           status: "Upcoming",
         },
       ]

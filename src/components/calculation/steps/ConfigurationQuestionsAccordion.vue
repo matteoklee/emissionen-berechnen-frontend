@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <div class="p-8">
+    <div class="px-8 py-4">
 
       <Accordion type="single" class="w-full" collapsible :default-value="defaultValue" v-model="currentOpenItem">
         <AccordionItem

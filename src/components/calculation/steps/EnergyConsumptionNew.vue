@@ -22,7 +22,7 @@
                 </div>
               </div>
 
-              <div class="flex flex-col items-start">
+              <div class="flex flex-col items-start text-left">
                 <p class="font-medium mb-1"
                    :class="{
                       'text-green-500': currentStep > step.id,
@@ -44,7 +44,7 @@
               <div v-motion-slide-bottom :duration="1000" :key="currentStep">
 
                 <template v-if="currentStep === 1">
-                  <div class="max-w-screen-lg">
+                  <div class="max-w-screen-lg hidden">
                     <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
                     <div class="flex justify-end mb-4">
                       <Button
@@ -127,22 +127,45 @@
                     </div>
 
                   </div>
+
+                  <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
+                  <EnergyConsumption></EnergyConsumption>
                 </template>
 
                 <template v-if="currentStep === 2">
                   <div class="">
                     <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
-                    <RenewableEnergy></RenewableEnergy>
+                    <VehiclesAndEquipment></VehiclesAndEquipment>
                   </div>
                 </template>
                 <template v-if="currentStep === 3">
                   <div class="">
                     <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
+                    <PrivateSpace></PrivateSpace>
                   </div>
                 </template>
                 <template v-if="currentStep === 4">
                   <div class="">
                     <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
+                    <RenewableEnergy></RenewableEnergy>
+                  </div>
+                </template>
+                <template v-if="currentStep === 5">
+                  <div class="">
+                    <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
+                    <Laundry></Laundry>
+                  </div>
+                </template>
+                <template v-if="currentStep === 6">
+                  <div class="">
+                    <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
+                    <Refrigerant></Refrigerant>
+                  </div>
+                </template>
+                <template v-if="currentStep === 7">
+                  <div class="">
+                    <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
+                    <ManualEmissionFactors></ManualEmissionFactors>
                   </div>
                 </template>
 
@@ -152,13 +175,13 @@
           </div>
 
           <div class="flex justify-between mt-4">
-            <Button variant="outline" type="button" size="sm" @click="prevStep()">Zurück</Button>
+            <Button variant="outline" type="button" size="lg" @click="prevStep()">Zurück</Button>
 
             <div class="">
-              <Button v-if="currentStep !== steps.length" variant="outline" class="bg-black text-white" type="button" size="sm" @click="nextStep()">
-                Nächster Schritt
+              <Button v-if="currentStep !== steps.length" variant="outline" class="bg-black text-white" type="button" size="lg" @click="nextStep()">
+                Weiter
               </Button>
-              <Button v-if="currentStep === steps.length" variant="outline" class="bg-black text-white" size="sm" type="submit">Bestätigen</Button>
+              <Button v-if="currentStep === steps.length" variant="outline" class="bg-black text-white" size="lg" type="submit">Bestätigen</Button>
             </div>
           </div>
         </div>
@@ -187,11 +210,23 @@ import SelectGroup from "@/components/ui/select/SelectGroup.vue";
 import SelectLabel from "@/components/ui/select/SelectLabel.vue";
 import SelectItem from "@/components/ui/select/SelectItem.vue";
 import Input from "@/components/ui/input/Input.vue";
-import RenewableEnergy from "@/components/calculation/form/RenewableEnergy.vue";
+import RenewableEnergy from "@/components/calculation/steps/consumptionSteps/RenewableEnergy.vue";
+import EnergyConsumption from "@/components/calculation/steps/consumptionSteps/EnergyConsumption.vue";
+import VehiclesAndEquipment from "@/components/calculation/steps/consumptionSteps/VehiclesAndEquipment.vue";
+import PrivateSpace from "@/components/calculation/steps/consumptionSteps/PrivateSpace.vue";
+import Laundry from "@/components/calculation/steps/consumptionSteps/Laundry.vue";
+import Refrigerant from "@/components/calculation/steps/consumptionSteps/Refrigerant.vue";
+import ManualEmissionFactors from "@/components/calculation/steps/consumptionSteps/ManualEmissionFactors.vue";
 
 export default {
   name: "EnergyConsumptionNew",
   components: {
+    ManualEmissionFactors,
+    Refrigerant,
+    Laundry,
+    PrivateSpace,
+    VehiclesAndEquipment,
+    EnergyConsumption,
     RenewableEnergy,
     Input,
     SelectItem,
@@ -232,28 +267,38 @@ export default {
       steps: [
         {
           id: 1,
-          title: 'Hotel Emissionen',
+          title: 'Energieverbrauch allgmein',
           description: 'verpflichtend'
         },
         {
           id: 2,
-          title: 'Erneuerbare Energien',
+          title: 'Fahrzeuge & Equipment',
           description: 'optional'
         },
         {
           id: 3,
-          title: 'Wäsche',
+          title: 'Private Räumlickeiten',
           description: 'optional'
         },
         {
           id: 4,
-          title: 'Kühlmittel',
+          title: 'Erneuerbare Energien',
           description: 'optional'
         },
         {
           id: 5,
-          title: 'Zusammenfassung',
-          description: ''
+          title: 'Externe Wäscherei',
+          description: 'optional'
+        },
+        {
+          id: 6,
+          title: 'Kühlmittel',
+          description: 'optional'
+        },
+        {
+          id: 7,
+          title: 'Manuelle Emissionsfaktoren',
+          description: 'optional'
         },
       ],
     };

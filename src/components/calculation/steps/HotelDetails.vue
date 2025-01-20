@@ -1,6 +1,5 @@
 <template>
-
-  <div class="w-full p-8">
+  <div class="w-full px-8 py-4">
     <form @submit.prevent="onSubmit">
       <div class="flex flex-col mb-2">
         <Button type="button" variant="outline" class="text-md py-6 border bg-black text-white">
@@ -9,7 +8,7 @@
         >
       </div>
 
-      <Separator label="oder manuell eingeben" class="my-6" />
+      <Separator label="oder manuell eingeben" class="my-6 bg-black" />
 
       <div class="flex flex-col mt-4 mb-4 w-full space-y-4">
         <div class="w-full">

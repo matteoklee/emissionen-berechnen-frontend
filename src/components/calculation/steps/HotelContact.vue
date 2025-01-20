@@ -1,5 +1,5 @@
 <template>
-  <div class="p-8 w-full">
+  <div class="px-8 py-4 w-full">
     <form @submit.prevent="onSubmit">
       <div class="flex flex-col mb-2">
         <Button type="button" variant="outline" class="text-lg py-6 border bg-black text-white">
@@ -8,11 +8,11 @@
         >
       </div>
 
-      <Separator label="oder manuell eingeben" class="my-6" />
+      <Separator label="oder manuell eingeben" class="my-6 bg-black" />
 
       <div class="border rounded-lg p-4 my-4">
         <h1 class="text-xl font-bold">Persönliche Informationen</h1>
-        <div class="flex flex-row mt-4 mb-4 w-full space-x-4 items-end">
+        <div class="flex flex-row mt-2 mb-4 w-full space-x-4 items-end">
           <div class="w-1/2">
             <Label for="name" class="font-medium">Name</Label>
             <Input
@@ -48,7 +48,7 @@
 
       <div class="border rounded-lg p-4 my-4">
         <h1 class="text-xl font-bold">Hotelinformationen</h1>
-        <div class="flex flex-row mt-4 mb-4 w-full space-x-4 items-end">
+        <div class="flex flex-row mt-2 w-full space-x-4 items-end">
           <div class="w-1/2">
             <Label for="hotelName" class="font-medium">Name des Hotels</Label>
             <Input
@@ -74,7 +74,7 @@
 
       <div class="border rounded-lg p-4 my-4">
         <h1 class="text-xl font-bold">Adresse</h1>
-        <div class="flex flex-row mt-4 mb-4 w-full space-x-4 items-end">
+        <div class="flex flex-row mt-2 w-full space-x-4 items-end">
           <div class="w-1/2">
             <Label for="street" class="font-medium">Straße</Label>
             <Input
@@ -96,7 +96,7 @@
             />
           </div>
         </div>
-        <div class="flex flex-row mt-4 mb-4 w-full space-x-4 items-end">
+        <div class="flex flex-row mt-2 w-full space-x-4 items-end">
           <div class="w-1/2">
             <Label for="country" class="font-medium">Land</Label>
             <Input
@@ -118,7 +118,7 @@
             />
           </div>
         </div>
-        <div class="flex flex-row mt-4 mb-4 w-full space-x-4 items-end">
+        <div class="flex flex-row mt-2 w-full space-x-4 items-end">
           <div class="w-1/2">
             <Label for="postcode" class="font-medium">PLZ</Label>
             <Input
