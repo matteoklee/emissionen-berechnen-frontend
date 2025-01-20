@@ -178,7 +178,7 @@
               <Button v-if="currentStep !== steps.length" variant="outline" class="bg-black text-white" type="button" size="lg" @click="nextStep()">
                 Weiter
               </Button>
-              <Button v-if="currentStep === steps.length" variant="outline" class="bg-black text-white" size="lg" type="submit">Bestätigen</Button>
+              <Button v-if="currentStep === steps.length" variant="outline" class="bg-black text-white" size="lg" type="submit" @click="calculate()">Berechnen</Button>
             </div>
           </div>
         </div>
@@ -216,7 +216,7 @@ import Refrigerant from "@/components/calculation/steps/consumptionSteps/Refrige
 import ManualEmissionFactors from "@/components/calculation/steps/consumptionSteps/ManualEmissionFactors.vue";
 
 export default {
-  name: "EnergyConsumptionNew",
+  name: "EnergyConsumptionStepper",
   components: {
     ManualEmissionFactors,
     Refrigerant,
@@ -325,6 +325,10 @@ export default {
         this.currentStep--;
       }
     },
+
+    calculate() {
+
+    }
   },
 };
 </script>

@@ -76,7 +76,7 @@
 
             <template v-if="currentStep === 2">
               <div class="mx-4">
-                <EnergyConsumptionNew class="" />
+                <EnergyConsumptionStepper class="" />
               </div>
             </template>
 
@@ -123,7 +123,7 @@ import ConfigurationQuestions from "@/components/calculation/steps/Configuration
 import EnergyConsumption from "@/components/calculation/steps/consumptionSteps/EnergyConsumption.vue";
 import RenewableEnergy from "@/components/calculation/steps/consumptionSteps/RenewableEnergy.vue";
 import ConfigurationQuestionsAccordion from "@/components/calculation/steps/ConfigurationQuestionsAccordion.vue";
-import EnergyConsumptionNew from "@/components/calculation/steps/EnergyConsumptionNew.vue";
+import EnergyConsumptionStepper from "@/components/calculation/steps/EnergyConsumptionStepper.vue";
 import Card from "@/components/ui/card/Card.vue";
 import CalculationResult from "@/components/calculation/steps/CalculationResult.vue";
 export default {
@@ -131,7 +131,7 @@ export default {
   components: {
     CalculationResult,
     Card,
-    EnergyConsumptionNew,
+    EnergyConsumptionStepper,
     ConfigurationQuestionsAccordion,
     RenewableEnergy,
     EnergyConsumption,
