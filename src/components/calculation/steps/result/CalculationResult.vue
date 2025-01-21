@@ -94,7 +94,7 @@
           </section>
 
           <section class="">
-            <h2 class="text-xl font-bold mb-4">Carbon Footprint</h2>
+            <h2 class="text-xl font-bold mb-4">Erneuerbare Energien</h2>
             <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               <MetricCard title="Genutzte erneuerbare Energie" :value="formatNumber(result.renewableEnergy.totalRenewableEnergyUsed)" unit="kWh" />
               <MetricCard title="Anteil erneuerbarer Elektrizität" :value="formatPercentage(result.renewableEnergy.totalRenewableShareOfElectricity)" unit="%" />
