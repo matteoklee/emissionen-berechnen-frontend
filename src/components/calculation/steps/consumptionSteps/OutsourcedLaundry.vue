@@ -122,6 +122,7 @@ export default {
           actualPrivateSpaceConsumption: null
         }
       ];
+      this.footprintStore.formData.configuration.hasOutsourcedLaundry = true;
       this.knowsOutsourcedLaundryConsumption = true;
       this.footprintStore.formData.outsourcedLaundry.laundryTonnage = 85.0;
       this.updateLaundry();
@@ -130,11 +131,13 @@ export default {
       this.footprintStore.formData.outsourcedLaundry.laundryEnergyConsumptions = [];
       this.footprintStore.formData.outsourcedLaundry.laundryTonnage = null;
       this.knowsOutsourcedLaundryConsumption = false;
+      this.footprintStore.formData.configuration.hasOutsourcedLaundry = false;
       this.updateLaundry();
     },
     updateLaundry() {
       this.laundryTonnage = this.footprintStore.formData.outsourcedLaundry.laundryTonnage;
       this.laundryEnergyConsumptions = this.footprintStore.formData.outsourcedLaundry.laundryEnergyConsumptions;
+      this.hasOutsourcedLaundry = this.footprintStore.formData.configuration.hasOutsourcedLaundry;
     }
   }
 }

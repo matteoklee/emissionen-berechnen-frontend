@@ -125,7 +125,7 @@ import RenewableEnergy from "@/components/calculation/steps/consumptionSteps/Ren
 import ConfigurationQuestionsAccordion from "@/components/calculation/steps/ConfigurationQuestionsAccordion.vue";
 import EnergyConsumptionStepper from "@/components/calculation/steps/EnergyConsumptionStepper.vue";
 import Card from "@/components/ui/card/Card.vue";
-import CalculationResult from "@/components/calculation/steps/CalculationResult.vue";
+import CalculationResult from "@/components/calculation/steps/result/CalculationResult.vue";
 export default {
   name: "CalculationFormNew",
   components: {
