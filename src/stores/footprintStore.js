@@ -3,6 +3,14 @@ import footprintService from "@/services/footprintService.js";
 
 export const useFootprintStore = defineStore('footprintStore', {
     state: () => ({
+        energyTypes: [
+            "PURCHASED_ENERGY_GRID",
+            "DIESEL_STATIONARY",
+            "PURCHASED_STEAM",
+            "NATURAL_GAS",
+            "PURCHASED_ELECTRICITY_PPA"
+        ],
+        energyUnits: ["KILOWATT_HOURS", "CUBIC_METERS", "GIGAJOULES", "LITERS"],
         formData: {
             contactInfo: {
                 name: '',

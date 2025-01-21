@@ -4,7 +4,7 @@
       <EnergyTable
           :rows="energyConsumptions"
           :energyTypes="energyTypes"
-          :units="units"
+          :units="energyUnits"
           @add-row="addRow"
           @delete-row="deleteRow"
       />
@@ -56,15 +56,8 @@ export default {
   data() {
     return {
       energyConsumptions: this.footprintStore.formData.energyConsumptions,
-
-      energyTypes: [
-        "PURCHASED_ENERGY_GRID",
-        "DIESEL_STATIONARY",
-        "PURCHASED_STEAM",
-        "NATURAL_GAS",
-        "PURCHASED_ELECTRICITY_PPA"
-      ],
-      units: ["KILOWATT_HOURS", "CUBIC_METERS", "GIGAJOULES", "LITERS"],
+      energyTypes: this.footprintStore.energyTypes,
+      energyUnits: this.footprintStore.energyUnits,
     };
   },
   methods: {

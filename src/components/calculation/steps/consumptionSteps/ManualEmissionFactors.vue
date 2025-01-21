@@ -102,14 +102,7 @@ export default {
   data() {
     return {
       manualEmissionFactors: this.footprintStore.formData.manualEmissionFactors,
-
-      energyTypes: [
-        "Purchased Electricity (Grid)",
-        "Natural Gas",
-        "Solar Energy",
-        "Wind Energy",
-        "Hydropower"
-      ],
+      energyTypes: this.footprintStore.energyTypes,
     }
   },
   methods: {

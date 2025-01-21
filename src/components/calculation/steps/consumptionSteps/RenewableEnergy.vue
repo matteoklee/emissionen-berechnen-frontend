@@ -104,15 +104,6 @@ export default {
   data() {
     return {
       renewableEnergyPurchases: this.footprintStore.formData.renewableEnergyPurchases,
-
-      energyTypes: [
-        "Purchased Electricity (Grid)",
-        "Natural Gas",
-        "Solar Energy",
-        "Wind Energy",
-        "Hydropower"
-      ],
-      units: ["kWh", "m³", "GJ", "liters"],
     };
   },
   methods: {

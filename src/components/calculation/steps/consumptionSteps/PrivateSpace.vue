@@ -24,7 +24,7 @@
         <EnergyTable
             :rows="energyConsumptions"
             :energyTypes="energyTypes"
-            :units="units"
+            :units="energyUnits"
             @add-row="addRow"
             @delete-row="deleteRow"
         />
@@ -40,9 +40,6 @@
       </div>
     </div>
   </div>
-
-  Store: {{this.footprintStore.formData.configuration.hasPrivateSpace}}
-  Lokal: {{hasPrivateSpace}}
 </template>
 
 <script>
@@ -67,15 +64,8 @@ export default {
       knowsPrivateSpaceEnergyConsumption: this.footprintStore.formData.configuration.knowsPrivateSpaceEnergyConsumption,
       privateSpacePercentage: this.footprintStore.formData.hotelDetails.privateSpacePercentage,
       energyConsumptions: this.footprintStore.formData.energyConsumptions,
-
-      energyTypes: [
-        "Purchased Electricity (Grid)",
-        "Natural Gas",
-        "Solar Energy",
-        "Wind Energy",
-        "Hydropower"
-      ],
-      units: ["kWh", "m³", "GJ", "liters"],
+      energyTypes: this.footprintStore.energyTypes,
+      energyUnits: this.footprintStore.energyUnits,
     }
   },
   methods: {

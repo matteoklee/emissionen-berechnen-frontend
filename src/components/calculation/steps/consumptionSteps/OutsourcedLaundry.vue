@@ -24,7 +24,7 @@
         <EnergyTable
             :rows="laundryEnergyConsumptions"
             :energyTypes="energyTypes"
-            :units="units"
+            :units="energyUnits"
             @add-row="addRow"
             @delete-row="deleteRow"
         />
@@ -76,14 +76,8 @@ export default {
       laundryTonnage: this.footprintStore.formData.outsourcedLaundry.laundryTonnage,
       laundryEnergyConsumptions: this.footprintStore.formData.outsourcedLaundry.laundryEnergyConsumptions,
 
-      energyTypes: [
-        "Purchased Electricity (Grid)",
-        "Natural Gas",
-        "Solar Energy",
-        "Wind Energy",
-        "Hydropower"
-      ],
-      units: ["kWh", "m³", "GJ", "liters"],
+      energyTypes: this.footprintStore.energyTypes,
+      energyUnits: this.footprintStore.energyUnits,
     }
   },
   methods: {
