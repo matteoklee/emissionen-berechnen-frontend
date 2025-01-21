@@ -33,8 +33,8 @@
     </div>
   </div>
 
-  <div class="w-full p-8">
-    <Card class="w-full">
+  <div v-if="result !== null" class="w-full p-8">
+    <Card class="w-full mb-8">
       <CardHeader>
         <CardTitle>Carbon Footprint Results</CardTitle>
         <CardDescription>Detailed breakdown of your hotel's environmental impact</CardDescription>
@@ -73,8 +73,50 @@
         </Tabs>
       </CardContent>
     </Card>
-  </div>
 
+    <Card class="w-full">
+      <CardHeader>
+        <CardTitle>CO2-Fußabdruck Ergebnisse</CardTitle>
+        <CardDescription>Detaillierte Aufschlüsselung der Umweltauswirkungen Ihres Hotels</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div class="space-y-8">
+          <section class="">
+            <h2 class="text-xl font-bold mb-4">Carbon Footprint</h2>
+            <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <MetricCard title="Gesamt CO2" :value="formatNumber(result.carbonFootprint.totalCO2)" unit="kg CO2e" />
+              <MetricCard title="Gästezimmer Footprint" :value="formatNumber(result.carbonFootprint.guestroomFootprint)" unit="kg CO2e" />
+              <MetricCard title="Meeting Footprint" :value="formatNumber(result.carbonFootprint.meetingsFootprint)" unit="kg CO2e" />
+              <MetricCard title="Einzelzimmer Footprint (pro Tag)" :value="formatNumber(result.carbonFootprint.singleGuestroomFootprintPerDay)" unit="kg CO2e" />
+              <MetricCard title="Meeting Footprint (pro m² pro Stunde)" :value="formatNumber(result.carbonFootprint.meetingsFootprintPerSqmPerHour)" unit="kg CO2e" />
+              <MetricCard title="m² Footprint" :value="formatNumber(result.carbonFootprint.sqmFootprint)" unit="kg CO2e" />
+            </div>
+          </section>
+
+          <section class="">
+            <h2 class="text-xl font-bold mb-4">Carbon Footprint</h2>
+            <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <MetricCard title="Genutzte erneuerbare Energie" :value="formatNumber(result.renewableEnergy.totalRenewableEnergyUsed)" unit="kWh" />
+              <MetricCard title="Anteil erneuerbarer Elektrizität" :value="formatPercentage(result.renewableEnergy.totalRenewableShareOfElectricity)" unit="%" />
+              <MetricCard title="Anteil erneuerbarer Energie" :value="formatPercentage(result.renewableEnergy.totalRenewableShareOfEnergy)" unit="%" />
+            </div>
+          </section>
+
+          <section class="">
+            <h2 class="text-xl font-bold mb-4">GHG Scopes</h2>
+            <div class="grid gap-4 md:grid-cols-3">
+              <MetricCard title="Scope 1" :value="formatNumber(result.ghgScopes.scopeOne)" unit="kg CO2e" />
+              <MetricCard title="Scope 2" :value="formatNumber(result.ghgScopes.scopeTwo)" unit="kg CO2e" />
+              <MetricCard title="Scope 3" :value="formatNumber(result.ghgScopes.scopeThree)" unit="kg CO2e" />
+            </div>
+          </section>
+        </div>
+      </CardContent>
+    </Card>
+  </div>
+  <div v-else class="w-full p-8">
+    <p class="text-gray-700 text-md">Berechnung wurde noch nicht durchgeführt.</p>
+  </div>
 
 </template>
 
@@ -104,7 +146,11 @@ export default {
   },
   data() {
     return {
-      result: this.footprintStore.result,
+    }
+  },
+  computed: {
+    result() {
+      return this.footprintStore.result;
     }
   },
   methods: {

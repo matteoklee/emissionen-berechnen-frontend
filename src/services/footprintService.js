@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {toast} from "vue-sonner";
 
 const axiosInstance = axios.create({
     baseURL: '/api/v1/hcmi',
@@ -11,6 +12,14 @@ const footprintService = {
             const response = await axiosInstance.post('', payload);
             return response.data;
         } catch (error) {
+            toast.error('Berechnung fehlgeschlagen.', {
+                duration: 5000,
+                action: {
+                    label: 'Ok',
+                    onClick: () => {
+                    }
+                }
+            });
             console.error('error calculating carbon footprint:', error);
             throw error;
         }

@@ -4,7 +4,7 @@
       <div class="flex flex-col lg:flex-row">
 
         <div class="lg:w-1/4 p-2">
-          <h1 class="font-medium text-lg mx-2">Steps</h1>
+          <h1 class="font-medium text-lg mx-2">Schritte</h1>
           <div class="flex flex-col items-start">
             <button @click="setActiveStep(step.id)" v-for="step in steps" :key="step.id" class="w-full flex border rounded-lg items-center p-2 my-2" :class="(currentStep === step.id ? 'border-b-2 border-b-blue-500' : '')">
               <div class="mr-2">
@@ -41,45 +41,39 @@
 
           <div class="flex-grow">
             <div class="w-full mx-2">
+              <h3 class="font-medium mb-1 text-lg">3.{{steps[currentStep-1].id}} {{steps[currentStep-1].title}}</h3>
               <!-- <div v-motion-slide-bottom :duration="1000" :key="currentStep"> -->
                 <template v-if="currentStep === 1">
-                  <h3 class="font-medium mb-1 text-lg">{{steps[currentStep-1].title}}</h3>
                   <EnergyConsumption></EnergyConsumption>
                 </template>
 
                 <template v-if="currentStep === 2">
                   <div class="">
-                    <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
                     <VehiclesAndEquipment></VehiclesAndEquipment>
                   </div>
                 </template>
                 <template v-if="currentStep === 3">
                   <div class="">
-                    <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
                     <PrivateSpace></PrivateSpace>
                   </div>
                 </template>
                 <template v-if="currentStep === 4">
                   <div class="">
-                    <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
                     <RenewableEnergy></RenewableEnergy>
                   </div>
                 </template>
                 <template v-if="currentStep === 5">
                   <div class="">
-                    <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
                     <OutsourcedLaundry></OutsourcedLaundry>
                   </div>
                 </template>
                 <template v-if="currentStep === 6">
                   <div class="">
-                    <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
                     <Refrigerant></Refrigerant>
                   </div>
                 </template>
                 <template v-if="currentStep === 7">
                   <div class="">
-                    <h3 class="font-medium mb-4 text-lg">{{steps[currentStep-1].title}}</h3>
                     <ManualEmissionFactors></ManualEmissionFactors>
                   </div>
                 </template>
@@ -117,6 +111,11 @@ import OutsourcedLaundry from "@/components/calculation/steps/consumptionSteps/O
 import Refrigerant from "@/components/calculation/steps/consumptionSteps/Refrigerant.vue";
 import ManualEmissionFactors from "@/components/calculation/steps/consumptionSteps/ManualEmissionFactors.vue";
 import {useFootprintStore} from "@/stores/footprintStore.js";
+import {toast} from "vue-sonner";
+import authService from "@/services/authService.js";
+import userService from "@/services/userService.js";
+import {eventBus} from "@/services/util/eventBus.js";
+import axios from "axios";
 
 export default {
   name: "EnergyConsumptionStepper",
@@ -198,7 +197,7 @@ export default {
     async calculate() {
       await this.footprintStore.calculateFootprint();
       this.$emit('nextStep', true);
-    }
+    },
   },
 };
 </script>

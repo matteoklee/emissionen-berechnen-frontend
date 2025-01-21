@@ -36,6 +36,7 @@
             :rows="laundryEnergyConsumptions"
             :energyTypes="energyTypes"
             :units="energyUnits"
+            :privateSpace="false"
             @add-row="addRow"
             @delete-row="deleteRow"
         />

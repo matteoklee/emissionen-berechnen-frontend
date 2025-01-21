@@ -101,8 +101,9 @@
           </button>
         </div>
         <div class="h-full flex justify-center items-center p-2">
-          <button v-if="currentStep === steps.length-1" class="">
-            <Send  strokeWidth="2" class="text-primary" />
+          <button v-if="currentStep === steps.length-1" class="" @click="resetResult()">
+            <!--<Send  strokeWidth="2" class="text-primary" />-->
+            <RotateCcw strokeWidth="2" class="text-red-500" />
           </button>
           <button v-else :disabled="currentStep >= steps.length" class="" @click="nextStep()">
             <ChevronRight strokeWidth="2" :size="28" />
@@ -115,27 +116,27 @@
 </template>
 
 <script>
-import {X, Send, Check, ChevronRight, ChevronLeft} from "lucide-vue-next";
+import {X, Send, Check, ChevronRight, ChevronLeft, RotateCcw} from "lucide-vue-next";
 import Button from "@/components/ui/button/Button.vue";
 import HotelDetails from "@/components/calculation/steps/HotelDetails.vue";
 import HotelContact from "@/components/calculation/steps/HotelContact.vue";
-import ConfigurationQuestions from "@/components/calculation/steps/ConfigurationQuestions.vue";
-import EnergyConsumption from "@/components/calculation/steps/consumptionSteps/EnergyConsumption.vue";
-import RenewableEnergy from "@/components/calculation/steps/consumptionSteps/RenewableEnergy.vue";
-import ConfigurationQuestionsAccordion from "@/components/calculation/steps/ConfigurationQuestionsAccordion.vue";
 import EnergyConsumptionStepper from "@/components/calculation/steps/EnergyConsumptionStepper.vue";
 import Card from "@/components/ui/card/Card.vue";
 import CalculationResult from "@/components/calculation/steps/result/CalculationResult.vue";
+import {useFootprintStore} from "@/stores/footprintStore.js";
 export default {
   name: "CalculationFormNew",
   components: {
     CalculationResult,
     Card,
     EnergyConsumptionStepper,
-    ConfigurationQuestionsAccordion,
-    RenewableEnergy,
-    EnergyConsumption,
-    ConfigurationQuestions, HotelContact, HotelDetails, Button, X, Send, Check, ChevronRight, ChevronLeft},
+    HotelContact, HotelDetails, Button, X, Send, Check, ChevronRight, ChevronLeft, RotateCcw},
+  setup() {
+    const footprintStore = useFootprintStore();
+    return {
+      footprintStore
+    };
+  },
   data() {
     return {
       currentStep: 0,
@@ -195,6 +196,10 @@ export default {
         }
       });
     },
+    resetResult() {
+      //TODO: resetResult and resetInputs
+      this.setActiveStep(0);
+    }
   },
   mounted() {
     this.updateStepStatus();

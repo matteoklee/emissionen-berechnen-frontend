@@ -11,7 +11,7 @@
       </div>
       <div v-if="hasPrivateSpace === true">
         <div class="flex justify-between items-center mb-4">
-          <p class="font-medium">Are you able to provide the energy consumption of the private space?</p>
+          <p class="font-medium">Sind Sie in der Lage den Energieverbrauch der privaten Räumlichkeiten anzugeben?</p>
           <div class="flex justify-end items-center">
             <Label for="submit" class="">Nein</Label>
             <Switch id="submit" v-model:checked="knowsPrivateSpaceEnergyConsumption" @update:checked="updateKnowsPrivateSpaceEnergyConsumption($event)" class="data-[state=checked]:bg-black mx-2" />
@@ -25,13 +25,14 @@
             :rows="energyConsumptions"
             :energyTypes="energyTypes"
             :units="energyUnits"
+            :privateSpace="false"
             @add-row="addRow"
             @delete-row="deleteRow"
         />
       </div>
       <div v-if="hasPrivateSpace === true && !knowsPrivateSpaceEnergyConsumption">
         <div class="flex flex-col">
-          <p class="font-medium mb-4">Are you able to provide the area of private space as a % of the total conditioned area?</p>
+          <p class="font-medium mb-4">Können Sie den Anteil der privaten Räumlichkeiten an der gesamten klimatisierten Fläche als Prozentsatz angeben?</p>
           <div class="flex items-center">
             <Input id="input" type="number" placeholder="5" v-model="privateSpacePercentage" @update:model-value="updatePrivateSpacePercentage($event)" class="mr-2" /> <!-- @update:model-value="answerQuestion(item, $event)" -->
             <Label for="input" class="">%</Label>

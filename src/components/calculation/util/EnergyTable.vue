@@ -112,7 +112,7 @@ export default {
   props: {
     privateSpace: {
       type: Boolean,
-      required: true,
+      required: false,
     },
     rows: {
       type: Array,

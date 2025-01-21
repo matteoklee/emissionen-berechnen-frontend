@@ -16,7 +16,7 @@
 
       <div class="flex flex-col mt-4 mb-4 w-full space-y-4">
         <div class="w-full">
-          <Label for="guestRoomArea" class="font-medium">Total area of guest rooms and corridors</Label>
+          <Label for="guestRoomArea" class="font-medium">Gesamtfläche der Gästezimmer und Flure</Label>
           <Input
               v-model="hotelDetails.guestRoomArea"
               @update:model-value="update('guestRoomArea', $event)"
@@ -27,7 +27,7 @@
           />
         </div>
         <div class="w-full">
-          <Label for="meetingArea" class="font-medium">Total area of meeting facility space</Label>
+          <Label for="meetingArea" class="font-medium">Gesamtfläche der Versammlungsräume</Label>
           <Input
               v-model="hotelDetails.meetingArea"
               @update:model-value="update('meetingArea', $event)"
@@ -38,7 +38,7 @@
           />
         </div>
         <div class="w-full">
-          <Label for="conditionedArea" class="font-medium">Total area of conditioned space*</Label>
+          <Label for="conditionedArea" class="font-medium">Gesamte klimatisierte Fläche</Label>
           <Input
               v-model="hotelDetails.conditionedArea"
               @update:model-value="update('conditionedArea', $event)"
@@ -49,7 +49,7 @@
           />
         </div>
         <div class="w-full">
-          <Label for="roomCount" class="font-medium">Total number of guest rooms</Label>
+          <Label for="roomCount" class="font-medium">Anzahl an Gästezimmern</Label>
           <Input
               v-model="hotelDetails.roomCount"
               @update:model-value="update('roomCount', $event)"
@@ -60,7 +60,7 @@
           />
         </div>
         <div class="w-full">
-          <Label for="totalOccupiedRooms" class="font-medium">Total number of occupied rooms* for reporting year</Label>
+          <Label for="totalOccupiedRooms" class="font-medium">Gesamtanzahl belegter Gästezimmer für das angegebene Jahr</Label>
           <Input
               v-model="hotelDetails.totalOccupiedRooms"
               @update:model-value="update('totalOccupiedRooms', $event)"
