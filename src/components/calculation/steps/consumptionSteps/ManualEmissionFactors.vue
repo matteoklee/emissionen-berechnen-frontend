@@ -1,6 +1,16 @@
 <template>
   <div class="w-full">
     <div class="border rounded-lg p-8">
+      <div class="flex justify-end mb-4 space-x-4">
+        <Button type="button" variant="outline" size="" class="bg-black text-white" @click="setDummyData()">
+          <Upload class="w-4 h-4 mr-2" />
+          Test-Manuelle EF
+        </Button>
+        <Button type="button" variant="outline" size="" class="bg-red-500 text-white" @click="reset()">
+          <Trash2 class="w-4 h-4 mr-2" />
+          Eingaben löschen
+        </Button>
+      </div>
       <div class="border rounded-lg">
         <Table class="w-full overflow-x-scroll">
           <TableCaption class="hidden">Table of your renewable energy.</TableCaption>
@@ -79,7 +89,7 @@ import SelectGroup from "@/components/ui/select/SelectGroup.vue";
 import SelectLabel from "@/components/ui/select/SelectLabel.vue";
 import SelectItem from "@/components/ui/select/SelectItem.vue";
 import {useFootprintStore} from "@/stores/footprintStore.js";
-import {Trash2} from "lucide-vue-next";
+import {Trash2, Upload} from "lucide-vue-next";
 import Table from "@/components/ui/table/Table.vue";
 
 export default {
@@ -92,7 +102,7 @@ export default {
     SelectContent,
     SelectValue,
     SelectTrigger,
-    Select, TableCell, TableBody, TableHead, Button, Input, TableRow, TableHeader, TableCaption, Trash2},
+    Select, TableCell, TableBody, TableHead, Button, Input, TableRow, TableHeader, TableCaption, Trash2, Upload},
   setup() {
     const footprintStore = useFootprintStore();
     return {
@@ -114,6 +124,26 @@ export default {
     },
     deleteRow(index) {
       this.footprintStore.formData.manualEmissionFactors.splice(index, 1);
+    },
+    setDummyData() {
+      this.footprintStore.formData.manualEmissionFactors = [
+        {
+          type: "PURCHASED_ENERGY_GRID",
+          factor: 0.25
+        },
+        {
+          type: "NATURAL_GAS",
+          factor: 0.2
+        }
+      ];
+      this.updateManualEmissionFactors();
+    },
+    reset() {
+      this.footprintStore.formData.manualEmissionFactors = [];
+      this.updateManualEmissionFactors();
+    },
+    updateManualEmissionFactors() {
+      this.manualEmissionFactors = this.footprintStore.formData.manualEmissionFactors;
     }
   }
 }

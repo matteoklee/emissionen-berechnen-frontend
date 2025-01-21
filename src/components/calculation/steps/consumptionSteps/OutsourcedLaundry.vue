@@ -1,6 +1,17 @@
 <template>
   <div class="w-full">
     <div class="border rounded-lg p-8">
+      <div class="flex justify-end mb-4 space-x-4">
+        <Button type="button" variant="outline" size="" class="bg-black text-white" @click="setDummyData()">
+          <Upload class="w-4 h-4 mr-2" />
+          Test-Energieverbrauch
+        </Button>
+        <Button type="button" variant="outline" size="" class="bg-red-500 text-white" @click="reset()">
+          <Trash2 class="w-4 h-4 mr-2" />
+          Eingaben löschen
+        </Button>
+      </div>
+      <Separator class="my-6"></Separator>
       <div class="flex justify-between items-center mb-4">
         <p class="font-medium">Lassen Sie Ihre Wäsche extern waschen? </p>
         <div class="flex justify-end items-center">
@@ -58,10 +69,13 @@ import Switch from "@/components/ui/switch/Switch.vue";
 import {useFootprintStore} from "@/stores/footprintStore.js";
 import EnergyTable from "@/components/calculation/util/EnergyTable.vue";
 import Input from "@/components/ui/input/Input.vue";
+import Button from "@/components/ui/button/Button.vue";
+import Separator from "@/components/ui/separator/Separator.vue";
+import {Upload, Trash2} from "lucide-vue-next";
 
 export default {
   name: "OutsourcedLaundry",
-  components: {Input, EnergyTable, Switch, Label},
+  components: {Separator, Button, Input, EnergyTable, Switch, Label, Upload, Trash2},
   setup() {
     const footprintStore = useFootprintStore();
     return {
@@ -71,7 +85,7 @@ export default {
   data() {
     return {
       hasOutsourcedLaundry: this.footprintStore.formData.configuration.hasOutsourcedLaundry,
-      knowsOutsourcedLaundryConsumption: false,
+      knowsOutsourcedLaundryConsumption: true,
       knowsLaundryTonnage: false,
       laundryTonnage: this.footprintStore.formData.outsourcedLaundry.laundryTonnage,
       laundryEnergyConsumptions: this.footprintStore.formData.outsourcedLaundry.laundryEnergyConsumptions,
@@ -98,6 +112,29 @@ export default {
     },
     deleteRow(index) {
       this.footprintStore.formData.outsourcedLaundry.laundryEnergyConsumptions.splice(index, 1);
+    },
+    setDummyData() {
+      this.footprintStore.formData.outsourcedLaundry.laundryEnergyConsumptions = [
+        {
+          type: "PURCHASED_ENERGY_GRID",
+          unit: "KILOWATT_HOURS",
+          totalConsumption: 300.0,
+          actualPrivateSpaceConsumption: null
+        }
+      ];
+      this.knowsOutsourcedLaundryConsumption = true;
+      this.footprintStore.formData.outsourcedLaundry.laundryTonnage = 85.0;
+      this.updateLaundry();
+    },
+    reset() {
+      this.footprintStore.formData.outsourcedLaundry.laundryEnergyConsumptions = [];
+      this.footprintStore.formData.outsourcedLaundry.laundryTonnage = null;
+      this.knowsOutsourcedLaundryConsumption = false;
+      this.updateLaundry();
+    },
+    updateLaundry() {
+      this.laundryTonnage = this.footprintStore.formData.outsourcedLaundry.laundryTonnage;
+      this.laundryEnergyConsumptions = this.footprintStore.formData.outsourcedLaundry.laundryEnergyConsumptions;
     }
   }
 }

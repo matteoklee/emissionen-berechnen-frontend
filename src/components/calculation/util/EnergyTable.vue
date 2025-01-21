@@ -6,8 +6,8 @@
         <TableHeader class="w-full">
           <TableRow class="w-full">
             <TableHead>Energieträger</TableHead>
-            <TableHead class="text-center">Einheit</TableHead>
             <TableHead class="text-center">Verbrauch</TableHead>
+            <TableHead class="text-center">Einheit</TableHead>
             <TableHead v-if="privateSpace" class="text-center">aus privaten Räumlichkeiten</TableHead>
             <TableHead class="text-right text-xs">Aktionen</TableHead>
           </TableRow>
@@ -30,6 +30,13 @@
               </Select>
             </TableCell>
             <TableCell class="text-center">
+              <Input
+                  type="number"
+                  v-model.number="row.totalConsumption"
+                  class="w-full border rounded px-2 py-1 text-center"
+              />
+            </TableCell>
+            <TableCell class="text-center">
               <Select v-model="row.unit" class="w-full border rounded px-2 py-1">
                 <SelectTrigger>
                   <SelectValue placeholder="Wähle eine Einheit" />
@@ -43,13 +50,6 @@
                   </SelectGroup>
                 </SelectContent>
               </Select>
-            </TableCell>
-            <TableCell class="text-center">
-              <Input
-                  type="number"
-                  v-model.number="row.totalConsumption"
-                  class="w-full border rounded px-2 py-1 text-center"
-              />
             </TableCell>
             <TableCell v-if="privateSpace" class="text-center">
               <Input

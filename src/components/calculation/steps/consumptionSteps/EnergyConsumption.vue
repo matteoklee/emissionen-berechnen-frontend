@@ -1,6 +1,16 @@
 <template>
   <div class="w-full">
     <div class="border rounded-lg p-8">
+      <div class="flex justify-end mb-4 space-x-4">
+        <Button type="button" variant="outline" size="" class="bg-black text-white" @click="setDummyData()">
+          <Upload class="w-4 h-4 mr-2" />
+          Test-Energieverbrauch
+        </Button>
+        <Button type="button" variant="outline" size="" class="bg-red-500 text-white" @click="reset()">
+          <Trash2 class="w-4 h-4 mr-2" />
+          Eingaben löschen
+        </Button>
+      </div>
       <EnergyTable
           :rows="energyConsumptions"
           :energyTypes="energyTypes"
@@ -21,7 +31,7 @@ import TableHead from "@/components/ui/table/TableHead.vue";
 import TableBody from "@/components/ui/table/TableBody.vue";
 import TableCell from "@/components/ui/table/TableCell.vue";
 import Button from "@/components/ui/button/Button.vue";
-import { CircleX } from "lucide-vue-next";
+import { CircleX, Trash2, Upload } from "lucide-vue-next";
 import Select from "@/components/ui/select/Select.vue";
 import SelectTrigger from "@/components/ui/select/SelectTrigger.vue";
 import SelectValue from "@/components/ui/select/SelectValue.vue";
@@ -45,7 +55,7 @@ export default {
     SelectValue,
     SelectTrigger,
     Select,
-    Button, TableCell, TableBody, TableHead, TableRow, TableHeader, TableCaption, Table, CircleX
+    Button, TableCell, TableBody, TableHead, TableRow, TableHeader, TableCaption, Table, CircleX, Trash2, Upload
   },
   setup() {
     const footprintStore = useFootprintStore();
@@ -72,6 +82,36 @@ export default {
     deleteRow(index) {
       this.footprintStore.formData.energyConsumptions.splice(index, 1);
     },
+    setDummyData() {
+      this.footprintStore.formData.energyConsumptions = [
+        {
+          type: "PURCHASED_ENERGY_GRID",
+          unit: "KILOWATT_HOURS",
+          totalConsumption: 1200000.0,
+          actualPrivateSpaceConsumption: 0
+        },
+        {
+            type: "DIESEL_STATIONARY",
+            unit: "KILOWATT_HOURS",
+            totalConsumption: 1200.0,
+            actualPrivateSpaceConsumption: 0
+        },
+        {
+          type: "NATURAL_GAS",
+          unit: "KILOWATT_HOURS",
+          totalConsumption: 8000.0,
+          actualPrivateSpaceConsumption: 0
+        }
+      ];
+      this.updateEnergyConsumption();
+    },
+    reset() {
+      this.footprintStore.formData.energyConsumptions = [];
+      this.updateEnergyConsumption();
+    },
+    updateEnergyConsumption() {
+      this.energyConsumptions = this.footprintStore.formData.energyConsumptions;
+    }
   },
 };
 </script>

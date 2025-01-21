@@ -4,7 +4,7 @@
       <div class="flex mb-2 space-x-4">
         <Button type="button" variant="outline" size="" class="w-full text-md py-6 bg-black text-white" @click="setDummyData()">
           <Upload class="w-4 h-4 mr-2" />
-          Hotelkontakt übernehmen
+          Hotelkonfiguration übernehmen
         </Button>
         <Button type="button" variant="outline" size="" class="w-full text-md py-6 bg-red-500 text-white" @click="reset()">
           <Trash2 class="w-4 h-4 mr-2" />

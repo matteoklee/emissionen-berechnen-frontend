@@ -26,13 +26,8 @@
             @delete-row="deleteRow"
         />
       </div>
-      <div v-else-if="includeVehicles === 'DEFAULT'">
+      <div class="hidden" v-else-if="includeVehicles === 'DEFAULT'">
         <p class="text-gray-700 my-2">Your total carbon footprint will be uplifted by 1%.</p>
-      </div>
-
-      <div class="text-primary">
-        STORE: {{this.footprintStore.formData.configuration.includeVehicles}}
-        LOKAL: {{this.includeVehicles}}
       </div>
     </div>
   </div>

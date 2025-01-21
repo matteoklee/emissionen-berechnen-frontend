@@ -1,12 +1,22 @@
 <template>
   <div class="w-full">
     <div class="border rounded-lg p-8">
+      <div class="flex justify-end mb-4 space-x-4">
+        <Button type="button" variant="outline" size="" class="bg-black text-white" @click="setDummyData()">
+          <Upload class="w-4 h-4 mr-2" />
+          Erneuerbare Energien Data
+        </Button>
+        <Button type="button" variant="outline" size="" class="bg-red-500 text-white" @click="reset()">
+          <Trash2 class="w-4 h-4 mr-2" />
+          Eingaben löschen
+        </Button>
+      </div>
       <div class="border rounded-lg">
         <Table class="w-full overflow-x-scroll">
           <TableCaption class="hidden">Table of your renewable energy.</TableCaption>
           <TableHeader class="w-full">
             <TableRow class="w-full">
-              <TableHead>Beschreibung</TableHead>
+              <TableHead class="w-1/2">Beschreibung</TableHead>
               <TableHead class="text-center">Kilowattstunden</TableHead>
               <TableHead class="text-center">Kommentar</TableHead>
               <TableHead class="text-right text-xs">Aktionen</TableHead>
@@ -14,7 +24,7 @@
           </TableHeader>
           <TableBody>
             <TableRow v-for="(row, index) in renewableEnergyPurchases" :key="index">
-              <TableCell class="text-center">
+              <TableCell class="w-1/2 text-center">
                 <Input
                     type="text"
                     v-model="row.description"
@@ -79,7 +89,7 @@ import TableRow from "@/components/ui/table/TableRow.vue";
 import TableHeader from "@/components/ui/table/TableHeader.vue";
 import TableCaption from "@/components/ui/table/TableCaption.vue";
 import Table from "@/components/ui/table/Table.vue";
-import {Trash2} from "lucide-vue-next";
+import {Trash2, Upload} from "lucide-vue-next";
 import {useFootprintStore} from "@/stores/footprintStore.js";
 
 export default {
@@ -93,7 +103,7 @@ export default {
     SelectValue,
     SelectTrigger,
     Select,
-    Button, TableCell, TableBody, TableHead, TableRow, TableHeader, TableCaption, Table, Trash2
+    Button, TableCell, TableBody, TableHead, TableRow, TableHeader, TableCaption, Table, Trash2, Upload
   },
   setup() {
     const footprintStore = useFootprintStore();
@@ -116,6 +126,23 @@ export default {
     },
     deleteRow(index) {
       this.footprintStore.formData.renewableEnergyPurchases.splice(index, 1);
+    },
+    setDummyData() {
+      this.footprintStore.formData.renewableEnergyPurchases = [
+        {
+          description: "Wind power from regional supplier",
+          amount: 8.0,
+          comments: "Certified renewable energy"
+        }
+      ];
+      this.updateRenewableEnergyPurchases();
+    },
+    reset() {
+      this.footprintStore.formData.renewableEnergyPurchases = [];
+      this.updateRenewableEnergyPurchases();
+    },
+    updateRenewableEnergyPurchases() {
+      this.renewableEnergyPurchases = this.footprintStore.formData.renewableEnergyPurchases;
     }
   },
 }
