@@ -2,8 +2,8 @@ import axios from 'axios';
 import authService from './authService';
 
 const axiosInstance = axios.create({
-  baseURL: '/api/v1',
-  timeout: 5000
+    baseURL: '/api/v1',
+    timeout: 5000
 });
 
 axiosInstance.interceptors.request.use(

@@ -15,6 +15,15 @@ export default defineConfig({
   },
   server: {
     proxy: {
+      '/api/v1/hcmi': {
+        target: 'http://localhost:8083',
+        changeOrigin: true,
+      },
+      '/api/v1': {
+        target: 'http://localhost:8085',
+        changeOrigin: true,
+      },
+      /*
       '/api': {
         target: 'http://localhost:8085',
         changeOrigin: true,
@@ -22,6 +31,7 @@ export default defineConfig({
         ws: true
         //rewrite: (path) => path.replace(/^\/api/, '')
       }
+       */
     }
   }
 });
